@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grand Multi Gym — Admin</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0a0908;--panel:#141210;--panel-2:#1c1916;
+  --gold:#f2b705;--ivory:#f4f1ea;--smoke:#9d968a;--line:#2b2620;--radius:2px;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--black);color:var(--ivory);font-family:'Manrope',sans-serif;}
+h1,h2,h3,h4{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;margin:0;}
+.top{background:var(--panel);border-bottom:1px solid var(--line);padding:16px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:5;}
+.top .t{font-size:19px;color:var(--gold);}
+.wrap{max-width:920px;margin:0 auto;padding:32px 24px 100px;}
+.note{font-size:12.5px;color:var(--smoke);margin-top:6px;line-height:1.5;}
+.block{background:var(--panel);border:1px solid var(--line);padding:24px;margin-bottom:22px;}
+.block h4{font-size:16px;color:var(--gold);margin-bottom:16px;text-transform:none;font-weight:800;}
+.row{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;margin-bottom:10px;align-items:center;}
+.row.single{grid-template-columns:1fr auto;}
+.row input,.row textarea,.field input,.field textarea,.field select{
+  background:var(--black);border:1px solid var(--line);color:var(--ivory);
+  padding:9px 11px;font-size:13.5px;font-family:inherit;width:100%;border-radius:var(--radius);
+}
+button.del{background:none;border:1px solid var(--line);color:#e05252;padding:8px 12px;border-radius:var(--radius);}
+.field{margin-bottom:14px;}
+.field label{display:block;font-size:12px;font-weight:700;color:var(--smoke);margin-bottom:5px;text-transform:uppercase;letter-spacing:.02em;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:var(--radius);font-weight:800;font-size:13.5px;border:1.5px solid transparent;background:none;cursor:pointer;}
+.btn-gold{background:var(--gold);color:#141210;}
+.btn-line{border-color:var(--gold);color:var(--gold);}
+.btn-ghost{border-color:var(--line);color:var(--ivory);}
+.login-box{max-width:340px;margin:120px auto;text-align:center;}
+.login-box input{width:100%;margin:14px 0;}
+.actions-bar{position:sticky;bottom:0;background:var(--panel);border-top:1px solid var(--line);padding:16px 24px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+.stars-input{width:70px;}
+#toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:var(--gold);color:#141210;padding:12px 22px;font-weight:800;font-size:13.5px;z-index:400;display:none;}
+</style>
+</head>
+<body>
+
+<div id="loginScreen" class="login-box">
+  <img src="assets/logo.jpg" alt="Grand Multi Gym" style="width:88px;height:88px;border-radius:50%;object-fit:cover;margin-bottom:18px;border:2px solid var(--gold);">
+  <h3 style="font-size:24px;">GRAND MULTI ADMIN</h3>
+  <p class="note">ADMIN ONLY.</p>
+  <div style="position:relative;">
+    <input type="password" id="pass" placeholder="Password (Password)" style="padding-right:42px;" onkeydown="if(event.key==='Enter')login()">
+    <button type="button" onclick="togglePass()" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--smoke);font-size:16px;padding:6px;">👁</button>
+  </div>
+  <button class="btn btn-gold" style="width:100%;justify-content:center;" onclick="login()">Log In</button>
+</div>
+
+<div id="app" style="display:none;">
+  <div class="top">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <img src="assets/logo.jpg" alt="Grand Multi Gym" style="width:34px;height:34px;border-radius:50%;object-fit:cover;">
+      <div class="t">Grand Multi Gym — Content Admin</div>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <a href="index.html" class="btn btn-ghost" target="_blank">View Site ↗</a>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="block" style="border-color:var(--gold);">
+      <h4>How this works — read this first</h4>
+      <p class="note">This now saves live to Firebase (Firestore). The moment you click <b>Save to Website</b> below, the change is in the database, and the live site (which listens to the same database) updates for every visitor within a second or two — no file to download or upload. Both this admin page and <code>index.html</code> need the same Firebase config pasted into their code once; see the block near the top of each file.</p>
+    </div>
+
+    <div class="block">
+      <h4>Hero Text</h4>
+      <div class="field"><label>Eyebrow line</label><input id="h_eyebrow"></div>
+      <div class="field"><label>Subheadline</label><textarea id="h_sub" rows="2"></textarea></div>
+    </div>
+
+    <div class="block">
+      <h4>Why Grand Multi</h4>
+      <div id="whyList"></div>
+      <button class="btn btn-line" onclick="addWhy()">+ Add Item</button>
+    </div>
+
+    <div class="block">
+      <h4>Pricing Plans</h4>
+      <div id="priceList"></div>
+      <button class="btn btn-line" onclick="addPricing()">+ Add Plan</button>
+    </div>
+
+    <div class="block">
+      <h4>Gym Rules</h4>
+      <div id="rulesList"></div>
+      <button class="btn btn-line" onclick="addRule()">+ Add Rule</button>
+    </div>
+
+    <div class="block">
+      <h4>FAQs</h4>
+      <div id="faqList"></div>
+      <button class="btn btn-line" onclick="addFaq()">+ Add FAQ</button>
+    </div>
+
+    <div class="block">
+      <h4>Reviews</h4>
+      <div id="reviewList"></div>
+      <button class="btn btn-line" onclick="addReview()">+ Add Review</button>
+      <p class="note">Only add real reviews here, or clearly-demo ones marked "Demo" — the site displays a Demo badge automatically when you tick the box.</p>
+    </div>
+
+    <div class="block">
+      <h4>AI Chatbot Key</h4>
+      <p class="note">The Groq API key is built directly into <code>index.html</code> (in the chatbot's code and its ⚙ settings field), so the bot works for every visitor without anyone entering a key. That also means anyone who views the page source can see it. To change or rotate the key later, edit it directly in <code>index.html</code>.</p>
+    </div>
+  </div>
+  <div class="actions-bar">
+    <button class="btn btn-gold" onclick="saveToFirestore()">💾 Save to Website</button>
+    <button class="btn btn-ghost" onclick="downloadConfig()">⬇ Download backup (JSON)</button>
+    <span class="note" style="margin:0;" id="saveStatus">Not connected to Firebase yet.</span>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<!-- Firebase (client SDK only) -->
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script>
+/* ===== PASTE THE SAME FIREBASE WEB CONFIG YOU PUT IN index.html ===== */
+const firebaseConfig = {
+  apiKey: "AIzaSyAX1iDS9IEI6EugPpgjXOGOOr_2t5w9mE0",
+  authDomain: "grand-muilt-gym.firebaseapp.com",
+  projectId: "grand-muilt-gym",
+  storageBucket: "grand-muilt-gym.firebasestorage.app",
+  messagingSenderId: "437245103225",
+  appId: "1:437245103225:web:ee1acc451091ad1ca9d8a8"
+};
+let db = null;
+try{
+  firebase.initializeApp(firebaseConfig);
+  db = firebase.firestore();
+}catch(err){ console.warn('Firebase not configured yet.', err); }
+</script>
+
+<script>
+function togglePass(){
+  const p = document.getElementById('pass');
+  p.type = p.type === 'password' ? 'text' : 'password';
+}
+function login(){
+  if(document.getElementById('pass').value === 'admin123'){
+    document.getElementById('loginScreen').style.display='none';
+    document.getElementById('app').style.display='block';
+    loadFromFirestore();
+  } else { alert('Wrong password (demo: admin123)'); }
+}
+
+const defaultState = {
+  hero: { eyebrow:'Kattanam, Kerala — Since 2003', sub:"Discipline today. Strength tomorrow. Weight training, cardio, personal coaching, and special training for Army & Kerala Police aspirants — for men and women." },
+  why: [
+    {t:'Weight Training', d:'Full equipment for strength work, all levels.'},
+    {t:'Cardio Training', d:'Dedicated cardio setup for conditioning.'},
+    {t:'Personal Support', d:'Coaching that pays attention, not just access.'},
+    {t:'Men & Women', d:'A floor that welcomes everyone.'},
+    {t:'Army Special Training', d:'For Indian Army aspirants.'},
+    {t:'Kerala Police Training', d:'For Kerala Police aspirants.'},
+    {t:'Diet & Nutrition', d:'Guidance alongside your training.'},
+    {t:'Fat Loss Support', d:'Training, cardio and nutrition together.'}
+  ],
+  pricing: [
+    {name:'General Gym / Weight Training', price:500, duration:'Ask us (duration to be confirmed)', desc:'Full access to weight training equipment and floor coaching.', popular:true},
+    {name:'Cardio Training', price:700, duration:'Ask us (duration to be confirmed)', desc:'Cardio conditioning sessions with equipment access.', popular:false}
+  ],
+  rules: [
+    'Wear proper shoes','Bring your towel & water bottle','Use equipment properly',
+    'Wipe down equipment after use','Maintain silence & respect others','Be consistent, be disciplined'
+  ],
+  faq: [
+    {q:'What are the gym fees?', a:'Weight training is ₹500 and cardio training is ₹700. Contact us for the exact duration these cover.'},
+    {q:'Where is Grand Multi Gym located?', a:'Mankavil Garden, Bharanikkavu, Kattanam, Kerala 690503.'},
+    {q:'Do you provide personal training?', a:'Yes, personal training is available.'},
+    {q:'Do you provide Army or Kerala Police special training?', a:'Yes, we offer special training for Indian Army and Kerala Police aspirants.'},
+    {q:'Do you train both men and women?', a:'Yes, everyone trains here.'},
+    {q:'How can I book?', a:'Use the Book Now button, WhatsApp us, or call 9961573434.'}
+  ],
+  reviews: [
+    {name:'Godz Gym', text:'Super than fitness world.', stars:5, demo:false, src:'Google'},
+    {name:'Surya Babu', text:'💪', stars:5, demo:false, src:'Google'},
+    {name:'kailas Shankar', text:'Very good experience.', stars:5, demo:false, src:'Google'},
+    {name:'Vishal Murali', text:'Less fees compared to the nearby ones. Average equipment. Great personal support.', stars:4, demo:false, src:'Google'},
+    {name:'S.J creations', text:"It's a good place.", stars:5, demo:false, src:'Google'},
+    {name:'Arun', text:'Placeholder demo review — replace with a real one.', stars:5, demo:true, src:'Demo'}
+  ]
+};
+let state = JSON.parse(JSON.stringify(defaultState));
+
+function init(){
+  document.getElementById('h_eyebrow').value = state.hero.eyebrow;
+  document.getElementById('h_sub').value = state.hero.sub;
+  document.getElementById('h_eyebrow').oninput = e => state.hero.eyebrow = e.target.value;
+  document.getElementById('h_sub').oninput = e => state.hero.sub = e.target.value;
+  renderWhy(); renderPricing(); renderRules(); renderFaq(); renderReviews();
+}
+
+function loadFromFirestore(){
+  const statusEl = document.getElementById('saveStatus');
+  if(!db){ statusEl.textContent = 'Not connected to Firebase — paste your config near the top of this file.'; return; }
+  statusEl.textContent = 'Loading current site content…';
+  db.collection('site').doc('config').get().then(docSnap => {
+    if(docSnap.exists){ state = Object.assign(JSON.parse(JSON.stringify(defaultState)), docSnap.data()); }
+    init();
+    statusEl.textContent = 'Connected — showing live site content.';
+  }).catch(err => { statusEl.textContent = 'Could not load from Firestore: ' + err.message; });
+}
+
+function renderWhy(){
+  document.getElementById('whyList').innerHTML = state.why.map((w,i)=>`
+    <div class="row">
+      <input value="${esc(w.t)}" oninput="state.why[${i}].t=this.value">
+      <input value="${esc(w.d)}" oninput="state.why[${i}].d=this.value">
+      <button class="del" onclick="state.why.splice(${i},1);renderWhy()">Delete</button>
+    </div>`).join('');
+}
+function addWhy(){ state.why.push({t:'New Item',d:'Description'}); renderWhy(); }
+
+function renderPricing(){
+  document.getElementById('priceList').innerHTML = state.pricing.map((p,i)=>`
+    <div class="block" style="padding:16px;">
+      <div class="row"><input value="${esc(p.name)}" oninput="state.pricing[${i}].name=this.value" placeholder="Plan name">
+      <input type="number" value="${p.price}" oninput="state.pricing[${i}].price=this.value" placeholder="Price ₹">
+      <button class="del" onclick="state.pricing.splice(${i},1);renderPricing()">Delete</button></div>
+      <div class="row single"><input value="${esc(p.duration)}" oninput="state.pricing[${i}].duration=this.value" placeholder="Duration (e.g. per month)">
+      <label style="display:flex;align-items:center;gap:6px;font-size:13px;"><input type="checkbox" style="width:auto;" ${p.popular?'checked':''} onchange="state.pricing[${i}].popular=this.checked"> Popular</label></div>
+      <input value="${esc(p.desc)}" oninput="state.pricing[${i}].desc=this.value" placeholder="Short description" style="margin-top:8px;">
+    </div>`).join('');
+}
+function addPricing(){ state.pricing.push({name:'New Plan',price:0,duration:'Set duration',desc:'Describe this plan.',popular:false}); renderPricing(); }
+
+function renderRules(){
+  document.getElementById('rulesList').innerHTML = state.rules.map((r,i)=>`
+    <div class="row single">
+      <input value="${esc(r)}" oninput="state.rules[${i}]=this.value">
+      <button class="del" onclick="state.rules.splice(${i},1);renderRules()">Delete</button>
+    </div>`).join('');
+}
+function addRule(){ state.rules.push('New rule'); renderRules(); }
+
+function renderFaq(){
+  document.getElementById('faqList').innerHTML = state.faq.map((f,i)=>`
+    <div class="row">
+      <input value="${esc(f.q)}" oninput="state.faq[${i}].q=this.value" placeholder="Question">
+      <input value="${esc(f.a)}" oninput="state.faq[${i}].a=this.value" placeholder="Answer">
+      <button class="del" onclick="state.faq.splice(${i},1);renderFaq()">Delete</button>
+    </div>`).join('');
+}
+function addFaq(){ state.faq.push({q:'New question?',a:'Answer here.'}); renderFaq(); }
+
+function renderReviews(){
+  document.getElementById('reviewList').innerHTML = state.reviews.map((r,i)=>`
+    <div class="block" style="padding:16px;">
+      <div class="row"><input value="${esc(r.name)}" oninput="state.reviews[${i}].name=this.value" placeholder="Name">
+      <input class="stars-input" type="number" min="1" max="5" value="${r.stars}" oninput="state.reviews[${i}].stars=this.value" placeholder="Stars">
+      <button class="del" onclick="state.reviews.splice(${i},1);renderReviews()">Delete</button></div>
+      <input value="${esc(r.text)}" oninput="state.reviews[${i}].text=this.value" placeholder="Review text" style="margin-bottom:8px;">
+      <div class="row single"><input value="${esc(r.src||'')}" oninput="state.reviews[${i}].src=this.value" placeholder="Source (e.g. Google)">
+      <label style="display:flex;align-items:center;gap:6px;font-size:13px;"><input type="checkbox" style="width:auto;" ${r.demo?'checked':''} onchange="state.reviews[${i}].demo=this.checked"> Demo</label></div>
+    </div>`).join('');
+}
+function addReview(){ state.reviews.push({name:'New',text:'Review text',stars:5,demo:true,src:'Demo'}); renderReviews(); }
+
+function esc(s){ return String(s??'').replace(/"/g,'&quot;'); }
+
+function downloadConfig(){
+  const blob = new Blob([JSON.stringify(state,null,2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'config-backup.json';
+  a.click();
+  showToast('Backup downloaded');
+}
+function saveToFirestore(){
+  const statusEl = document.getElementById('saveStatus');
+  if(!db){ statusEl.textContent = 'Not connected to Firebase — paste your config near the top of this file.'; return; }
+  statusEl.textContent = 'Saving…';
+  db.collection('site').doc('config').set(state).then(()=>{
+    statusEl.textContent = 'Saved — live on the website now.';
+    showToast('Saved to website');
+  }).catch(err => { statusEl.textContent = 'Save failed: ' + err.message; });
+}
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.style.display='block';
+  setTimeout(()=>t.style.display='none',2200);
+}
+</script>
+</body>
+</html>
