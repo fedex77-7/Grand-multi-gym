@@ -610,23 +610,12 @@ footer{background:#050403;border-top:1px solid var(--line);padding:64px 0 28px;}
       <div class="s">Your Grand Multi Gym Assistant</div>
     </div>
     <div style="display:flex;gap:6px;">
-      <button onclick="toggleChatSettings()" title="AI settings">⚙</button>
+      <button onclick="clearChat()" title="Clear chat">🗑</button>
       <button onclick="closeChat()">×</button>
     </div>
   </div>
-  <div id="chatSettings" style="display:none;padding:12px 16px;border-bottom:1px solid var(--line);background:var(--panel-2);">
-    <div class="field" style="margin-bottom:8px;"><label>Groq API Key</label>
-      <input id="chatApiKey" value="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" oninput="state.apiKey=this.value">
-    </div>
-    <p class="note">This key is built into this file so the chatbot works right away for every visitor. Anyone who views this page's source can also see it — if that becomes a problem, swap it out or move the request through a small server-side proxy.</p>
-  </div>
   <div class="chat-body" id="chatBody"></div>
   <div class="suggested" id="chatSuggest"></div>
-  <div class="chat-quick">
-    <a href="tel:+919778575418">📞 Call</a>
-    <a href="#" onclick="waLink('inquiry');return false;">💬 WhatsApp</a>
-    <button onclick="clearChat()">🗑 Clear</button>
-  </div>
   <div class="chat-input-row">
     <input type="text" id="chatInput" placeholder="Type in Malayalam, Manglish or English..." onkeydown="if(event.key==='Enter')sendChat()">
     <button onclick="sendChat()">➤</button>
@@ -718,7 +707,7 @@ const state = {
     {q:'How can I book?', a:'Use the Book Now button, WhatsApp us, or call 9778575418.'}
   ],
   aiProvider: 'groq',
-  apiKey: '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',
+  apiKey: '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',
   chatHistory: []
 };
 
@@ -839,7 +828,6 @@ function openChat(){
   }
 }
 function closeChat(){ document.getElementById('chatWindow').classList.remove('open'); }
-function toggleChatSettings(){ const el=document.getElementById('chatSettings'); el.style.display = el.style.display==='none' ? 'block' : 'none'; }
 function clearChat(){ state.chatHistory=[]; document.getElementById('chatBody').innerHTML=''; openChat(); }
 function quickAsk(q){ document.getElementById('chatInput').value=q; sendChat(); }
 function clearSuggestions(){ document.getElementById('chatSuggest').innerHTML=''; }
@@ -870,11 +858,13 @@ Creatine (creatine monohydrate): a common, widely used sports supplement. Typica
 You do not know: exact opening hours, exact membership duration, trainer qualifications/certifications, medical claims, exact Army/Police test details, exact equipment list, offers or discounts, and you cannot build a fully personalized diet/training plan (weight, age, medical history unknown) — give the general direction above and suggest talking to a trainer at the gym for a plan tailored to them. If asked something else not covered, say this isn't available yet and to call 9778575418.
 `;
 
-const SYSTEM_PROMPT = `You are "Grand Multi AI", the assistant for Grand Multi Gym (Grand Multi Health Club) in Kattanam, Kerala. You detect whether the user is writing in Malayalam script, Manglish (Malayalam written in English letters), English, or a mix, and you reply naturally in that same style — never force everything into formal English. Keep replies short (2-5 sentences unless more detail is clearly wanted), warm, and direct.
+const SYSTEM_PROMPT = `You are "Grand Multi AI", a fitness-focused assistant for Grand Multi Gym (Grand Multi Health Club) in Kattanam, Kerala. You detect whether the user is writing in Malayalam script, Manglish (Malayalam written in English letters), English, or a mix, and you reply naturally in that same style — never force everything into formal English. Keep replies short (2-5 sentences unless more detail is clearly wanted), warm, and direct.
 
-You can answer general questions on any topic the person asks, using your own knowledge, just like a normal helpful assistant — you are not limited to gym topics. Feel free to help with everyday questions, general facts, advice, translations, etc.
+Your main strength is fitness: today's workout ideas, weekly training splits, diet/nutrition direction for fat loss or muscle gain, supplement basics like creatine, recovery, and general exercise form guidance. Whenever a question is fitness/health/nutrition-adjacent, go deeper and be genuinely useful — give concrete, practical suggestions (specific exercises, rep ranges, meal ideas) rather than vague generalities, while still avoiding personal medical prescriptions.
 
-For anything specifically about Grand Multi Gym itself (fees, services, rules, location, programs), only use the knowledge base below — never invent hours, exact membership duration, trainer certifications, discounts, or facilities that aren't listed. If a gym-specific detail isn't in the knowledge base, say clearly: "I don't have that information yet. You can contact Grand Multi Gym directly at 9778575418." You may share the general workout-split, diet-direction, and creatine information in the knowledge base when asked, but always frame it as general guidance, not a personal prescription, and suggest a trainer at the gym or a doctor for anything specific to the person's health or goals.
+You can also answer completely unrelated general questions (facts, translations, advice, anything) using your own knowledge, like a normal helpful assistant — never refuse a question just because it isn't about fitness or the gym. You do not have live internet/web search — you answer from what you already know, so for anything that changes daily (news, scores, prices, "right now" facts) say plainly that you can't check that live.
+
+For anything specifically about Grand Multi Gym itself (fees, services, rules, location, programs), only use the knowledge base below — never invent hours, exact membership duration, trainer certifications, discounts, or facilities that aren't listed. If a gym-specific detail isn't in the knowledge base, say clearly: "I don't have that information yet. You can contact Grand Multi Gym directly at 9778575418." Frame any workout-split, diet-direction, or creatine guidance as general information, not a personal prescription, and suggest a trainer at the gym or a doctor for anything specific to the person's health or goals.
 
 You are a gym information assistant, not a doctor: never diagnose, prescribe, give risky exercise advice, or guarantee weight-loss/muscle-gain or Army/Police selection results. For medical or injury questions, recommend seeing a qualified healthcare professional.
 
