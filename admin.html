@@ -4,977 +4,186 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Grand Multi Gym — Admin</title>
-
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#050505;
-  --panel:#101010;
-  --panel2:#151515;
-  --gold:#f5c400;
-  --gold2:#ffd84d;
-  --text:#fff;
-  --muted:#a9a9a9;
-  --border:rgba(245,196,0,.22);
-  --danger:#ff4d4d;
-  --success:#54d68b;
+  --black:#0a0908;--panel:#141210;--panel-2:#1c1916;
+  --gold:#f2b705;--gold-soft:rgba(242,183,5,0.14);
+  --ivory:#f4f1ea;--smoke:#9d968a;--line:#2b2620;
+  --radius:12px;--radius-sm:8px;
 }
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
 body{
-  font-family:Inter,Arial,sans-serif;
+  margin:0;color:var(--ivory);font-family:'Manrope',sans-serif;min-height:100vh;
   background:
-    radial-gradient(circle at top right,rgba(245,196,0,.09),transparent 35%),
-    radial-gradient(circle at bottom left,rgba(245,196,0,.06),transparent 30%),
-    var(--bg);
-  color:var(--text);
-  min-height:100vh;
+    radial-gradient(circle at 8% 8%, rgba(242,183,5,0.16), transparent 40%),
+    radial-gradient(circle at 92% 18%, rgba(242,183,5,0.10), transparent 38%),
+    radial-gradient(circle at 50% 100%, rgba(242,183,5,0.08), transparent 45%),
+    var(--black);
+  background-attachment:fixed;
 }
-
-button,
-input,
-textarea,
-select{
-  font:inherit;
+h1,h2,h3,h4{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;margin:0;}
+.top{
+  background:rgba(20,18,16,0.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(242,183,5,0.18);padding:16px 24px;
+  display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:20;flex-wrap:wrap;gap:10px;
 }
-
-button{
-  cursor:pointer;
-}
-
-/* ================= LOGIN ================= */
-
-.login-screen{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:24px;
-  position:relative;
-  overflow:hidden;
-}
-
-.login-glow{
-  position:absolute;
-  width:420px;
-  height:420px;
-  background:rgba(245,196,0,.08);
-  filter:blur(100px);
-  border-radius:50%;
-}
-
-.login-card{
-  width:100%;
-  max-width:430px;
-  position:relative;
-  z-index:2;
-  padding:42px 34px;
-  border:1px solid var(--border);
-  border-radius:28px;
-  background:rgba(15,15,15,.78);
-  backdrop-filter:blur(22px);
-  -webkit-backdrop-filter:blur(22px);
-  box-shadow:
-    0 30px 90px rgba(0,0,0,.65),
-    inset 0 1px 0 rgba(255,255,255,.04);
-  text-align:center;
-}
-
-.login-logo{
-  width:96px;
-  height:96px;
-  margin:0 auto 22px;
-  padding:5px;
-  border-radius:25px;
-  background:#090909;
-  border:1px solid rgba(245,196,0,.45);
-  box-shadow:0 0 35px rgba(245,196,0,.12);
-  overflow:hidden;
-}
-
-.login-logo img{
-  width:100%;
-  height:100%;
-  display:block;
-  object-fit:contain;
-  border-radius:19px;
-}
-
-.login-card h1{
-  font-size:28px;
-  margin-bottom:7px;
-}
-
-.login-card .subtitle{
-  color:var(--muted);
-  margin-bottom:30px;
-}
-
-.login-input{
-  width:100%;
-  padding:15px 17px;
-  border-radius:14px;
-  border:1px solid var(--border);
-  outline:none;
-  background:#090909;
-  color:white;
-  margin-bottom:14px;
-  transition:.2s;
-}
-
-.login-input:focus{
-  border-color:var(--gold);
-  box-shadow:0 0 0 3px rgba(245,196,0,.08);
-}
-
-.login-btn{
-  width:100%;
-  padding:15px;
-  border:0;
-  border-radius:14px;
-  background:linear-gradient(135deg,var(--gold),var(--gold2));
-  color:#080808;
-  font-weight:800;
-  transition:.2s;
-}
-
-.login-btn:hover{
-  transform:translateY(-1px);
-  box-shadow:0 10px 30px rgba(245,196,0,.18);
-}
-
-.login-error{
-  color:#ff7777;
-  font-size:13px;
-  margin-top:14px;
-  min-height:18px;
-}
-
-/* ================= APP ================= */
-
-#app{
-  display:none;
-  min-height:100vh;
-}
-
-.layout{
-  display:flex;
-  min-height:100vh;
-}
-
-/* SIDEBAR */
-
-.sidebar{
-  width:260px;
-  position:fixed;
-  left:0;
-  top:0;
-  bottom:0;
-  padding:24px 16px;
-  border-right:1px solid var(--border);
-  background:rgba(7,7,7,.88);
-  backdrop-filter:blur(20px);
-  z-index:20;
-  overflow-y:auto;
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:8px 10px 24px;
-  border-bottom:1px solid rgba(255,255,255,.06);
-  margin-bottom:20px;
-}
-
-.brand-mark{
-  width:44px;
-  height:44px;
-  border-radius:13px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:linear-gradient(135deg,var(--gold),#9d7800);
-  color:#050505;
-  font-weight:900;
-}
-
-.brand-title{
-  font-weight:800;
-  font-size:15px;
-}
-
-.brand-sub{
-  font-size:11px;
-  color:var(--muted);
-  margin-top:3px;
-}
-
-.nav-btn{
-  width:100%;
-  text-align:left;
-  border:1px solid transparent;
-  background:transparent;
-  color:#cfcfcf;
-  padding:12px 13px;
-  border-radius:12px;
-  margin-bottom:7px;
-  transition:.2s;
-}
-
-.nav-btn:hover,
-.nav-btn.active{
-  background:rgba(245,196,0,.08);
-  color:var(--gold2);
-  border-color:var(--border);
-}
-
-.logout-btn{
-  width:100%;
-  margin-top:18px;
-  padding:12px;
-  border-radius:12px;
-  border:1px solid rgba(255,77,77,.25);
-  background:rgba(255,77,77,.06);
-  color:#ff7777;
-  transition:.2s;
-}
-
-.logout-btn:hover{
-  background:rgba(255,77,77,.12);
-}
-
-/* MAIN */
-
-.main{
-  width:100%;
-  margin-left:260px;
-  padding:28px;
-  max-width:1600px;
-}
-
-.topbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
-  margin-bottom:28px;
-}
-
-.topbar h2{
-  font-size:26px;
-}
-
-.topbar p{
-  color:var(--muted);
-  margin-top:5px;
-  font-size:13px;
-}
-
-.save-area{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.save-status{
-  color:var(--muted);
-  font-size:12px;
-}
-
-.save-btn{
-  border:0;
-  border-radius:12px;
-  padding:12px 18px;
-  background:linear-gradient(135deg,var(--gold),var(--gold2));
-  color:#050505;
-  font-weight:800;
-}
-
-.save-btn:hover{
-  box-shadow:0 8px 25px rgba(245,196,0,.16);
-}
-
-/* SECTIONS */
-
-.section{
-  display:none;
-}
-
-.section.active{
-  display:block;
-}
-
+.top .t{font-size:19px;color:var(--gold);}
+.wrap{max-width:960px;margin:0 auto;padding:32px 24px 120px;}
+.note{font-size:12.5px;color:var(--smoke);margin-top:6px;line-height:1.5;}
 .glass{
-  border:1px solid var(--border);
-  background:rgba(15,15,15,.72);
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-  border-radius:22px;
-  box-shadow:
-    0 20px 60px rgba(0,0,0,.25),
-    inset 0 1px 0 rgba(255,255,255,.025);
+  background:rgba(20,18,16,0.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(242,183,5,0.16);border-radius:var(--radius);
 }
-
-.section-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-  margin-bottom:18px;
+.block{padding:24px;margin-bottom:20px;}
+.block h4{font-size:16px;color:var(--gold);margin-bottom:16px;text-transform:none;font-weight:800;}
+.row{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;margin-bottom:10px;align-items:center;}
+.row.single{grid-template-columns:1fr auto;}
+.row input,.row textarea,.field input,.field textarea,.field select{
+  background:rgba(0,0,0,0.35);border:1px solid var(--line);color:var(--ivory);
+  padding:9px 11px;font-size:13.5px;font-family:inherit;width:100%;border-radius:var(--radius-sm);
 }
-
-.section-head h3{
-  font-size:20px;
+.row input:focus,.row textarea:focus,.field input:focus,.field textarea:focus{outline:none;border-color:var(--gold);}
+button.del{background:none;border:1px solid var(--line);color:#e05252;padding:8px 12px;border-radius:var(--radius-sm);}
+.field{margin-bottom:14px;}
+.field label{display:block;font-size:12px;font-weight:700;color:var(--smoke);margin-bottom:5px;text-transform:uppercase;letter-spacing:.02em;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:var(--radius-sm);font-weight:800;font-size:13.5px;border:1.5px solid transparent;background:none;cursor:pointer;transition:transform .12s ease;}
+.btn:active{transform:scale(0.97);}
+.btn-gold{background:var(--gold);color:#141210;}
+.btn-line{border-color:var(--gold);color:var(--gold);}
+.btn-ghost{border-color:var(--line);color:var(--ivory);}
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
+.login-box{max-width:360px;width:100%;text-align:center;padding:40px 32px;}
+.login-box input{width:100%;margin:14px 0;}
+.actions-bar{
+  position:fixed;bottom:0;left:0;right:0;z-index:20;
+  background:rgba(20,18,16,0.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-top:1px solid rgba(242,183,5,0.18);
+  padding:14px 24px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;
 }
-
-.section-head p{
-  color:var(--muted);
-  font-size:12px;
-  margin-top:4px;
+.stars-input{width:70px;}
+#toast{
+  position:fixed;top:20px;left:50%;transform:translateX(-50%);
+  color:#141210;padding:12px 22px;font-weight:800;font-size:13.5px;z-index:400;display:none;border-radius:var(--radius-sm);
 }
-
-.add-btn{
-  padding:10px 15px;
-  border-radius:11px;
-  border:1px solid var(--border);
-  background:rgba(245,196,0,.08);
-  color:var(--gold2);
-  font-weight:700;
-}
-
-.add-btn:hover{
-  background:rgba(245,196,0,.14);
-}
-
-/* DASHBOARD */
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:16px;
-  margin-bottom:22px;
-}
-
-.stat{
-  padding:20px;
-}
-
-.stat-label{
-  color:var(--muted);
-  font-size:12px;
-}
-
-.stat-value{
-  font-size:30px;
-  font-weight:800;
-  color:var(--gold2);
-  margin-top:7px;
-}
-
-/* FORM */
-
-.editor{
-  padding:22px;
-  margin-bottom:18px;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px;
-}
-
-.grid-3{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-}
-
-.field{
-  margin-bottom:14px;
-}
-
-.field.full{
-  grid-column:1/-1;
-}
-
-.field label{
-  display:block;
-  color:#cfcfcf;
-  font-size:12px;
-  margin-bottom:7px;
-}
-
-.field input,
-.field textarea,
-.field select{
-  width:100%;
-  border:1px solid rgba(255,255,255,.08);
-  background:#090909;
-  color:#fff;
-  border-radius:11px;
-  padding:12px 13px;
-  outline:none;
-}
-
-.field textarea{
-  min-height:100px;
-  resize:vertical;
-}
-
-.field input:focus,
-.field textarea:focus,
-.field select:focus{
-  border-color:var(--gold);
-  box-shadow:0 0 0 3px rgba(245,196,0,.07);
-}
-
-.actions{
-  display:flex;
-  gap:8px;
-  margin-top:5px;
-}
-
-.small-btn{
-  border-radius:9px;
-  padding:9px 13px;
-  border:1px solid rgba(255,255,255,.1);
-  background:#171717;
-  color:#ddd;
-}
-
-.small-btn.primary{
-  background:rgba(245,196,0,.1);
-  border-color:var(--border);
-  color:var(--gold2);
-}
-
-.small-btn.delete{
-  color:#ff7777;
-  border-color:rgba(255,77,77,.2);
-}
-
-.item-card{
-  scroll-margin-top:100px;
-  transition:border-color .3s,box-shadow .3s;
-}
-
-.item-card.just-added{
-  animation:newItemGlow 1.3s ease;
-}
-
-@keyframes newItemGlow{
-  0%{
-    border-color:rgba(245,196,0,.8);
-    box-shadow:0 0 0 5px rgba(245,196,0,.08);
-  }
-  100%{
-    border-color:var(--border);
-    box-shadow:none;
-  }
-}
-
-/* HERO */
-
-.hero-preview{
-  padding:22px;
-}
-
-.hero-title{
-  color:var(--gold2);
-  font-size:14px;
-  margin-bottom:5px;
-}
-
-/* TOAST */
-
-.toast{
-  position:fixed;
-  right:24px;
-  bottom:24px;
-  z-index:100;
-  padding:13px 17px;
-  border-radius:12px;
-  border:1px solid var(--border);
-  background:#121212;
-  color:#fff;
-  box-shadow:0 15px 40px rgba(0,0,0,.4);
-  transform:translateY(20px);
-  opacity:0;
-  pointer-events:none;
-  transition:.25s;
-}
-
-.toast.show{
-  transform:translateY(0);
-  opacity:1;
-}
-
-/* MOBILE */
-
-.mobile-top{
-  display:none;
-}
-
-@media(max-width:900px){
-
-  .sidebar{
-    width:220px;
-  }
-
-  .main{
-    margin-left:220px;
-    padding:20px;
-  }
-
-  .stats{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-}
-
-@media(max-width:700px){
-
-  .sidebar{
-    position:relative;
-    width:100%;
-    height:auto;
-    border-right:0;
-    border-bottom:1px solid var(--border);
-  }
-
-  .layout{
-    display:block;
-  }
-
-  .main{
-    margin-left:0;
-    padding:16px;
-  }
-
-  .topbar{
-    align-items:flex-start;
-    flex-direction:column;
-  }
-
-  .grid,
-  .grid-3{
-    grid-template-columns:1fr;
-  }
-
-  .stats{
-    grid-template-columns:1fr 1fr;
-  }
+#toast.ok{background:var(--gold);}
+#toast.err{background:#e05252;color:#fff;}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.stat-card{padding:18px;text-align:center;}
+.stat-card b{font-family:'Anton';font-size:26px;color:var(--gold);display:block;}
+.stat-card span{font-size:11.5px;color:var(--smoke);text-transform:uppercase;letter-spacing:.02em;}
+.quicknav{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+.quicknav a{font-size:12px;font-weight:700;color:var(--smoke);border:1px solid var(--line);padding:6px 12px;border-radius:100px;}
+.quicknav a:hover{color:var(--gold);border-color:var(--gold);}
+.item-flash{animation:flash 1s ease;}
+@keyframes flash{0%{background:var(--gold-soft);}100%{background:transparent;}}
+.dirty-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);display:none;margin-right:4px;}
+.dirty-dot.show{display:inline-block;}
+@media(max-width:680px){
+  .row{grid-template-columns:1fr;}
+  .stat-grid{grid-template-columns:repeat(2,1fr);}
+  .top{flex-direction:column;align-items:flex-start;}
+  .actions-bar{flex-direction:column;align-items:stretch;}
 }
 </style>
 </head>
-
 <body>
 
-<!-- ================= LOGIN ================= -->
+<div id="loginScreen" class="login-wrap">
+  <div class="login-box glass">
+    <img src="assets/logo.jpg" alt="Grand Multi Gym" style="width:88px;height:88px;border-radius:50%;object-fit:cover;margin-bottom:18px;border:2px solid var(--gold);">
+    <h3 style="font-size:22px;">GRAND MULTI ADMIN</h3>
+    <div style="position:relative;">
+      <input type="password" id="pass" placeholder="Enter password" style="padding-right:42px;" onkeydown="if(event.key==='Enter')login()">
+      <button type="button" onclick="togglePass()" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--smoke);font-size:16px;padding:6px;">👁</button>
+    </div>
+    <label style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--smoke);justify-content:center;margin-bottom:16px;">
+      <input type="checkbox" id="rememberMe" style="width:auto;" checked> Remember me on this device
+    </label>
+    <button class="btn btn-gold" style="width:100%;justify-content:center;" onclick="login()">Log In</button>
+  </div>
+</div>
 
-<div class="login-screen" id="loginScreen">
+<div id="app" style="display:none;">
+  <div class="top">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <img src="assets/logo.jpg" alt="Grand Multi Gym" style="width:34px;height:34px;border-radius:50%;object-fit:cover;">
+      <div class="t">Grand Multi Gym — Admin</div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;">
+      <span id="dirtyIndicator" class="note" style="margin:0;display:flex;align-items:center;"><span class="dirty-dot" id="dirtyDot"></span><span id="dirtyText"></span></span>
+      <a href="index.html" class="btn btn-ghost" target="_blank">View Site ↗</a>
+      <button class="btn btn-ghost" onclick="logout()">Logout</button>
+    </div>
+  </div>
+  <div class="wrap">
 
-  <div class="login-glow"></div>
-
-  <div class="login-card">
-
-    <div class="login-logo">
-      <img src="assets/logo.jpg" alt="Grand Multi Gym Logo">
+    <div class="block glass" id="dashboard">
+      <h4>Dashboard</h4>
+      <div class="stat-grid">
+        <div class="stat-card glass"><b id="statPricing">0</b><span>Pricing</span></div>
+        <div class="stat-card glass"><b id="statRules">0</b><span>Rules</span></div>
+        <div class="stat-card glass"><b id="statFaq">0</b><span>FAQs</span></div>
+        <div class="stat-card glass"><b id="statReviews">0</b><span>Reviews</span></div>
+      </div>
+      <div class="quicknav">
+        <a href="#heroBlock">Hero</a>
+        <a href="#pricingBlock">Pricing</a>
+        <a href="#rulesBlock">Rules</a>
+        <a href="#faqBlock">FAQs</a>
+        <a href="#reviewsBlock">Reviews</a>
+      </div>
+      <p class="note" id="syncStatus">Connecting…</p>
     </div>
 
-    <h1>Grand Multi Gym</h1>
-    <div class="subtitle">Content Manager</div>
+    <div class="block glass" id="heroBlock">
+      <h4>Hero Text</h4>
+      <div class="field"><label>Eyebrow line</label><input id="h_eyebrow"></div>
+      <div class="field"><label>Subheadline</label><textarea id="h_sub" rows="2"></textarea></div>
+    </div>
 
-    <form id="loginForm">
+    <div class="block glass" id="pricingBlock">
+      <h4>Pricing Plans</h4>
+      <div id="priceList"></div>
+      <button class="btn btn-line" onclick="addPricing()">+ Add Plan</button>
+    </div>
 
-      <input
-        type="password"
-        id="passwordInput"
-        class="login-input"
-        placeholder="Enter password"
-        autocomplete="current-password"
-        required
-      >
+    <div class="block glass" id="rulesBlock">
+      <h4>Gym Rules</h4>
+      <div id="rulesList"></div>
+      <button class="btn btn-line" onclick="addRule()">+ Add Rule</button>
+    </div>
 
-      <button class="login-btn" type="submit">
-        Login
-      </button>
+    <div class="block glass" id="faqBlock">
+      <h4>FAQs</h4>
+      <div id="faqList"></div>
+      <button class="btn btn-line" onclick="addFaq()">+ Add FAQ</button>
+    </div>
 
-      <div class="login-error" id="loginError"></div>
+    <div class="block glass" id="reviewsBlock">
+      <h4>Reviews</h4>
+      <div id="reviewList"></div>
+      <button class="btn btn-line" onclick="addReview()">+ Add Review</button>
+      <p class="note">Tick "Demo" for placeholder reviews so the site labels them clearly.</p>
+    </div>
 
-    </form>
-
+  </div>
+  <div class="actions-bar">
+    <button class="btn btn-gold" onclick="saveToFirestore()">💾 Save Changes</button>
+    <button class="btn btn-ghost" onclick="downloadConfig()">⬇ Download Backup</button>
+    <span class="note" style="margin:0;" id="saveStatus"></span>
   </div>
 </div>
 
-
-<!-- ================= APP ================= -->
-
-<div id="app">
-
-  <div class="layout">
-
-    <!-- SIDEBAR -->
-
-    <aside class="sidebar">
-
-      <div class="brand">
-        <div class="brand-mark">GM</div>
-
-        <div>
-          <div class="brand-title">Grand Multi Gym</div>
-          <div class="brand-sub">Content Manager</div>
-        </div>
-      </div>
-
-      <button class="nav-btn active" data-section="dashboard">
-        Dashboard
-      </button>
-
-      <button class="nav-btn" data-section="hero">
-        Hero
-      </button>
-
-      <button class="nav-btn" data-section="why">
-        Why Us
-      </button>
-
-      <button class="nav-btn" data-section="pricing">
-        Pricing
-      </button>
-
-      <button class="nav-btn" data-section="rules">
-        Rules
-      </button>
-
-      <button class="nav-btn" data-section="faq">
-        FAQ
-      </button>
-
-      <button class="nav-btn" data-section="reviews">
-        Reviews
-      </button>
-
-      <button class="logout-btn" id="logoutBtn">
-        Log Out
-      </button>
-
-    </aside>
-
-
-    <!-- MAIN -->
-
-    <main class="main">
-
-      <div class="topbar">
-
-        <div>
-          <h2 id="pageTitle">Dashboard</h2>
-          <p>Manage your gym website content.</p>
-        </div>
-
-        <div class="save-area">
-          <span class="save-status" id="saveStatus">
-            All changes saved
-          </span>
-
-          <button class="save-btn" id="saveBtn">
-            Save Changes
-          </button>
-        </div>
-
-      </div>
-
-
-      <!-- ================= DASHBOARD ================= -->
-
-      <section class="section active" id="section-dashboard">
-
-        <div class="stats">
-
-          <div class="glass stat">
-            <div class="stat-label">Why Us</div>
-            <div class="stat-value" id="statWhy">0</div>
-          </div>
-
-          <div class="glass stat">
-            <div class="stat-label">Pricing Plans</div>
-            <div class="stat-value" id="statPricing">0</div>
-          </div>
-
-          <div class="glass stat">
-            <div class="stat-label">FAQ</div>
-            <div class="stat-value" id="statFaq">0</div>
-          </div>
-
-          <div class="glass stat">
-            <div class="stat-label">Reviews</div>
-            <div class="stat-value" id="statReviews">0</div>
-          </div>
-
-        </div>
-
-        <div class="glass editor">
-
-          <div class="section-head">
-            <div>
-              <h3>Website Overview</h3>
-              <p>Manage the main content displayed on your website.</p>
-            </div>
-          </div>
-
-          <p style="color:#aaa;line-height:1.7;font-size:14px;">
-            Use the sections on the left to update your website content.
-            After making changes, press <b style="color:#f5c400;">Save Changes</b>
-            to publish the updates.
-          </p>
-
-        </div>
-
-      </section>
-
-
-      <!-- ================= HERO ================= -->
-
-      <section class="section" id="section-hero">
-
-        <div class="glass editor">
-
-          <div class="section-head">
-            <div>
-              <h3>Hero Section</h3>
-              <p>Update the main heading and introduction.</p>
-            </div>
-          </div>
-
-          <div id="heroEditor"></div>
-
-        </div>
-
-      </section>
-
-
-      <!-- ================= WHY US ================= -->
-
-      <section class="section" id="section-why">
-
-        <div class="section-head">
-
-          <div>
-            <h3>Why Us</h3>
-            <p>Manage the benefits shown on your website.</p>
-          </div>
-
-          <button class="add-btn" id="addWhy">
-            + Add Why Us
-          </button>
-
-        </div>
-
-        <div id="whyList"></div>
-
-      </section>
-
-
-      <!-- ================= PRICING ================= -->
-
-      <section class="section" id="section-pricing">
-
-        <div class="section-head">
-
-          <div>
-            <h3>Pricing</h3>
-            <p>Manage membership plans and prices.</p>
-          </div>
-
-          <button class="add-btn" id="addPricing">
-            + Add Plan
-          </button>
-
-        </div>
-
-        <div id="pricingList"></div>
-
-      </section>
-
-
-      <!-- ================= RULES ================= -->
-
-      <section class="section" id="section-rules">
-
-        <div class="section-head">
-
-          <div>
-            <h3>Rules</h3>
-            <p>Manage gym rules and policies.</p>
-          </div>
-
-          <button class="add-btn" id="addRule">
-            + Add Rule
-          </button>
-
-        </div>
-
-        <div id="rulesList"></div>
-
-      </section>
-
-
-      <!-- ================= FAQ ================= -->
-
-      <section class="section" id="section-faq">
-
-        <div class="section-head">
-
-          <div>
-            <h3>FAQ</h3>
-            <p>Manage frequently asked questions.</p>
-          </div>
-
-          <button class="add-btn" id="addFaq">
-            + Add FAQ
-          </button>
-
-        </div>
-
-        <div id="faqList"></div>
-
-      </section>
-
-
-      <!-- ================= REVIEWS ================= -->
-
-      <section class="section" id="section-reviews">
-
-        <div class="section-head">
-
-          <div>
-            <h3>Reviews</h3>
-            <p>Manage customer testimonials.</p>
-          </div>
-
-          <button class="add-btn" id="addReview">
-            + Add Review
-          </button>
-
-        </div>
-
-        <div id="reviewsList"></div>
-
-      </section>
-
-    </main>
-
-  </div>
-
-</div>
-
-<div class="toast" id="toast"></div>
-
-
-<!-- FIREBASE -->
-
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-
-
+<div id="toast"></div>
+
+<!-- Firebase (client SDK only) -->
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
 <script>
-
-/* =========================================================
-   LOGIN
-========================================================= */
-
-const ADMIN_PASSWORD = "grandmultigym@1234";
-
-const loginScreen = document.getElementById("loginScreen");
-const app = document.getElementById("app");
-const loginForm = document.getElementById("loginForm");
-const passwordInput = document.getElementById("passwordInput");
-const loginError = document.getElementById("loginError");
-
-
-function showApp(){
-
-  loginScreen.style.display = "none";
-  app.style.display = "block";
-
-  passwordInput.value = "";
-
-}
-
-
-function showLogin(){
-
-  app.style.display = "none";
-  loginScreen.style.display = "flex";
-
-  loginError.textContent = "";
-
-  setTimeout(() => {
-    passwordInput.focus();
-  },100);
-
-}
-
-
-loginForm.addEventListener("submit",function(e){
-
-  e.preventDefault();
-
-  const password = passwordInput.value;
-
-  if(password === ADMIN_PASSWORD){
-
-    /*
-      Remember login in this browser until Logout.
-    */
-    localStorage.setItem(
-      "grandMultiGymAdmin",
-      "true"
-    );
-
-    loginError.textContent = "";
-
-    showApp();
-
-    loadData();
-
-  }else{
-
-    loginError.textContent = "Incorrect password.";
-
-  }
-
-});
-
-
-/* =========================================================
-   LOGOUT
-========================================================= */
-
-document.getElementById("logoutBtn").addEventListener("click",function(){
-
-  localStorage.removeItem("grandMultiGymAdmin");
-
-  showLogin();
-
-});
-
-
-/* =========================================================
-   FIREBASE
-========================================================= */
-
 const firebaseConfig = {
   apiKey: "AIzaSyAX1iDS9IEI6EugPpgjXOGOOr_2t5w9mE0",
   authDomain: "grand-muilt-gym.firebaseapp.com",
@@ -983,1276 +192,221 @@ const firebaseConfig = {
   messagingSenderId: "437245103225",
   appId: "1:437245103225:web:ee1acc451091ad1ca9d8a8"
 };
-
 let db = null;
-let firebaseReady = false;
-
 try{
-
   firebase.initializeApp(firebaseConfig);
-
   db = firebase.firestore();
-
-  firebaseReady = true;
-
-}catch(error){
-
-  console.error(error);
-
-}
-
-
-/* =========================================================
-   DEFAULT STATE
-========================================================= */
-
-const defaultState = {
-
-  hero:{
-    title:"",
-    subtitle:"",
-    description:"",
-    buttonText:"",
-    buttonLink:""
-  },
-
-  pricing:[],
-
-  programs:[],
-
-  why:[],
-
-  rules:[],
-
-  gallery:[],
-
-  reviews:[],
-
-  faq:[],
-
-  aiProvider:"",
-
-  apiKey:"",
-
-  bookings:[],
-
-  chatHistory:[]
-
-};
-
-
-let state = clone(defaultState);
-
-let hasUnsavedChanges = false;
-
-
-/* =========================================================
-   HELPERS
-========================================================= */
-
-function clone(obj){
-
-  return JSON.parse(JSON.stringify(obj));
-
-}
-
-
-function arr(value){
-
-  return Array.isArray(value) ? value : [];
-
-}
-
-
-function esc(value){
-
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-
-}
-
-
-function money(value){
-
-  return value ?? "";
-
-}
-
-
-function showToast(message){
-
-  const toast = document.getElementById("toast");
-
-  toast.textContent = message;
-
-  toast.classList.add("show");
-
-  clearTimeout(window.toastTimer);
-
-  window.toastTimer = setTimeout(() => {
-
-    toast.classList.remove("show");
-
-  },2500);
-
-}
-
-
-function markChanged(){
-
-  hasUnsavedChanges = true;
-
-  document.getElementById("saveStatus").textContent =
-    "Unsaved changes";
-
-}
-
-
-function markSaved(){
-
-  hasUnsavedChanges = false;
-
-  document.getElementById("saveStatus").textContent =
-    "All changes saved";
-
-}
-
-
-/* =========================================================
-   SMOOTH SCROLL TO NEW ITEM
-========================================================= */
-
-function scrollToLastEditorItem(
-  containerSelector,
-  focusSelector = "input"
-){
-
-  requestAnimationFrame(() => {
-
-    const container =
-      document.querySelector(containerSelector);
-
-    if(!container) return;
-
-    const items =
-      container.querySelectorAll(".item-card");
-
-    if(!items.length) return;
-
-    const target = items[items.length - 1];
-
-    target.classList.add("just-added");
-
-    target.scrollIntoView({
-      behavior:"smooth",
-      block:"center"
-    });
-
-    setTimeout(() => {
-
-      const input =
-        target.querySelector(focusSelector);
-
-      if(input){
-
-        input.focus();
-
-        if(
-          typeof input.select === "function" &&
-          input.tagName === "INPUT"
-        ){
-
-          input.select();
-
-        }
-
-      }
-
-    },450);
-
-  });
-
-}
-
-
-/* =========================================================
-   LOAD FIRESTORE
-========================================================= */
-
-async function loadData(){
-
-  if(!firebaseReady){
-
-    showToast("Database connection unavailable.");
-
-    renderAll();
-
-    return;
-
-  }
-
-  try{
-
-    const snap =
-      await db.collection("site")
-      .doc("config")
-      .get();
-
-    if(snap.exists){
-
-      state = normalizeState(
-        Object.assign(
-          clone(defaultState),
-          snap.data()
-        )
-      );
-
-    }else{
-
-      state = clone(defaultState);
-
-    }
-
-    renderAll();
-
-    markSaved();
-
-  }catch(error){
-
-    console.error(error);
-
-    showToast("Could not load website data.");
-
-    renderAll();
-
-  }
-
-}
-
-
-/* =========================================================
-   NORMALIZE
-========================================================= */
-
-function normalizeState(data){
-
-  data.why = arr(data.why);
-
-  data.pricing = arr(data.pricing);
-
-  data.rules = arr(data.rules);
-
-  data.faq = arr(data.faq);
-
-  data.reviews = arr(data.reviews);
-
-  data.programs = arr(data.programs);
-
-  data.gallery = arr(data.gallery);
-
-  data.bookings = arr(data.bookings);
-
-  data.chatHistory = arr(data.chatHistory);
-
-  data.hero = data.hero || {};
-
-  return data;
-
-}
-
-
-/* =========================================================
-   SAVE
-========================================================= */
-
-async function saveData(){
-
-  if(!firebaseReady){
-
-    showToast("Database connection unavailable.");
-
-    return;
-
-  }
-
-  try{
-
-    await db.collection("site")
-      .doc("config")
-      .set(state,{merge:true});
-
-    markSaved();
-
-    showToast("Changes saved successfully.");
-
-  }catch(error){
-
-    console.error(error);
-
-    showToast("Could not save changes.");
-
-  }
-
-}
-
-
-document.getElementById("saveBtn")
-  .addEventListener("click",saveData);
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-const titles = {
-
-  dashboard:"Dashboard",
-
-  hero:"Hero Section",
-
-  why:"Why Us",
-
-  pricing:"Pricing",
-
-  rules:"Rules",
-
-  faq:"FAQ",
-
-  reviews:"Reviews"
-
-};
-
-
-document.querySelectorAll(".nav-btn")
-.forEach(button => {
-
-  button.addEventListener("click",() => {
-
-    const section =
-      button.dataset.section;
-
-    openSection(section);
-
-  });
-
-});
-
-
-function openSection(name){
-
-  document.querySelectorAll(".nav-btn")
-  .forEach(btn => {
-
-    btn.classList.toggle(
-      "active",
-      btn.dataset.section === name
-    );
-
-  });
-
-
-  document.querySelectorAll(".section")
-  .forEach(section => {
-
-    section.classList.remove("active");
-
-  });
-
-
-  const target =
-    document.getElementById(
-      "section-" + name
-    );
-
-  if(target){
-
-    target.classList.add("active");
-
-  }
-
-
-  document.getElementById("pageTitle")
-    .textContent =
-      titles[name] || name;
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
-}
-
-
-/* =========================================================
-   HERO
-========================================================= */
-
-function renderHero(){
-
-  const h = state.hero || {};
-
-  document.getElementById("heroEditor").innerHTML = `
-
-    <div class="grid">
-
-      <div class="field full">
-        <label>Title</label>
-        <input
-          id="heroTitle"
-          value="${esc(h.title)}"
-          placeholder="Main heading"
-        >
-      </div>
-
-      <div class="field">
-        <label>Subtitle</label>
-        <input
-          id="heroSubtitle"
-          value="${esc(h.subtitle)}"
-          placeholder="Subtitle"
-        >
-      </div>
-
-      <div class="field">
-        <label>Button Text</label>
-        <input
-          id="heroButtonText"
-          value="${esc(h.buttonText)}"
-          placeholder="Button text"
-        >
-      </div>
-
-      <div class="field">
-        <label>Button Link</label>
-        <input
-          id="heroButtonLink"
-          value="${esc(h.buttonLink)}"
-          placeholder="#pricing"
-        >
-      </div>
-
-      <div class="field full">
-        <label>Description</label>
-        <textarea
-          id="heroDescription"
-          placeholder="Hero description"
-        >${esc(h.description)}</textarea>
-      </div>
-
-    </div>
-
-  `;
-
-
-  document.getElementById("heroEditor")
-    .querySelectorAll("input,textarea")
-    .forEach(input => {
-
-      input.addEventListener("input",readHero);
-
-    });
-
-}
-
-
-function readHero(){
-
-  state.hero = {
-
-    title:
-      document.getElementById("heroTitle").value,
-
-    subtitle:
-      document.getElementById("heroSubtitle").value,
-
-    description:
-      document.getElementById("heroDescription").value,
-
-    buttonText:
-      document.getElementById("heroButtonText").value,
-
-    buttonLink:
-      document.getElementById("heroButtonLink").value
-
-  };
-
-  markChanged();
-
-}
-
-
-/* =========================================================
-   WHY US
-========================================================= */
-
-function renderWhy(){
-
-  const list =
-    document.getElementById("whyList");
-
-  if(!state.why.length){
-
-    list.innerHTML = `
-      <div class="glass editor">
-        <p style="color:#888;">
-          No Why Us items added yet.
-        </p>
-      </div>
-    `;
-
-    return;
-
-  }
-
-
-  list.innerHTML =
-    state.why.map((item,index) => `
-
-      <div class="glass editor item-card">
-
-        <div class="grid">
-
-          <div class="field">
-            <label>Title</label>
-
-            <input
-              value="${esc(item.title)}"
-              oninput="updateWhy(${index},'title',this.value)"
-            >
-          </div>
-
-          <div class="field">
-            <label>Icon</label>
-
-            <input
-              value="${esc(item.icon)}"
-              oninput="updateWhy(${index},'icon',this.value)"
-              placeholder="⭐"
-            >
-          </div>
-
-          <div class="field full">
-
-            <label>Description</label>
-
-            <textarea
-              oninput="updateWhy(${index},'description',this.value)"
-            >${esc(item.description)}</textarea>
-
-          </div>
-
-        </div>
-
-        <div class="actions">
-
-          <button
-            class="small-btn delete"
-            onclick="deleteWhy(${index})"
-          >
-            Delete
-          </button>
-
-        </div>
-
-      </div>
-
-    `).join("");
-
-}
-
-
-function updateWhy(index,key,value){
-
-  state.why[index][key] = value;
-
-  markChanged();
-
-}
-
-
-function deleteWhy(index){
-
-  if(!confirm("Delete this item?")) return;
-
-  state.why.splice(index,1);
-
-  renderWhy();
-
-  updateStats();
-
-  markChanged();
-
-}
-
-
-document.getElementById("addWhy")
-.addEventListener("click",() => {
-
-  state.why.push({
-
-    title:"New Benefit",
-
-    description:"",
-
-    icon:"⭐"
-
-  });
-
-  renderWhy();
-
-  updateStats();
-
-  markChanged();
-
-  scrollToLastEditorItem(
-    "#whyList",
-    "input"
-  );
-
-});
-
-
-/* =========================================================
-   PRICING
-========================================================= */
-
-function renderPricing(){
-
-  const list =
-    document.getElementById("pricingList");
-
-
-  if(!state.pricing.length){
-
-    list.innerHTML = `
-      <div class="glass editor">
-        <p style="color:#888;">
-          No pricing plans added yet.
-        </p>
-      </div>
-    `;
-
-    return;
-
-  }
-
-
-  list.innerHTML =
-    state.pricing.map((item,index) => `
-
-      <div class="glass editor item-card">
-
-        <div class="grid-3">
-
-          <div class="field">
-
-            <label>Plan Name</label>
-
-            <input
-              value="${esc(item.name)}"
-              oninput="updatePricing(${index},'name',this.value)"
-            >
-
-          </div>
-
-          <div class="field">
-
-            <label>Price</label>
-
-            <input
-              value="${esc(money(item.price))}"
-              oninput="updatePricing(${index},'price',this.value)"
-            >
-
-          </div>
-
-          <div class="field">
-
-            <label>Duration</label>
-
-            <input
-              value="${esc(item.duration)}"
-              oninput="updatePricing(${index},'duration',this.value)"
-              placeholder="1 Month"
-            >
-
-          </div>
-
-          <div class="field full">
-
-            <label>Description</label>
-
-            <textarea
-              oninput="updatePricing(${index},'description',this.value)"
-            >${esc(item.description)}</textarea>
-
-          </div>
-
-        </div>
-
-        <div class="actions">
-
-          <button
-            class="small-btn delete"
-            onclick="deletePricing(${index})"
-          >
-            Delete
-          </button>
-
-        </div>
-
-      </div>
-
-    `).join("");
-
-}
-
-
-function updatePricing(index,key,value){
-
-  state.pricing[index][key] = value;
-
-  markChanged();
-
-}
-
-
-function deletePricing(index){
-
-  if(!confirm("Delete this pricing plan?")) return;
-
-  state.pricing.splice(index,1);
-
-  renderPricing();
-
-  updateStats();
-
-  markChanged();
-
-}
-
-
-document.getElementById("addPricing")
-.addEventListener("click",() => {
-
-  state.pricing.push({
-
-    name:"New Plan",
-
-    price:"",
-
-    duration:"",
-
-    description:""
-
-  });
-
-  renderPricing();
-
-  updateStats();
-
-  markChanged();
-
-  scrollToLastEditorItem(
-    "#pricingList",
-    "input"
-  );
-
-});
-
-
-/* =========================================================
-   RULES
-========================================================= */
-
-function renderRules(){
-
-  const list =
-    document.getElementById("rulesList");
-
-
-  if(!state.rules.length){
-
-    list.innerHTML = `
-      <div class="glass editor">
-        <p style="color:#888;">
-          No rules added yet.
-        </p>
-      </div>
-    `;
-
-    return;
-
-  }
-
-
-  list.innerHTML =
-    state.rules.map((item,index) => `
-
-      <div class="glass editor item-card">
-
-        <div class="field">
-
-          <label>Rule</label>
-
-          <textarea
-            oninput="updateRule(${index},this.value)"
-          >${esc(
-            typeof item === "string"
-              ? item
-              : item.text || item.description || ""
-          )}</textarea>
-
-        </div>
-
-        <div class="actions">
-
-          <button
-            class="small-btn delete"
-            onclick="deleteRule(${index})"
-          >
-            Delete
-          </button>
-
-        </div>
-
-      </div>
-
-    `).join("");
-
-}
-
-
-function updateRule(index,value){
-
-  if(typeof state.rules[index] === "string"){
-
-    state.rules[index] = {
-      text:value
-    };
-
-  }else{
-
-    state.rules[index].text = value;
-
-  }
-
-  markChanged();
-
-}
-
-
-function deleteRule(index){
-
-  if(!confirm("Delete this rule?")) return;
-
-  state.rules.splice(index,1);
-
-  renderRules();
-
-  markChanged();
-
-}
-
-
-document.getElementById("addRule")
-.addEventListener("click",() => {
-
-  state.rules.push({
-
-    text:"New gym rule"
-
-  });
-
-  renderRules();
-
-  markChanged();
-
-  scrollToLastEditorItem(
-    "#rulesList",
-    "textarea"
-  );
-
-});
-
-
-/* =========================================================
-   FAQ
-========================================================= */
-
-function renderFaq(){
-
-  const list =
-    document.getElementById("faqList");
-
-
-  if(!state.faq.length){
-
-    list.innerHTML = `
-      <div class="glass editor">
-        <p style="color:#888;">
-          No FAQ items added yet.
-        </p>
-      </div>
-    `;
-
-    return;
-
-  }
-
-
-  list.innerHTML =
-    state.faq.map((item,index) => `
-
-      <div class="glass editor item-card">
-
-        <div class="field">
-
-          <label>Question</label>
-
-          <input
-            value="${esc(item.question)}"
-            oninput="updateFaq(${index},'question',this.value)"
-          >
-
-        </div>
-
-        <div class="field">
-
-          <label>Answer</label>
-
-          <textarea
-            oninput="updateFaq(${index},'answer',this.value)"
-          >${esc(item.answer)}</textarea>
-
-        </div>
-
-        <div class="actions">
-
-          <button
-            class="small-btn delete"
-            onclick="deleteFaq(${index})"
-          >
-            Delete
-          </button>
-
-        </div>
-
-      </div>
-
-    `).join("");
-
-}
-
-
-function updateFaq(index,key,value){
-
-  state.faq[index][key] = value;
-
-  markChanged();
-
-}
-
-
-function deleteFaq(index){
-
-  if(!confirm("Delete this FAQ?")) return;
-
-  state.faq.splice(index,1);
-
-  renderFaq();
-
-  updateStats();
-
-  markChanged();
-
-}
-
-
-document.getElementById("addFaq")
-.addEventListener("click",() => {
-
-  state.faq.push({
-
-    question:"New question",
-
-    answer:"New answer"
-
-  });
-
-  renderFaq();
-
-  updateStats();
-
-  markChanged();
-
-  scrollToLastEditorItem(
-    "#faqList",
-    "input"
-  );
-
-});
-
-
-/* =========================================================
-   REVIEWS
-========================================================= */
-
-function renderReviews(){
-
-  const list =
-    document.getElementById("reviewsList");
-
-
-  if(!state.reviews.length){
-
-    list.innerHTML = `
-      <div class="glass editor">
-        <p style="color:#888;">
-          No reviews added yet.
-        </p>
-      </div>
-    `;
-
-    return;
-
-  }
-
-
-  list.innerHTML =
-    state.reviews.map((item,index) => `
-
-      <div class="glass editor item-card">
-
-        <div class="grid">
-
-          <div class="field">
-
-            <label>Customer Name</label>
-
-            <input
-              value="${esc(item.name)}"
-              oninput="updateReview(${index},'name',this.value)"
-            >
-
-          </div>
-
-          <div class="field">
-
-            <label>Rating</label>
-
-            <input
-              type="number"
-              min="1"
-              max="5"
-              value="${esc(item.rating || 5)}"
-              oninput="updateReview(${index},'rating',this.value)"
-            >
-
-          </div>
-
-          <div class="field full">
-
-            <label>Review</label>
-
-            <textarea
-              oninput="updateReview(${index},'text',this.value)"
-            >${esc(item.text || item.review || "")}</textarea>
-
-          </div>
-
-        </div>
-
-        <div class="actions">
-
-          <button
-            class="small-btn delete"
-            onclick="deleteReview(${index})"
-          >
-            Delete
-          </button>
-
-        </div>
-
-      </div>
-
-    `).join("");
-
-}
-
-
-function updateReview(index,key,value){
-
-  state.reviews[index][key] = value;
-
-  markChanged();
-
-}
-
-
-function deleteReview(index){
-
-  if(!confirm("Delete this review?")) return;
-
-  state.reviews.splice(index,1);
-
-  renderReviews();
-
-  updateStats();
-
-  markChanged();
-
-}
-
-
-document.getElementById("addReview")
-.addEventListener("click",() => {
-
-  state.reviews.push({
-
-    name:"New Customer",
-
-    rating:5,
-
-    text:"New customer review"
-
-  });
-
-  renderReviews();
-
-  updateStats();
-
-  markChanged();
-
-  scrollToLastEditorItem(
-    "#reviewsList",
-    "input"
-  );
-
-});
-
-
-/* =========================================================
-   STATS
-========================================================= */
-
-function updateStats(){
-
-  document.getElementById("statWhy")
-    .textContent = state.why.length;
-
-  document.getElementById("statPricing")
-    .textContent = state.pricing.length;
-
-  document.getElementById("statFaq")
-    .textContent = state.faq.length;
-
-  document.getElementById("statReviews")
-    .textContent = state.reviews.length;
-
-}
-
-
-/* =========================================================
-   RENDER ALL
-========================================================= */
-
-function renderAll(){
-
-  state = normalizeState(state);
-
-  renderHero();
-
-  renderWhy();
-
-  renderPricing();
-
-  renderRules();
-
-  renderFaq();
-
-  renderReviews();
-
-  updateStats();
-
-}
-
-
-/* =========================================================
-   BACKUP
-========================================================= */
-
-function downloadBackup(){
-
-  const blob =
-    new Blob(
-      [JSON.stringify(state,null,2)],
-      {type:"application/json"}
-    );
-
-  const url =
-    URL.createObjectURL(blob);
-
-  const a =
-    document.createElement("a");
-
-  a.href = url;
-
-  a.download =
-    "grand-multi-gym-backup.json";
-
-  document.body.appendChild(a);
-
-  a.click();
-
-  a.remove();
-
-  URL.revokeObjectURL(url);
-
-}
-
-
-/* =========================================================
-   UNSAVED CHANGE WARNING
-========================================================= */
-
-window.addEventListener("beforeunload",function(e){
-
-  if(hasUnsavedChanges){
-
-    e.preventDefault();
-
-    e.returnValue = "";
-
-  }
-
-});
-
-
-/* =========================================================
-   START
-========================================================= */
-
-if(
-  localStorage.getItem("grandMultiGymAdmin")
-  === "true"
-){
-
-  showApp();
-
-  loadData();
-
-}else{
-
-  showLogin();
-
-}
-
+}catch(err){ console.warn('Firebase not configured yet.', err); }
 </script>
 
+<script>
+const ADMIN_PASSWORD = 'admin123';
+const REMEMBER_KEY = 'gmg_admin_logged_in';
+let dirty = false;
+
+function togglePass(){
+  const p = document.getElementById('pass');
+  p.type = p.type === 'password' ? 'text' : 'password';
+}
+function login(){
+  if(document.getElementById('pass').value === ADMIN_PASSWORD){
+    if(document.getElementById('rememberMe').checked){ localStorage.setItem(REMEMBER_KEY,'1'); }
+    enterApp();
+  } else { alert('Incorrect password.'); }
+}
+function logout(){
+  localStorage.removeItem(REMEMBER_KEY);
+  dirty = false;
+  document.getElementById('app').style.display='none';
+  document.getElementById('loginScreen').style.display='flex';
+  document.getElementById('pass').value='';
+}
+function enterApp(){
+  document.getElementById('loginScreen').style.display='none';
+  document.getElementById('app').style.display='block';
+  loadFromFirestore();
+}
+window.addEventListener('DOMContentLoaded', ()=>{
+  try{
+    if(localStorage.getItem(REMEMBER_KEY) === '1'){ enterApp(); }
+  }catch(err){ /* localStorage unavailable in this context — login screen stays up */ }
+});
+window.addEventListener('beforeunload', (e)=>{
+  if(dirty){ e.preventDefault(); e.returnValue=''; }
+});
+function markDirty(){
+  dirty = true;
+  document.getElementById('dirtyDot').classList.add('show');
+  document.getElementById('dirtyText').textContent = 'Unsaved changes';
+  updateStats();
+}
+function clearDirty(){
+  dirty = false;
+  document.getElementById('dirtyDot').classList.remove('show');
+  document.getElementById('dirtyText').textContent = '';
+}
+
+const defaultState = {
+  hero: { eyebrow:'Kattanam, Kerala — Since 2003', sub:"Discipline today. Strength tomorrow. Weight training, cardio, personal coaching, and special training for Army & Kerala Police aspirants — for men and women." },
+  pricing: [
+    {name:'General Gym / Weight Training', price:500, duration:'Ask us (duration to be confirmed)', desc:'Full access to weight training equipment and floor coaching.', popular:true},
+    {name:'Cardio Training', price:700, duration:'Ask us (duration to be confirmed)', desc:'Cardio conditioning sessions with equipment access.', popular:false}
+  ],
+  rules: [
+    'Wear proper shoes','Bring your towel & water bottle','Use equipment properly',
+    'Wipe down equipment after use','Maintain silence & respect others','Be consistent, be disciplined'
+  ],
+  faq: [
+    {q:'What are the gym fees?', a:'Weight training is ₹500 and cardio training is ₹700. Contact us for the exact duration these cover.'},
+    {q:'Where is Grand Multi Gym located?', a:'Mankavil Garden, Bharanikkavu, Kattanam, Kerala 690503.'},
+    {q:'Do you provide personal training?', a:'Yes, personal training is available.'},
+    {q:'Do you provide Army or Kerala Police special training?', a:'Yes, we offer special training for Indian Army and Kerala Police aspirants.'},
+    {q:'Do you train both men and women?', a:'Yes, everyone trains here.'},
+    {q:'How can I book?', a:'Use the Book Now button, WhatsApp us, or call 9778575418.'}
+  ],
+  reviews: [
+    {name:'Godz Gym', text:'Super than fitness world.', stars:5, demo:false, src:'Google'},
+    {name:'Surya Babu', text:'💪', stars:5, demo:false, src:'Google'},
+    {name:'kailas Shankar', text:'Very good experience.', stars:5, demo:false, src:'Google'},
+    {name:'Vishal Murali', text:'Less fees compared to the nearby ones. Average equipment. Great personal support.', stars:4, demo:false, src:'Google'},
+    {name:'S.J creations', text:"It's a good place.", stars:5, demo:false, src:'Google'},
+    {name:'Arun', text:'Placeholder demo review — replace with a real one.', stars:5, demo:true, src:'Demo'}
+  ]
+};
+let state = JSON.parse(JSON.stringify(defaultState));
+
+function init(){
+  document.getElementById('h_eyebrow').value = state.hero.eyebrow;
+  document.getElementById('h_sub').value = state.hero.sub;
+  document.getElementById('h_eyebrow').oninput = e => { state.hero.eyebrow = e.target.value; markDirty(); };
+  document.getElementById('h_sub').oninput = e => { state.hero.sub = e.target.value; markDirty(); };
+  renderPricing(); renderRules(); renderFaq(); renderReviews();
+  updateStats();
+}
+
+function updateStats(){
+  document.getElementById('statPricing').textContent = state.pricing.length;
+  document.getElementById('statRules').textContent = state.rules.length;
+  document.getElementById('statFaq').textContent = state.faq.length;
+  document.getElementById('statReviews').textContent = state.reviews.length;
+}
+
+function loadFromFirestore(){
+  const statusEl = document.getElementById('syncStatus');
+  if(!db){ statusEl.textContent = 'Not connected to Firebase yet.'; init(); return; }
+  statusEl.textContent = 'Loading current site content…';
+  db.collection('site').doc('config').get().then(docSnap => {
+    if(docSnap.exists){ state = Object.assign(JSON.parse(JSON.stringify(defaultState)), docSnap.data()); }
+    init();
+    statusEl.textContent = 'Connected — showing live site content.';
+  }).catch(err => { statusEl.textContent = 'Could not load: ' + err.message; init(); });
+}
+
+function scrollAndFocus(containerId, itemId){
+  requestAnimationFrame(()=>{
+    const el = document.getElementById(itemId);
+    if(!el) return;
+    el.scrollIntoView({behavior:'smooth', block:'center'});
+    el.classList.add('item-flash');
+    const firstInput = el.querySelector('input, textarea');
+    if(firstInput) firstInput.focus();
+  });
+}
+
+function renderPricing(){
+  document.getElementById('priceList').innerHTML = state.pricing.map((p,i)=>`
+    <div class="block glass" style="padding:16px;" id="price-item-${i}">
+      <div class="row"><input value="${esc(p.name)}" oninput="state.pricing[${i}].name=this.value;markDirty()" placeholder="Plan name">
+      <input type="number" value="${p.price}" oninput="state.pricing[${i}].price=this.value;markDirty()" placeholder="Price ₹">
+      <button class="del" onclick="state.pricing.splice(${i},1);renderPricing();markDirty();showToast('Plan removed','ok')">Delete</button></div>
+      <div class="row single"><input value="${esc(p.duration)}" oninput="state.pricing[${i}].duration=this.value;markDirty()" placeholder="Duration (e.g. per month)">
+      <label style="display:flex;align-items:center;gap:6px;font-size:13px;"><input type="checkbox" style="width:auto;" ${p.popular?'checked':''} onchange="state.pricing[${i}].popular=this.checked;markDirty()"> Popular</label></div>
+      <input value="${esc(p.desc)}" oninput="state.pricing[${i}].desc=this.value;markDirty()" placeholder="Short description" style="margin-top:8px;">
+    </div>`).join('');
+}
+function addPricing(){
+  state.pricing.push({name:'New Plan',price:0,duration:'Set duration',desc:'Describe this plan.',popular:false});
+  renderPricing(); markDirty(); updateStats();
+  scrollAndFocus('priceList', 'price-item-'+(state.pricing.length-1));
+  showToast('Plan added','ok');
+}
+
+function renderRules(){
+  document.getElementById('rulesList').innerHTML = state.rules.map((r,i)=>`
+    <div class="row single" id="rule-item-${i}">
+      <input value="${esc(r)}" oninput="state.rules[${i}]=this.value;markDirty()">
+      <button class="del" onclick="state.rules.splice(${i},1);renderRules();markDirty();showToast('Rule removed','ok')">Delete</button>
+    </div>`).join('');
+}
+function addRule(){
+  state.rules.push('New rule');
+  renderRules(); markDirty(); updateStats();
+  scrollAndFocus('rulesList', 'rule-item-'+(state.rules.length-1));
+  showToast('Rule added','ok');
+}
+
+function renderFaq(){
+  document.getElementById('faqList').innerHTML = state.faq.map((f,i)=>`
+    <div class="row" id="faq-item-${i}">
+      <input value="${esc(f.q)}" oninput="state.faq[${i}].q=this.value;markDirty()" placeholder="Question">
+      <input value="${esc(f.a)}" oninput="state.faq[${i}].a=this.value;markDirty()" placeholder="Answer">
+      <button class="del" onclick="state.faq.splice(${i},1);renderFaq();markDirty();showToast('FAQ removed','ok')">Delete</button>
+    </div>`).join('');
+}
+function addFaq(){
+  state.faq.push({q:'New question?',a:'Answer here.'});
+  renderFaq(); markDirty(); updateStats();
+  scrollAndFocus('faqList', 'faq-item-'+(state.faq.length-1));
+  showToast('FAQ added','ok');
+}
+
+function renderReviews(){
+  document.getElementById('reviewList').innerHTML = state.reviews.map((r,i)=>`
+    <div class="block glass" style="padding:16px;" id="review-item-${i}">
+      <div class="row"><input value="${esc(r.name)}" oninput="state.reviews[${i}].name=this.value;markDirty()" placeholder="Name">
+      <input class="stars-input" type="number" min="1" max="5" value="${r.stars}" oninput="state.reviews[${i}].stars=this.value;markDirty()" placeholder="Stars">
+      <button class="del" onclick="state.reviews.splice(${i},1);renderReviews();markDirty();showToast('Review removed','ok')">Delete</button></div>
+      <input value="${esc(r.text)}" oninput="state.reviews[${i}].text=this.value;markDirty()" placeholder="Review text" style="margin-bottom:8px;">
+      <div class="row single"><input value="${esc(r.src||'')}" oninput="state.reviews[${i}].src=this.value;markDirty()" placeholder="Source (e.g. Google)">
+      <label style="display:flex;align-items:center;gap:6px;font-size:13px;"><input type="checkbox" style="width:auto;" ${r.demo?'checked':''} onchange="state.reviews[${i}].demo=this.checked;markDirty()"> Demo</label></div>
+    </div>`).join('');
+}
+function addReview(){
+  state.reviews.push({name:'New',text:'Review text',stars:5,demo:true,src:'Demo'});
+  renderReviews(); markDirty(); updateStats();
+  scrollAndFocus('reviewList', 'review-item-'+(state.reviews.length-1));
+  showToast('Review added','ok');
+}
+
+function esc(s){ return String(s??'').replace(/"/g,'&quot;'); }
+
+function downloadConfig(){
+  const blob = new Blob([JSON.stringify(state,null,2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'config-backup.json';
+  a.click();
+  showToast('Backup downloaded','ok');
+}
+function saveToFirestore(){
+  const statusEl = document.getElementById('saveStatus');
+  if(!db){ statusEl.textContent = 'Not connected to Firebase.'; showToast('Not connected to Firebase','err'); return; }
+  statusEl.textContent = 'Saving…';
+  db.collection('site').doc('config').set(state, {merge:true}).then(()=>{
+    statusEl.textContent = 'Saved just now.';
+    clearDirty();
+    showToast('Saved to website','ok');
+  }).catch(err => {
+    statusEl.textContent = 'Save failed.';
+    showToast('Save failed: ' + err.message, 'err');
+  });
+}
+function showToast(msg, type){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.className = type==='err' ? 'err' : 'ok';
+  t.style.display='block';
+  setTimeout(()=>t.style.display='none',2200);
+}
+</script>
 </body>
 </html>
