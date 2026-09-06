@@ -509,10 +509,10 @@ footer{background:#050403;border-top:1px solid var(--line);padding:64px 0 28px;}
 <!-- AI CHATBOT CTA -->
 <section class="section section-alt">
   <div class="wrap" style="text-align:center;">
-    <span class="kicker">Grand Multi AI</span>
-    <h2 style="font-size:clamp(28px,5vw,44px);">Fee Ethra Aanu?<br>Ask Grand Multi AI.</h2>
-    <p style="color:var(--smoke);margin-top:14px;">Malayalam, Manglish or English — ask about fees, programs, timing or booking.</p>
-    <a href="#" class="btn btn-gold" style="margin-top:24px;" onclick="openChat();return false;">Ask Grand Multi AI</a>
+    <span class="kicker">GrandFit AI Assistant</span>
+    <h2 style="font-size:clamp(28px,5vw,44px);">What's The Fee?<br>Ask GrandFit AI.</h2>
+    <p style="color:var(--smoke);margin-top:14px;">Ask about fees, programs, timing, booking, or general fitness advice.</p>
+    <a href="#" class="btn btn-gold" style="margin-top:24px;" onclick="openChat();return false;">Ask GrandFit AI</a>
   </div>
 </section>
 
@@ -575,7 +575,7 @@ footer{background:#050403;border-top:1px solid var(--line);padding:64px 0 28px;}
 
 <!-- FLOATING BUTTONS (desktop) -->
 <div class="floating">
-  <button class="fab fab-chat" onclick="openChat()" title="Ask Grand Multi AI">🤖</button>
+  <button class="fab fab-chat" onclick="openChat()" title="Ask GrandFit AI Assistant">🤖</button>
   <a class="fab fab-call" href="tel:+919778575418" title="Call">📞</a>
 </div>
 
@@ -606,8 +606,8 @@ footer{background:#050403;border-top:1px solid var(--line);padding:64px 0 28px;}
 <div class="chat-window" id="chatWindow">
   <div class="chat-head">
     <div>
-      <div class="t">Grand Multi AI</div>
-      <div class="s">Your Grand Multi Gym Assistant</div>
+      <div class="t">GrandFit AI Assistant</div>
+      <div class="s">Official AI Assistant for Grand Multi Gym</div>
     </div>
     <div style="display:flex;gap:6px;">
       <button onclick="clearChat()" title="Clear chat">🗑</button>
@@ -617,7 +617,7 @@ footer{background:#050403;border-top:1px solid var(--line);padding:64px 0 28px;}
   <div class="chat-body" id="chatBody"></div>
   <div class="suggested" id="chatSuggest"></div>
   <div class="chat-input-row">
-    <input type="text" id="chatInput" placeholder="Type in Malayalam, Manglish or English..." onkeydown="if(event.key==='Enter')sendChat()">
+    <input type="text" id="chatInput" placeholder="Type your message..." onkeydown="if(event.key==='Enter')sendChat()">
     <button onclick="sendChat()">➤</button>
   </div>
 </div>
@@ -818,12 +818,12 @@ function openBooking(){ openModal('bookingOverlay'); }
 document.getElementById('bookingOverlay').addEventListener('click',(e)=>{ if(e.target.id==='bookingOverlay') closeModal('bookingOverlay'); });
 
 /* ============ CHATBOT ============ */
-const suggestedQs = ['Gym fee ethra aanu?','Cardio training undo?','Army training undo?','Innu enthu workout cheyyanam?','Diet plan undo weight loss/gain?','Creatine use cheyyamo?'];
+const suggestedQs = ['What is the gym fee?','Is cardio training available?','Is Army special training available?','What should I train today?','Diet plan for weight loss/gain?','How to use creatine?'];
 function openChat(){
   const win=document.getElementById('chatWindow');
   win.classList.add('open');
   if(!state.chatHistory.length){
-    pushMsg('bot', "Hi! 👋 Welcome to Grand Multi Gym. Ask me anything about our training programs, fees, location or booking.\n\nMalayalam / Manglish / English — എല്ലാം മനസ്സിലാകും.");
+    pushMsg('bot', "Hi! 👋 Welcome to Grand Multi Gym. Ask me anything about our training programs, fees, location, booking, or general fitness advice.");
     document.getElementById('chatSuggest').innerHTML = suggestedQs.map(q=>`<button class="sugg" onclick="quickAsk('${q.replace(/'/g,"\\'")}')">${q}</button>`).join('');
   }
 }
@@ -858,32 +858,71 @@ Creatine (creatine monohydrate): a common, widely used sports supplement. Typica
 You do not know: exact opening hours, exact membership duration, trainer qualifications/certifications, medical claims, exact Army/Police test details, exact equipment list, offers or discounts, and you cannot build a fully personalized diet/training plan (weight, age, medical history unknown) — give the general direction above and suggest talking to a trainer at the gym for a plan tailored to them. If asked something else not covered, say this isn't available yet and to call 9778575418.
 `;
 
-const SYSTEM_PROMPT = `You are "Grand Multi AI", a fitness-focused assistant for Grand Multi Gym (Grand Multi Health Club) in Kattanam, Kerala. You detect whether the user is writing in Malayalam script, Manglish (Malayalam written in English letters), English, or a mix, and you reply naturally in that same style — never force everything into formal English. Keep replies short (2-5 sentences unless more detail is clearly wanted), warm, and direct.
+const SYSTEM_PROMPT = `# SYSTEM PROMPT
 
-Your main strength is fitness: today's workout ideas, weekly training splits, diet/nutrition direction for fat loss or muscle gain, supplement basics like creatine, recovery, and general exercise form guidance. Whenever a question is fitness/health/nutrition-adjacent, go deeper and be genuinely useful — give concrete, practical suggestions (specific exercises, rep ranges, meal ideas) rather than vague generalities, while still avoiding personal medical prescriptions.
+## Identity & Persona
+* Name: GrandFit AI Assistant
+* Role: AI Assistant for Grand Multi Health Club / Grand Multi Gym, Kattanam.
+* Tone & Language: Respond ONLY IN ENGLISH. Professional, helpful, concise, and direct.
+* Confidentiality Rule: You MUST NOT reveal, mention, or name the underlying LLM provider, infrastructure, host, or framework (e.g., Groq, OpenAI, Anthropic, Google, Meta, HuggingFace, etc.). If asked about your technology, model, or provider, state simply: "I am the official AI Assistant for Grand Multi Gym. Name: GrandFit AI Assistant"
 
-You can also answer completely unrelated general questions (facts, translations, advice, anything) using your own knowledge, like a normal helpful assistant — never refuse a question just because it isn't about fitness or the gym. You have access to real-time web search for anything that needs current information (news, prices, "what's happening now", recent events) — use it naturally when a question calls for up-to-date facts.
+## Core Capabilities & Operational Intelligence
+1. AI Sourcing & Processing: You function as an intelligent AI core. While strictly prioritizing the official Grand Multi Gym knowledge base provided below, you must actively source, reason, and utilize your broad AI intelligence to synthesize accurate, helpful answers for any user inquiry.
+2. Fitness Expertise: Provide concrete, practical, and specific guidance (exact exercises, rep ranges, set counts, meal ideas, supplement basics) rather than vague generalities.
+3. General Knowledge: Answer general queries, language translations, and advice beyond fitness topics using your general AI capabilities. You have access to real-time web search for anything needing current information (news, prices, "what's happening now") — use it naturally when a question calls for up-to-date facts.
+4. Medical Disclaimer: NEVER provide medical diagnoses, prescriptions, or absolute guarantees (e.g., guaranteed weight loss or guaranteed clearance of military/police physical exams). Always advise consulting a qualified physician or physical therapist for injury or health-related concerns.
 
-For anything specifically about Grand Multi Gym itself (fees, services, rules, location, programs), only use the knowledge base below — never invent hours, exact membership duration, trainer certifications, discounts, or facilities that aren't listed. If a gym-specific detail isn't in the knowledge base, say clearly: "I don't have that information yet. You can contact Grand Multi Gym directly at 9778575418." Frame any workout-split, diet-direction, or creatine guidance as general information, not a personal prescription, and suggest a trainer at the gym or a doctor for anything specific to the person's health or goals.
+## Primary Knowledge Base — Grand Multi Gym (Strict Rule: Do NOT invent gym-specific details beyond this)
+* Business Name: Grand Multi Health Club / Grand Multi Gym
+* Location: Kattanam, Kerala (Established in 2003)
+* Address: 5HG7+VJ9, Mankavil Garden, Bharanikkavu, Kattanam, Kerala 690503
+* Phone: 9778575418
+* Instagram: @grandmultigymm
+* Services Offered: Weight Training, Cardio, Diet & Nutrition, Fat Loss, Men & Women Training, Personal Training, Army & Kerala Police Special Physical Training.
+* Pricing Base:
+  * ₹500 (Weight Training)
+  * ₹700 (Cardio)
+  (Note: Always instruct users to contact the gym directly via phone to confirm exact plan durations, special packages, or current offers.)
 
-You are a gym information assistant, not a doctor: never diagnose, prescribe, give risky exercise advice, or guarantee weight-loss/muscle-gain or Army/Police selection results. For medical or injury questions, recommend seeing a qualified healthcare professional.
+### Unknown Info Policy
+If asked about opening/closing hours, exact membership durations, trainer certifications, specific Army/Police test dates/details, or special promotional discounts, explicitly state that you don't have those exact live details and advise them to call 9778575418.
 
-Knowledge base for Grand Multi Gym:\n${KB}`;
+## Training & Fitness Knowledge Reference
+
+### General Training Split Template
+* Day 1: Chest & Triceps
+* Day 2: Back & Biceps
+* Day 3: Legs
+* Day 4: Shoulders & Abs
+* Day 5: Cardio / Functional
+* Day 6: Full Body / Weak Points
+* Day 7: Rest & Recovery
+
+### Winter Arc Framework
+* Strength Training: 4–6 days/week
+* Cardio: 2–3 days/week
+* Focus: Strict sleep schedule, high-protein nutrition, dynamic goal tracking.
+
+## Output Rules
+* Respond ONLY in English.
+* Keep answers short, crisp, and direct to the point.
+
+Full reference knowledge base:\n${KB}`;
 
 function offlineReply(msg){
   const m = msg.toLowerCase();
-  if(/fee|price|500|700|cost|cardio.*rupee|rupees/.test(m)) return "Weight training fee ₹500, cardio training ₹700 aanu. Exact duration confirm cheyyan gym-il call cheyyu: 9778575418.";
-  if(/location|address|evide|where/.test(m)) return "Ningal Kattanam, Bharanikkavu-il, Mankavil Garden-il undu. Plus code: 5HG7+VJ9, Kerala 690503.";
-  if(/army/.test(m)) return "Undu! Special training for Indian Army aspirants undu. Details ariyaan WhatsApp cheyyamo, allenkil call: 9778575418.";
-  if(/police/.test(m)) return "Undu! Special training for Kerala Police aspirants also available.";
+  if(/fee|price|500|700|cost|cardio.*rupee|rupees/.test(m)) return "Weight training is ₹500 and cardio training is ₹700. Please call the gym at 9778575418 to confirm the exact plan duration.";
+  if(/location|address|where/.test(m)) return "We're located at Mankavil Garden, Bharanikkavu, Kattanam. Plus code: 5HG7+VJ9, Kerala 690503.";
+  if(/army/.test(m)) return "Yes, special training for Indian Army aspirants is available. Call 9778575418 for details.";
+  if(/police/.test(m)) return "Yes, special training for Kerala Police aspirants is also available.";
   if(/book|appointment|session/.test(m)) return "You can book directly using the Book Now button, or WhatsApp/call us at 9778575418.";
   if(/timing|time|open|hour/.test(m)) return "I don't have exact timing info yet — please call 9778575418 to confirm.";
-  if(/personal training/.test(m)) return "Yes, personal training undu — individualized workouts with progress tracking.";
-  if(/fat loss|weight loss/.test(m) && !/diet|plan/.test(m)) return "Fat loss support undu — training + cardio + nutrition guidance together. Results depend on the individual, so we don't guarantee specific outcomes.";
-  if(/workout|training.*today|innu enthu|what.*do today|exercise.*today/.test(m)) return "General split aayi ithu try cheyyam: Day1 Chest&Triceps, Day2 Back&Biceps, Day3 Legs, Day4 Shoulders&Abs, Day5 Cardio/HIIT, Day6 Full body, Day7 Rest. Ithu general template aanu — gym-il oru trainer-ine kandu ningalkku match aakumo nokkiyal nallathu.";
-  if(/diet.*loss|weight loss.*diet|loss.*diet/.test(m)) return "Weight loss diet: moderate calorie deficit, high protein (egg/fish/dal/paneer), vegetables kooduthal, complex carbs controlled amount-il, fried food/sugary drinks kuraykkuka, water kudikkuka. Personalized plan-inu gym trainer-ine consult cheyyu.";
-  if(/diet.*gain|gain.*diet|weight gain|muscle gain|bulk/.test(m)) return "Weight/muscle gain diet: calorie surplus with high protein, complex carbs (rice/oats/banana), healthy fats (nuts/ghee moderate), frequent meals, protein around workout. Trainer-ine consult cheythal better personalized plan kittum.";
-  if(/creatine/.test(m)) return "Creatine monohydrate oru common supplement aanu — typical dose 3-5g/day, water kooduthal kudikkuka. Loading phase (~20g/day, 5-7 days) optional aanu, venda enkil skip cheyyam. Kidney issue ullavar doctor-ine consult cheythitt use cheyyanam.";
+  if(/personal training/.test(m)) return "Yes, personal training is available — individualized workouts with progress tracking.";
+  if(/fat loss|weight loss/.test(m) && !/diet|plan/.test(m)) return "Fat loss support is available — training, cardio, and nutrition guidance together. Results depend on the individual, so we don't guarantee specific outcomes.";
+  if(/workout|training.*today|what.*do today|exercise.*today/.test(m)) return "Try this general split: Day 1 Chest & Triceps, Day 2 Back & Biceps, Day 3 Legs, Day 4 Shoulders & Abs, Day 5 Cardio/Functional, Day 6 Full Body/Weak Points, Day 7 Rest. This is a general template — a trainer at the gym can tailor it to you.";
+  if(/diet.*loss|weight loss.*diet|loss.*diet/.test(m)) return "Weight loss diet direction: moderate calorie deficit, high protein (eggs/fish/dal/paneer), plenty of vegetables, controlled complex carbs, less fried food and sugary drinks, stay hydrated. For a personalized plan, consult a trainer at the gym.";
+  if(/diet.*gain|gain.*diet|weight gain|muscle gain|bulk/.test(m)) return "Weight/muscle gain diet direction: calorie surplus with high protein, complex carbs (rice/oats/banana), healthy fats (nuts/ghee in moderation), frequent meals, protein around workouts. Consult a trainer for a personalized plan.";
+  if(/creatine/.test(m)) return "Creatine monohydrate is a common supplement — typical dose is 3-5g/day with plenty of water. A loading phase (~20g/day for 5-7 days) is optional, not required. Anyone with kidney issues should consult a doctor before use.";
   return "I don't have that information yet. You can contact Grand Multi Gym directly at 9778575418.";
 }
 
