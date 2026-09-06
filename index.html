@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Malayalam:wght@400;500;700&display=swap" rel="stylesheet">
 <script>window.MathJax=undefined;</script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -28,6 +29,7 @@
   "sameAs": ["https://instagram.com/grandmultigymm"]
 }
 </script>
+
 <style>
 :root{
   --black:#0a0908;
@@ -89,7 +91,10 @@ header.site{
   background:rgba(10,9,8,0.72);backdrop-filter:blur(10px);
   border-bottom:1px solid var(--line);
 }
-.navbar{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1180px;margin:0 auto;}
+.navbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 24px;max-width:1180px;margin:0 auto;
+}
 .brand{display:flex;align-items:center;gap:10px;}
 .brand img{height:40px;width:40px;border-radius:50%;object-fit:cover;}
 .brand-text{font-family:'Anton',sans-serif;font-size:18px;letter-spacing:0.02em;}
@@ -98,210 +103,564 @@ nav.links{display:flex;gap:28px;font-size:14px;font-weight:600;}
 nav.links a{color:var(--smoke);transition:color .15s;}
 nav.links a:hover{color:var(--gold);}
 .nav-cta{display:flex;align-items:center;gap:10px;}
-.hamburger{display:none;background:none;border:none;color:var(--ivory);font-size:26px;}
+.hamburger{
+  display:none;background:none;border:none;color:var(--ivory);font-size:26px;
+}
 @media(max-width:920px){
   nav.links{display:none;}
   .nav-cta .btn-line{display:none;}
   .hamburger{display:block;}
 }
-.mobile-menu{display:none;flex-direction:column;gap:2px;background:var(--panel);border-top:1px solid var(--line);}
+.mobile-menu{
+  display:none;flex-direction:column;gap:2px;
+  background:var(--panel);border-top:1px solid var(--line);
+}
 .mobile-menu.open{display:flex;}
-.mobile-menu a{padding:14px 24px;border-bottom:1px solid var(--line);font-weight:600;}
+.mobile-menu a{
+  padding:14px 24px;border-bottom:1px solid var(--line);font-weight:600;
+}
 
 /* HERO */
-.hero{position:relative;min-height:92vh;display:flex;align-items:center;overflow:hidden;}
-.hero-bg{position:absolute;inset:0;background-image:url('assets/gallery-hulk2.jpg');background-size:cover;background-position:center 20%;filter:brightness(0.55) saturate(1.05);}
-.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,9,8,0.55) 0%, rgba(10,9,8,0.35) 40%, rgba(10,9,8,0.95) 100%);}
-.hero-content{position:relative;z-index:2;padding:140px 0 90px;}
-.eyebrow-tag{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--gold);color:var(--gold);padding:7px 16px;font-size:13px;font-weight:700;border-radius:100px;margin-bottom:26px;}
-.eyebrow-tag::before{content:'';width:7px;height:7px;background:var(--gold);border-radius:50%;}
-.hero h1{font-size:clamp(42px,8vw,88px);color:var(--ivory);max-width:820px;}
+.hero{
+  position:relative;min-height:92vh;display:flex;
+  align-items:center;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background-image:url('assets/gallery-hulk2.jpg');
+  background-size:cover;background-position:center 20%;
+  filter:brightness(0.55) saturate(1.05);
+}
+.hero::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(
+    180deg,
+    rgba(10,9,8,0.55) 0%,
+    rgba(10,9,8,0.35) 40%,
+    rgba(10,9,8,0.95) 100%
+  );
+}
+.hero-content{
+  position:relative;z-index:2;padding:140px 0 90px;
+}
+.eyebrow-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid var(--gold);color:var(--gold);
+  padding:7px 16px;font-size:13px;font-weight:700;
+  border-radius:100px;margin-bottom:26px;
+}
+.eyebrow-tag::before{
+  content:'';width:7px;height:7px;background:var(--gold);
+  border-radius:50%;
+}
+.hero h1{
+  font-size:clamp(42px,8vw,88px);
+  color:var(--ivory);max-width:820px;
+}
 .hero h1 .rot{color:var(--gold);display:inline-block;}
-.hero-sub{margin-top:26px;font-size:19px;color:#d8d2c4;max-width:480px;}
-.hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:40px;}
-.hero-stats{display:flex;gap:44px;margin-top:64px;flex-wrap:wrap;}
-.hero-stat b{font-family:'Anton';font-size:34px;color:var(--gold);display:block;}
+.hero-sub{
+  margin-top:26px;font-size:19px;color:#d8d2c4;max-width:480px;
+}
+.hero-actions{
+  display:flex;flex-wrap:wrap;gap:14px;margin-top:40px;
+}
+.hero-stats{
+  display:flex;gap:44px;margin-top:64px;flex-wrap:wrap;
+}
+.hero-stat b{
+  font-family:'Anton';font-size:34px;color:var(--gold);display:block;
+}
 .hero-stat span{color:var(--smoke);font-size:13px;}
 
 /* QUICK CTA BAR */
 .quickbar{background:var(--gold);color:#141210;}
-.quickbar .wrap{display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between;padding:16px 24px;}
-.quickbar strong{font-family:'Anton';font-size:18px;letter-spacing:.02em;}
-.qb-actions{display:flex;gap:22px;flex-wrap:wrap;font-weight:700;font-size:14px;}
+.quickbar .wrap{
+  display:flex;flex-wrap:wrap;gap:20px;
+  align-items:center;justify-content:space-between;padding:16px 24px;
+}
+.quickbar strong{
+  font-family:'Anton';font-size:18px;letter-spacing:.02em;
+}
+.qb-actions{
+  display:flex;gap:22px;flex-wrap:wrap;
+  font-weight:700;font-size:14px;
+}
 .qb-actions a{display:flex;align-items:center;gap:7px;}
 
 /* WHY */
-.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+.why-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--line);border:1px solid var(--line);
+}
 .why-item{background:var(--black);padding:34px 26px;}
-.why-item .num{color:var(--gold);font-family:'Anton';font-size:14px;letter-spacing:.05em;}
-.why-item h3{font-size:19px;margin-top:14px;color:var(--ivory);font-family:'Manrope';font-weight:800;text-transform:none;}
+.why-item .num{
+  color:var(--gold);font-family:'Anton';
+  font-size:14px;letter-spacing:.05em;
+}
+.why-item h3{
+  font-size:19px;margin-top:14px;color:var(--ivory);
+  font-family:'Manrope';font-weight:800;text-transform:none;
+}
 .why-item p{color:var(--smoke);font-size:14.5px;margin-top:8px;}
 @media(max-width:900px){.why-grid{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:560px){.why-grid{grid-template-columns:1fr;}}
 
 /* PROGRAMS */
 .section-alt{background:var(--panel);}
-.prog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);}
-.prog-card{background:var(--panel);padding:36px 28px;position:relative;transition:background .2s;}
+.prog-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:2px;background:var(--line);
+}
+.prog-card{
+  background:var(--panel);padding:36px 28px;
+  position:relative;transition:background .2s;
+}
 .prog-card:hover{background:var(--panel-2);}
-.prog-card .tag{position:absolute;top:20px;right:20px;font-size:11px;font-weight:800;color:var(--gold);border:1px solid var(--gold);padding:3px 9px;border-radius:100px;}
-.prog-card h3{font-family:'Manrope';font-weight:800;font-size:21px;text-transform:none;margin-top:6px;}
-.prog-card ul{list-style:none;padding:0;margin:18px 0 0;color:var(--smoke);font-size:14.5px;}
-.prog-card li{padding:6px 0;border-top:1px solid var(--line);}
+.prog-card .tag{
+  position:absolute;top:20px;right:20px;
+  font-size:11px;font-weight:800;color:var(--gold);
+  border:1px solid var(--gold);padding:3px 9px;border-radius:100px;
+}
+.prog-card h3{
+  font-family:'Manrope';font-weight:800;
+  font-size:21px;text-transform:none;margin-top:6px;
+}
+.prog-card ul{
+  list-style:none;padding:0;margin:18px 0 0;
+  color:var(--smoke);font-size:14.5px;
+}
+.prog-card li{
+  padding:6px 0;border-top:1px solid var(--line);
+}
 .prog-card li:first-child{border-top:none;}
 @media(max-width:900px){.prog-grid{grid-template-columns:1fr 1fr;}}
 @media(max-width:600px){.prog-grid{grid-template-columns:1fr;}}
 
 /* PRICING */
-.price-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;max-width:760px;}
-.price-card{border:1px solid var(--line);padding:38px 32px;position:relative;background:linear-gradient(180deg,var(--panel-2),var(--black));}
+.price-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:24px;max-width:760px;
+}
+.price-card{
+  border:1px solid var(--line);padding:38px 32px;
+  position:relative;
+  background:linear-gradient(180deg,var(--panel-2),var(--black));
+}
 .price-card.popular{border-color:var(--gold);}
-.price-card .badge{position:absolute;top:-13px;left:32px;background:var(--gold);color:#141210;font-size:11.5px;font-weight:800;padding:5px 12px;}
-.price-card h3{font-family:'Manrope';font-weight:800;text-transform:none;font-size:20px;color:var(--smoke);}
-.price-card .amount{font-family:'Anton';font-size:56px;color:var(--gold);margin-top:14px;}
+.price-card .badge{
+  position:absolute;top:-13px;left:32px;
+  background:var(--gold);color:#141210;
+  font-size:11.5px;font-weight:800;padding:5px 12px;
+}
+.price-card h3{
+  font-family:'Manrope';font-weight:800;
+  text-transform:none;font-size:20px;color:var(--smoke);
+}
+.price-card .amount{
+  font-family:'Anton';font-size:56px;color:var(--gold);
+  margin-top:14px;
+}
 .price-card .amount sup{font-size:22px;top:-22px;}
 .price-card .dur{color:var(--smoke);font-size:14px;margin-top:-6px;}
-.price-card p.desc{color:#c9c2b3;font-size:14.5px;margin-top:16px;}
-.price-card .btn{margin-top:24px;width:100%;justify-content:center;}
+.price-card p.desc{
+  color:#c9c2b3;font-size:14.5px;margin-top:16px;
+}
+.price-card .btn{
+  margin-top:24px;width:100%;justify-content:center;
+}
 @media(max-width:640px){.price-grid{grid-template-columns:1fr;}}
 
 /* WINTER ARC */
-.winter{position:relative;background:var(--black);overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
-.winter-band{background:repeating-linear-gradient(90deg,var(--gold),var(--gold) 40px,#141210 40px,#141210 80px);height:6px;}
+.winter{
+  position:relative;background:var(--black);overflow:hidden;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.winter-band{
+  background:repeating-linear-gradient(
+    90deg,
+    var(--gold),var(--gold) 40px,
+    #141210 40px,#141210 80px
+  );
+  height:6px;
+}
 .winter-inner{padding:96px 0;}
 .winter h2{font-size:clamp(34px,6vw,64px);}
-.winter .tagline{color:var(--gold);font-weight:700;margin-top:12px;font-size:17px;letter-spacing:.02em;}
-.winter-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);margin-top:56px;border:1px solid var(--line);}
+.winter .tagline{
+  color:var(--gold);font-weight:700;margin-top:12px;
+  font-size:17px;letter-spacing:.02em;
+}
+.winter-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--line);
+  margin-top:56px;border:1px solid var(--line);
+}
 .winter-item{background:var(--panel);padding:28px 24px;}
-.winter-item h4{font-family:'Manrope';font-weight:800;color:var(--gold);font-size:15px;letter-spacing:.03em;text-transform:uppercase;}
-.winter-item .freq{font-family:'Anton';font-size:22px;margin-top:10px;}
-.winter-item ul{list-style:none;padding:0;margin:14px 0 0;color:var(--smoke);font-size:13.5px;}
+.winter-item h4{
+  font-family:'Manrope';font-weight:800;color:var(--gold);
+  font-size:15px;letter-spacing:.03em;text-transform:uppercase;
+}
+.winter-item .freq{
+  font-family:'Anton';font-size:22px;margin-top:10px;
+}
+.winter-item ul{
+  list-style:none;padding:0;margin:14px 0 0;
+  color:var(--smoke);font-size:13.5px;
+}
 .winter-item li{padding:3px 0;}
-.winter-note{color:var(--smoke);font-size:13px;margin-top:36px;max-width:600px;border-left:2px solid var(--gold);padding-left:16px;}
-.winter-cta{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap;}
+.winter-note{
+  color:var(--smoke);font-size:13px;margin-top:36px;
+  max-width:600px;border-left:2px solid var(--gold);
+  padding-left:16px;
+}
+.winter-cta{
+  margin-top:36px;display:flex;gap:14px;flex-wrap:wrap;
+}
 @media(max-width:900px){.winter-grid{grid-template-columns:1fr 1fr;}}
 @media(max-width:560px){.winter-grid{grid-template-columns:1fr;}}
 
 /* RULES */
-.rules-list{display:flex;flex-direction:column;border-top:1px solid var(--line);max-width:760px;}
-.rule-row{display:flex;gap:24px;align-items:flex-start;padding:22px 0;border-bottom:1px solid var(--line);}
-.rule-row .rnum{font-family:'Anton';font-size:28px;color:var(--gold);min-width:44px;}
-.rule-row p{margin:0;font-size:16.5px;color:var(--ivory);padding-top:5px;}
+.rules-list{
+  display:flex;flex-direction:column;
+  border-top:1px solid var(--line);max-width:760px;
+}
+.rule-row{
+  display:flex;gap:24px;align-items:flex-start;
+  padding:22px 0;border-bottom:1px solid var(--line);
+}
+.rule-row .rnum{
+  font-family:'Anton';font-size:28px;color:var(--gold);
+  min-width:44px;
+}
+.rule-row p{
+  margin:0;font-size:16.5px;color:var(--ivory);padding-top:5px;
+}
 
 /* GALLERY */
-.gal-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:180px;gap:8px;}
-.gal-item{position:relative;overflow:hidden;cursor:pointer;background:var(--panel);}
-.gal-item img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease;}
+.gal-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  grid-auto-rows:180px;gap:8px;
+}
+.gal-item{
+  position:relative;overflow:hidden;cursor:pointer;background:var(--panel);
+}
+.gal-item img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .4s ease;
+}
 .gal-item:hover img{transform:scale(1.06);}
-.gal-item.big{grid-column:span 2;grid-row:span 2;}
-.gal-item .cap{position:absolute;bottom:0;left:0;right:0;padding:12px 14px;background:linear-gradient(0deg,rgba(0,0,0,0.75),transparent);font-size:12.5px;font-weight:700;color:var(--ivory);opacity:0;transition:opacity .2s;}
+.gal-item.big{
+  grid-column:span 2;grid-row:span 2;
+}
+.gal-item .cap{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:12px 14px;
+  background:linear-gradient(0deg,rgba(0,0,0,0.75),transparent);
+  font-size:12.5px;font-weight:700;color:var(--ivory);
+  opacity:0;transition:opacity .2s;
+}
 .gal-item:hover .cap{opacity:1;}
-@media(max-width:800px){.gal-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px;}.gal-item.big{grid-column:span 2;grid-row:span 1;}}
+@media(max-width:800px){
+  .gal-grid{
+    grid-template-columns:repeat(2,1fr);
+    grid-auto-rows:150px;
+  }
+  .gal-item.big{
+    grid-column:span 2;grid-row:span 1;
+  }
+}
 
 /* REVIEWS */
-.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-.rev-card{background:var(--panel);border:1px solid var(--line);padding:26px;}
-.rev-card .stars{color:var(--gold);font-size:14px;letter-spacing:2px;}
-.rev-card p.body{color:#d8d2c4;font-size:15px;margin-top:14px;min-height:44px;}
-.rev-card .who{display:flex;align-items:center;justify-content:space-between;margin-top:20px;padding-top:16px;border-top:1px solid var(--line);}
+.rev-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+}
+.rev-card{
+  background:var(--panel);border:1px solid var(--line);padding:26px;
+}
+.rev-card .stars{
+  color:var(--gold);font-size:14px;letter-spacing:2px;
+}
+.rev-card p.body{
+  color:#d8d2c4;font-size:15px;margin-top:14px;min-height:44px;
+}
+.rev-card .who{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:20px;padding-top:16px;border-top:1px solid var(--line);
+}
 .rev-card .who b{font-size:14px;}
 .rev-card .src{font-size:11.5px;color:var(--smoke);}
-.demo-flag{display:inline-block;margin-top:8px;font-size:10.5px;font-weight:800;color:#141210;background:var(--gold);padding:2px 8px;letter-spacing:.03em;}
+.demo-flag{
+  display:inline-block;margin-top:8px;font-size:10.5px;
+  font-weight:800;color:#141210;background:var(--gold);
+  padding:2px 8px;letter-spacing:.03em;
+}
 @media(max-width:900px){.rev-grid{grid-template-columns:1fr 1fr;}}
 @media(max-width:600px){.rev-grid{grid-template-columns:1fr;}}
 
 /* INSTAGRAM */
-.insta-strip{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;background:var(--panel);border:1px solid var(--line);padding:36px;}
-.insta-strip h3{font-family:'Manrope';font-weight:800;font-size:20px;text-transform:none;}
-.insta-strip p{color:var(--smoke);font-size:14.5px;margin-top:6px;}
+.insta-strip{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:24px;background:var(--panel);
+  border:1px solid var(--line);padding:36px;
+}
+.insta-strip h3{
+  font-family:'Manrope';font-weight:800;
+  font-size:20px;text-transform:none;
+}
+.insta-strip p{
+  color:var(--smoke);font-size:14.5px;margin-top:6px;
+}
 
 /* FAQ */
 .faq-item{border-bottom:1px solid var(--line);}
-.faq-q{width:100%;background:none;border:none;color:var(--ivory);text-align:left;padding:22px 0;font-size:17px;font-weight:700;display:flex;justify-content:space-between;align-items:center;}
-.faq-q .plus{color:var(--gold);font-size:22px;transition:transform .2s;}
+.faq-q{
+  width:100%;background:none;border:none;color:var(--ivory);
+  text-align:left;padding:22px 0;font-size:17px;font-weight:700;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.faq-q .plus{
+  color:var(--gold);font-size:22px;transition:transform .2s;
+}
 .faq-item.open .plus{transform:rotate(45deg);}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease;color:var(--smoke);font-size:15px;}
-.faq-item.open .faq-a{max-height:200px;padding-bottom:20px;}
+.faq-a{
+  max-height:0;overflow:hidden;transition:max-height .25s ease;
+  color:var(--smoke);font-size:15px;
+}
+.faq-item.open .faq-a{
+  max-height:200px;padding-bottom:20px;
+}
 
 /* CONTACT */
-.contact-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;}
-.contact-card{background:var(--panel);border:1px solid var(--line);padding:36px;}
-.contact-row{display:flex;gap:16px;align-items:flex-start;padding:16px 0;border-bottom:1px solid var(--line);}
+.contact-grid{
+  display:grid;grid-template-columns:1.1fr 1fr;gap:48px;
+}
+.contact-card{
+  background:var(--panel);border:1px solid var(--line);padding:36px;
+}
+.contact-row{
+  display:flex;gap:16px;align-items:flex-start;
+  padding:16px 0;border-bottom:1px solid var(--line);
+}
 .contact-row:last-child{border-bottom:none;}
 .contact-row .ic{color:var(--gold);font-size:20px;width:26px;}
-.contact-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;}
+.contact-actions{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:12px;margin-top:24px;
+}
 .contact-actions .btn{justify-content:center;}
-.map-embed{border:1px solid var(--line);height:100%;min-height:340px;background:var(--panel-2) url('assets/gallery-interior.jpg') center/cover;position:relative;}
-.map-embed a.overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(10,9,8,0.55);color:var(--gold);font-weight:800;}
+.map-embed{
+  border:1px solid var(--line);height:100%;min-height:340px;
+  background:var(--panel-2) url('assets/gallery-interior.jpg') center/cover;
+  position:relative;
+}
+.map-embed a.overlay{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(10,9,8,0.55);
+  color:var(--gold);font-weight:800;
+}
 @media(max-width:860px){.contact-grid{grid-template-columns:1fr;}}
 
 /* FOOTER */
-footer{background:#050403;border-top:1px solid var(--line);padding:64px 0 28px;}
-.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;}
+footer{
+  background:#050403;border-top:1px solid var(--line);
+  padding:64px 0 28px;
+}
+.foot-grid{
+  display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;
+}
 .foot-brand .brand-text{font-size:22px;}
-.foot-brand p{color:var(--smoke);margin-top:12px;font-size:14px;max-width:280px;}
-.foot-col h4{font-size:13px;letter-spacing:.05em;color:var(--gold);margin-bottom:16px;text-transform:uppercase;}
-.foot-col a{display:block;color:var(--smoke);font-size:14.5px;padding:5px 0;}
+.foot-brand p{
+  color:var(--smoke);margin-top:12px;
+  font-size:14px;max-width:280px;
+}
+.foot-col h4{
+  font-size:13px;letter-spacing:.05em;color:var(--gold);
+  margin-bottom:16px;text-transform:uppercase;
+}
+.foot-col a{
+  display:block;color:var(--smoke);font-size:14.5px;padding:5px 0;
+}
 .foot-col a:hover{color:var(--gold);}
-.foot-bottom{margin-top:48px;padding-top:22px;border-top:1px solid var(--line);color:var(--smoke);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.foot-bottom{
+  margin-top:48px;padding-top:22px;border-top:1px solid var(--line);
+  color:var(--smoke);font-size:13px;
+  display:flex;justify-content:space-between;
+  flex-wrap:wrap;gap:10px;
+}
 @media(max-width:760px){.foot-grid{grid-template-columns:1fr;}}
 
 /* FLOATING */
-.floating{position:fixed;right:20px;bottom:20px;z-index:90;display:flex;flex-direction:column;gap:12px;align-items:flex-end;}
-.fab{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 6px 20px rgba(0,0,0,0.5);border:none;}
+.floating{
+  position:fixed;right:20px;bottom:20px;z-index:90;
+  display:flex;flex-direction:column;gap:12px;align-items:flex-end;
+}
+.fab{
+  width:56px;height:56px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;box-shadow:0 6px 20px rgba(0,0,0,0.5);
+  border:none;
+}
 .fab-wa{background:#25D366;color:#08210f;}
 .fab-call{background:var(--ivory);color:#141210;}
 .fab-chat{background:#25D366;color:#08210f;font-size:24px;}
-.mobile-stickybar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:85;background:var(--panel);border-top:1px solid var(--line);}
-.mobile-stickybar .row{display:grid;grid-template-columns:repeat(3,1fr);}
-.mobile-stickybar a,.mobile-stickybar button{display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 0;font-size:11px;font-weight:700;color:var(--ivory);background:none;border:none;border-right:1px solid var(--line);}
-.mobile-stickybar a:last-child,.mobile-stickybar button:last-child{border-right:none;}
-@media(max-width:760px){.mobile-stickybar{display:block;} .floating{bottom:70px;} body{padding-bottom:56px;}}
+.mobile-stickybar{
+  display:none;position:fixed;bottom:0;left:0;right:0;
+  z-index:85;background:var(--panel);border-top:1px solid var(--line);
+}
+.mobile-stickybar .row{
+  display:grid;grid-template-columns:repeat(3,1fr);
+}
+.mobile-stickybar a,.mobile-stickybar button{
+  display:flex;flex-direction:column;align-items:center;
+  gap:3px;padding:10px 0;font-size:11px;font-weight:700;
+  color:var(--ivory);background:none;border:none;
+  border-right:1px solid var(--line);
+}
+.mobile-stickybar a:last-child,
+.mobile-stickybar button:last-child{
+  border-right:none;
+}
+@media(max-width:760px){
+  .mobile-stickybar{display:block;}
+  .floating{bottom:70px;}
+  body{padding-bottom:56px;}
+}
 
 /* MODALS */
-.modal-overlay{position:fixed;inset:0;background:rgba(5,4,3,0.8);z-index:200;display:none;align-items:center;justify-content:center;padding:20px;}
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(5,4,3,0.8);
+  z-index:200;display:none;align-items:center;
+  justify-content:center;padding:20px;
+}
 .modal-overlay.open{display:flex;}
-.modal{background:var(--panel);border:1px solid var(--line);max-width:460px;width:100%;max-height:88vh;overflow-y:auto;padding:30px;position:relative;}
-.modal-close{position:absolute;top:16px;right:16px;background:none;border:none;color:var(--smoke);font-size:22px;}
-.modal h3{font-family:'Manrope';font-weight:800;text-transform:none;font-size:22px;margin-bottom:6px;}
-.modal .sub{color:var(--smoke);font-size:13.5px;margin-bottom:22px;}
+.modal{
+  background:var(--panel);border:1px solid var(--line);
+  max-width:460px;width:100%;max-height:88vh;
+  overflow-y:auto;padding:30px;position:relative;
+}
+.modal-close{
+  position:absolute;top:16px;right:16px;
+  background:none;border:none;color:var(--smoke);font-size:22px;
+}
+.modal h3{
+  font-family:'Manrope';font-weight:800;text-transform:none;
+  font-size:22px;margin-bottom:6px;
+}
+.modal .sub{
+  color:var(--smoke);font-size:13.5px;margin-bottom:22px;
+}
 .field{margin-bottom:16px;}
-.field label{display:block;font-size:12.5px;font-weight:700;color:var(--smoke);margin-bottom:6px;text-transform:uppercase;letter-spacing:.02em;}
-.field input,.field select,.field textarea{width:100%;background:var(--black);border:1px solid var(--line);color:var(--ivory);padding:12px 14px;font-family:inherit;font-size:14.5px;border-radius:var(--radius);}
-.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold);}
+.field label{
+  display:block;font-size:12.5px;font-weight:700;
+  color:var(--smoke);margin-bottom:6px;
+  text-transform:uppercase;letter-spacing:.02em;
+}
+.field input,.field select,.field textarea{
+  width:100%;background:var(--black);
+  border:1px solid var(--line);color:var(--ivory);
+  padding:12px 14px;font-family:inherit;font-size:14.5px;
+  border-radius:var(--radius);
+}
+.field input:focus,.field select:focus,.field textarea:focus{
+  outline:none;border-color:var(--gold);
+}
 .field textarea{resize:vertical;min-height:70px;}
-.form-submit{width:100%;justify-content:center;margin-top:6px;}
+.form-submit{
+  width:100%;justify-content:center;margin-top:6px;
+}
 .confirm-box{text-align:center;padding:20px 0;}
-.confirm-box .tick{width:60px;height:60px;border-radius:50%;background:var(--gold);color:#141210;display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 18px;}
+.confirm-box .tick{
+  width:60px;height:60px;border-radius:50%;
+  background:var(--gold);color:#141210;
+  display:flex;align-items:center;justify-content:center;
+  font-size:30px;margin:0 auto 18px;
+}
 
 /* CHATBOT */
-.chat-window{position:fixed;right:20px;bottom:88px;width:360px;max-width:92vw;height:520px;max-height:75vh;background:var(--panel);border:1px solid var(--line);z-index:99;display:none;flex-direction:column;box-shadow:0 20px 50px rgba(0,0,0,0.6);}
+.chat-window{
+  position:fixed;right:20px;bottom:88px;width:360px;
+  max-width:92vw;height:520px;max-height:75vh;
+  background:var(--panel);border:1px solid var(--line);
+  z-index:99;display:none;flex-direction:column;
+  box-shadow:0 20px 50px rgba(0,0,0,0.6);
+}
 .chat-window.open{display:flex;}
-.chat-head{background:var(--gold);color:#141210;padding:16px 18px;display:flex;justify-content:space-between;align-items:center;}
+.chat-head{
+  background:var(--gold);color:#141210;
+  padding:16px 18px;display:flex;
+  justify-content:space-between;align-items:center;
+}
 .chat-head .t{font-family:'Anton';font-size:16px;}
 .chat-head .s{font-size:11px;font-weight:700;opacity:.75;}
-.chat-head button{background:none;border:none;color:#141210;font-size:20px;}
-.chat-body{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;}
-.msg{max-width:85%;padding:10px 14px;border-radius:12px;font-size:14px;line-height:1.4;}
-.msg.bot{background:var(--panel-2);color:var(--ivory);align-self:flex-start;border-bottom-left-radius:2px;}
-.msg.user{background:var(--gold);color:#141210;align-self:flex-end;border-bottom-right-radius:2px;font-weight:600;}
-.suggested{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 12px;}
-.sugg{background:var(--panel-2);border:1px solid var(--line);color:var(--smoke);font-size:12px;padding:6px 10px;border-radius:100px;}
-.chat-input-row{display:flex;border-top:1px solid var(--line);padding:10px;gap:8px;}
-.chat-input-row input{flex:1;background:var(--black);border:1px solid var(--line);color:var(--ivory);padding:10px 12px;border-radius:100px;font-size:14px;}
-.chat-input-row button{background:var(--gold);color:#141210;border:none;width:38px;height:38px;border-radius:50%;font-size:16px;}
-.chat-quick{display:flex;gap:8px;padding:8px 10px 0;}
-.chat-quick a,.chat-quick button{flex:1;text-align:center;font-size:11px;font-weight:700;padding:8px 0;border:1px solid var(--line);color:var(--smoke);background:none;}
-.typing span{display:inline-block;width:6px;height:6px;background:var(--smoke);border-radius:50%;margin-right:3px;animation:blink 1.2s infinite;}
+.chat-head button{
+  background:none;border:none;color:#141210;font-size:20px;
+}
+.chat-body{
+  flex:1;overflow-y:auto;padding:16px;
+  display:flex;flex-direction:column;gap:10px;
+}
+.msg{
+  max-width:85%;padding:10px 14px;border-radius:12px;
+  font-size:14px;line-height:1.4;
+}
+.msg.bot{
+  background:var(--panel-2);color:var(--ivory);
+  align-self:flex-start;border-bottom-left-radius:2px;
+}
+.msg.user{
+  background:var(--gold);color:#141210;
+  align-self:flex-end;border-bottom-right-radius:2px;
+  font-weight:600;
+}
+.suggested{
+  display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 12px;
+}
+.sugg{
+  background:var(--panel-2);border:1px solid var(--line);
+  color:var(--smoke);font-size:12px;padding:6px 10px;
+  border-radius:100px;
+}
+.chat-input-row{
+  display:flex;border-top:1px solid var(--line);
+  padding:10px;gap:8px;
+}
+.chat-input-row input{
+  flex:1;background:var(--black);
+  border:1px solid var(--line);color:var(--ivory);
+  padding:10px 12px;border-radius:100px;font-size:14px;
+}
+.chat-input-row button{
+  background:var(--gold);color:#141210;border:none;
+  width:38px;height:38px;border-radius:50%;font-size:16px;
+}
+.typing span{
+  display:inline-block;width:6px;height:6px;
+  background:var(--smoke);border-radius:50%;
+  margin-right:3px;animation:blink 1.2s infinite;
+}
 .typing span:nth-child(2){animation-delay:.2s;}
 .typing span:nth-child(3){animation-delay:.4s;}
-@keyframes blink{0%,80%,100%{opacity:.3}40%{opacity:1}}
+@keyframes blink{
+  0%,80%,100%{opacity:.3}
+  40%{opacity:1}
+}
 
-.note{font-size:12.5px;color:var(--smoke);margin-top:6px;}
-.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:var(--gold);color:#141210;padding:12px 22px;font-weight:800;font-size:13.5px;z-index:400;display:none;}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+.note{
+  font-size:12.5px;color:var(--smoke);margin-top:6px;
+}
+.toast{
+  position:fixed;top:20px;left:50%;
+  transform:translateX(-50%);
+  background:var(--gold);color:#141210;
+  padding:12px 22px;font-weight:800;font-size:13.5px;
+  z-index:400;display:none;
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;}
+}
 </style>
 </head>
+
 <body>
 
 <!-- NAVBAR -->
@@ -311,6 +670,7 @@ footer{background:#050403;border-top:1px solid var(--line);padding:64px 0 28px;}
       <img src="assets/logo.jpg" alt="Grand Multi Gym logo">
       <span class="brand-text">GRAND <span>MULTI</span> GYM</span>
     </a>
+
     <nav class="links">
       <a href="#home">Home</a>
       <a href="#why">About</a>
@@ -322,11 +682,15 @@ footer{background:#050403;border-top:1px solid var(--line);padding:64px 0 28px;}
       <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
     </nav>
+
     <div class="nav-cta">
-      <a href="#" class="btn btn-line" onclick="openBooking();return false;">Book Now</a>
-      <button class="hamburger" onclick="toggleMobileMenu()">☰</button>
+      <a href="#" class="btn btn-line"
+         onclick="openBooking();return false;">Book Now</a>
+      <button class="hamburger"
+              onclick="toggleMobileMenu()">☰</button>
     </div>
   </div>
+
   <div class="mobile-menu" id="mobileMenu">
     <a href="#home" onclick="toggleMobileMenu()">Home</a>
     <a href="#why" onclick="toggleMobileMenu()">About</a>
@@ -343,19 +707,47 @@ footer{background:#050403;border-top:1px solid var(--line);padding:64px 0 28px;}
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-bg"></div>
+
   <div class="wrap hero-content">
     <span class="eyebrow-tag">Kattanam, Kerala — Since 2003</span>
-    <h1>Build Your <span class="rot" id="rotWord">Strength.</span><br>Transform Yourself.</h1>
-    <p class="hero-sub">Discipline today. Strength tomorrow. Weight training, cardio, personal coaching, and special training for Army &amp; Kerala Police aspirants — for men and women.</p>
+
+    <h1>
+      Build Your
+      <span class="rot" id="rotWord">Strength.</span><br>
+      Transform Yourself.
+    </h1>
+
+    <p class="hero-sub">
+      Discipline today. Strength tomorrow. Weight training, cardio,
+      personal coaching, and special training for Army &amp; Kerala Police
+      aspirants — for men and women.
+    </p>
+
     <div class="hero-actions">
-      <a href="#" class="btn btn-gold" onclick="openBooking();return false;">Book Now</a>
-      <a href="#" class="btn btn-wa" onclick="waLink('inquiry');return false;">WhatsApp Us</a>
+      <a href="#" class="btn btn-gold"
+         onclick="openBooking();return false;">Book Now</a>
+
+      <a href="#" class="btn btn-wa"
+         onclick="waLink('inquiry');return false;">WhatsApp Us</a>
+
       <a href="#programs" class="btn btn-ghost">View Programs</a>
     </div>
+
     <div class="hero-stats">
-      <div class="hero-stat"><b>2003</b><span>Serving Kattanam since</span></div>
-      <div class="hero-stat"><b>₹500</b><span>Weight training</span></div>
-      <div class="hero-stat"><b>₹700</b><span>Cardio training</span></div>
+      <div class="hero-stat">
+        <b>2003</b>
+        <span>Serving Kattanam since</span>
+      </div>
+
+      <div class="hero-stat">
+        <b>₹500</b>
+        <span>Weight training</span>
+      </div>
+
+      <div class="hero-stat">
+        <b>₹700</b>
+        <span>Cardio training</span>
+      </div>
     </div>
   </div>
 </section>
@@ -363,12 +755,25 @@ footer{background:#050403;border-top:1px solid var(--line);padding:64px 0 28px;}
 <!-- QUICK CTA -->
 <div class="quickbar">
   <div class="wrap">
-    <strong>IT'S TIME FOR WINTER ARC — DISCIPLINE TODAY. STRENGTH TOMORROW.</strong>
+    <strong>
+      IT'S TIME FOR WINTER ARC — DISCIPLINE TODAY. STRENGTH TOMORROW.
+    </strong>
+
     <div class="qb-actions">
       <a href="tel:+919778575418">📞 Call Now</a>
-      <a href="#" onclick="waLink('inquiry');return false;">💬 WhatsApp</a>
-      <a href="https://instagram.com/grandmultigymm" target="_blank" rel="noopener">📷 @grandmultigymm</a>
-      <a href="#" onclick="openDirections();return false;">📍 Directions</a>
+
+      <a href="#" onclick="waLink('inquiry');return false;">
+        💬 WhatsApp
+      </a>
+
+      <a href="https://instagram.com/grandmultigymm"
+         target="_blank" rel="noopener">
+        📷 @grandmultigymm
+      </a>
+
+      <a href="#" onclick="openDirections();return false;">
+        📍 Directions
+      </a>
     </div>
   </div>
 </div>
@@ -376,11 +781,22 @@ footer{background:#050403;border-top:1px solid var(--line);padding:64px 0 28px;}
 <!-- WHY -->
 <section class="section" id="why">
   <div class="wrap">
+
     <div class="section-head">
       <span class="kicker">Why Grand Multi</span>
-      <h2>Built On Discipline,<br>Not Hype.</h2>
-      <p>A straightforward gym for people who show up. Real equipment, real training, real support — for everyone from first-timers to Army &amp; Police aspirants.</p>
+
+      <h2>
+        Built On Discipline,<br>
+        Not Hype.
+      </h2>
+
+      <p>
+        A straightforward gym for people who show up.
+        Real equipment, real training, real support — for everyone
+        from first-timers to Army &amp; Police aspirants.
+      </p>
     </div>
+
     <div class="why-grid" id="whyGrid"></div>
   </div>
 </section>
@@ -388,11 +804,21 @@ footer{background:#050403;border-top:1px solid var(--line);padding:64px 0 28px;}
 <!-- PROGRAMS -->
 <section class="section section-alt" id="programs">
   <div class="wrap">
+
     <div class="section-head">
       <span class="kicker">Training Programs</span>
-      <h2>Every Path To<br>Stronger Starts Here.</h2>
-      <p>Pick your focus. Every program is coached with attention, not just access to machines.</p>
+
+      <h2>
+        Every Path To<br>
+        Stronger Starts Here.
+      </h2>
+
+      <p>
+        Pick your focus. Every program is coached with attention,
+        not just access to machines.
+      </p>
     </div>
+
     <div class="prog-grid" id="progGrid"></div>
   </div>
 </section>
@@ -400,11 +826,21 @@ footer{background:#050403;border-top:1px solid var(--line);padding:64px 0 28px;}
 <!-- PRICING -->
 <section class="section" id="pricing">
   <div class="wrap">
+
     <div class="section-head">
       <span class="kicker">Membership</span>
-      <h2>Simple, Honest<br>Pricing.</h2>
-      <p>Exact duration and terms are confirmed at the gym — ask our team for the full breakdown.</p>
+
+      <h2>
+        Simple, Honest<br>
+        Pricing.
+      </h2>
+
+      <p>
+        Exact duration and terms are confirmed at the gym —
+        ask our team for the full breakdown.
+      </p>
     </div>
+
     <div class="price-grid" id="priceGrid"></div>
   </div>
 </section>
@@ -412,46 +848,97 @@ footer{background:#050403;border-top:1px solid var(--line);padding:64px 0 28px;}
 <!-- WINTER ARC -->
 <section class="winter" id="winter-arc">
   <div class="winter-band"></div>
+
   <div class="wrap winter-inner">
-    <h2>It's Time For<br>Winter Arc.</h2>
-    <p class="tagline">Discipline Today. Strength Tomorrow.</p>
+
+    <h2>
+      It's Time For<br>
+      Winter Arc.
+    </h2>
+
+    <p class="tagline">
+      Discipline Today. Strength Tomorrow.
+    </p>
+
     <div class="winter-grid">
+
       <div class="winter-item">
         <h4>Strength Training</h4>
         <div class="freq">4–6 Days/Week</div>
-        <ul><li>Compound lifts</li><li>8–12 reps</li><li>3–4 sets</li></ul>
+        <ul>
+          <li>Compound lifts</li>
+          <li>8–12 reps</li>
+          <li>3–4 sets</li>
+        </ul>
       </div>
+
       <div class="winter-item">
         <h4>Cardio</h4>
         <div class="freq">2–3 Days/Week</div>
-        <ul><li>20–30 minutes</li><li>HIIT or steady state</li></ul>
+        <ul>
+          <li>20–30 minutes</li>
+          <li>HIIT or steady state</li>
+        </ul>
       </div>
+
       <div class="winter-item">
         <h4>Nutrition</h4>
         <div class="freq">Eat Clean, Enough</div>
-        <ul><li>High protein</li><li>Complex carbs</li><li>Healthy fats</li><li>Stay hydrated</li></ul>
+        <ul>
+          <li>High protein</li>
+          <li>Complex carbs</li>
+          <li>Healthy fats</li>
+          <li>Stay hydrated</li>
+        </ul>
       </div>
+
       <div class="winter-item">
         <h4>Rest &amp; Recovery</h4>
         <div class="freq">7–8 Hrs Sleep</div>
-        <ul><li>Muscles grow when you rest —<br>not when you train.</li></ul>
+        <ul>
+          <li>
+            Muscles grow when you rest —<br>
+            not when you train.
+          </li>
+        </ul>
       </div>
+
     </div>
-    <p class="winter-note">This is general fitness information. Training and nutrition should be adapted to individual needs — talk to our trainers before starting a new routine.</p>
+
+    <p class="winter-note">
+      This is general fitness information. Training and nutrition
+      should be adapted to individual needs — talk to our trainers
+      before starting a new routine.
+    </p>
+
     <div class="winter-cta">
-      <a href="#" class="btn btn-gold" onclick="openBooking();return false;">Transform This Winter</a>
-      <a href="#" class="btn btn-line" onclick="waLink('inquiry');return false;">Follow The Plan</a>
+      <a href="#" class="btn btn-gold"
+         onclick="openBooking();return false;">
+        Transform This Winter
+      </a>
+
+      <a href="#" class="btn btn-line"
+         onclick="waLink('inquiry');return false;">
+        Follow The Plan
+      </a>
     </div>
+
   </div>
 </section>
 
 <!-- RULES -->
 <section class="section" id="rules">
   <div class="wrap">
+
     <div class="section-head">
       <span class="kicker">House Rules</span>
-      <h2>Respect The<br>Floor.</h2>
+
+      <h2>
+        Respect The<br>
+        Floor.
+      </h2>
     </div>
+
     <div class="rules-list" id="rulesList"></div>
   </div>
 </section>
@@ -459,11 +946,17 @@ footer{background:#050403;border-top:1px solid var(--line);padding:64px 0 28px;}
 <!-- GALLERY -->
 <section class="section section-alt" id="gallery">
   <div class="wrap">
+
     <div class="section-head">
       <span class="kicker">Inside The Gym</span>
+
       <h2>See Grand Multi.</h2>
-      <p>Actual photos from our floor in Kattanam.</p>
+
+      <p>
+        Actual photos from our floor in Kattanam.
+      </p>
     </div>
+
     <div class="gal-grid" id="galGrid"></div>
   </div>
 </section>
@@ -471,73 +964,164 @@ footer{background:#050403;border-top:1px solid var(--line);padding:64px 0 28px;}
 <!-- REVIEWS -->
 <section class="section" id="reviews">
   <div class="wrap">
+
     <div class="section-head">
       <span class="kicker">What Members Say</span>
       <h2>Real Reviews.</h2>
     </div>
+
     <div class="rev-grid" id="revGrid"></div>
+
     <div style="margin-top:32px;">
-      <a href="#" class="btn btn-line" onclick="openBooking();return false;">Leave A Review Request</a>
+      <a href="#" class="btn btn-line"
+         onclick="openBooking();return false;">
+        Leave A Review Request
+      </a>
     </div>
+
   </div>
 </section>
 
 <!-- INSTAGRAM -->
 <section class="section section-alt">
   <div class="wrap">
+
     <div class="insta-strip">
       <div>
         <h3>Follow @grandmultigymm</h3>
-        <p>Winter Arc drops, gym floor moments, and member progress on Instagram.</p>
+
+        <p>
+          Winter Arc drops, gym floor moments,
+          and member progress on Instagram.
+        </p>
       </div>
-      <a href="https://instagram.com/grandmultigymm" target="_blank" rel="noopener" class="btn btn-gold">Follow Us</a>
+
+      <a href="https://instagram.com/grandmultigymm"
+         target="_blank" rel="noopener"
+         class="btn btn-gold">
+        Follow Us
+      </a>
     </div>
+
   </div>
 </section>
 
 <!-- FAQ -->
 <section class="section" id="faq">
   <div class="wrap">
+
     <div class="section-head">
       <span class="kicker">Questions</span>
       <h2>FAQ.</h2>
     </div>
+
     <div id="faqList" style="max-width:720px;"></div>
+
   </div>
 </section>
 
 <!-- AI CHATBOT CTA -->
 <section class="section section-alt">
   <div class="wrap" style="text-align:center;">
+
     <span class="kicker">GrandFit AI Assistant</span>
-    <h2 style="font-size:clamp(28px,5vw,44px);">What's The Fee?<br>Ask GrandFit AI.</h2>
-    <p style="color:var(--smoke);margin-top:14px;">Ask about fees, programs, timing, booking, or general fitness advice.</p>
-    <a href="#" class="btn btn-gold" style="margin-top:24px;" onclick="openChat();return false;">Ask GrandFit AI</a>
+
+    <h2 style="font-size:clamp(28px,5vw,44px);">
+      What's The Fee?<br>
+      Ask GrandFit AI.
+    </h2>
+
+    <p style="color:var(--smoke);margin-top:14px;">
+      Ask about fees, programs, timing, booking,
+      or general fitness advice.
+    </p>
+
+    <a href="#" class="btn btn-gold"
+       style="margin-top:24px;"
+       onclick="openChat();return false;">
+      Ask GrandFit AI
+    </a>
+
   </div>
 </section>
 
 <!-- CONTACT -->
 <section class="section" id="contact">
   <div class="wrap">
+
     <div class="section-head">
       <span class="kicker">Visit Us</span>
       <h2>Get In Touch.</h2>
     </div>
+
     <div class="contact-grid">
+
       <div class="contact-card">
-        <div class="contact-row"><span class="ic">📞</span><div><b>Phone</b><br><a href="tel:+919778575418">9778575418</a></div></div>
-        <div class="contact-row"><span class="ic">📍</span><div><b>Address</b><br>5HG7+VJ9, Mankavil Garden,<br>Bharanikkavu, Kattanam, Kerala 690503</div></div>
-        <div class="contact-row"><span class="ic">📷</span><div><b>Instagram</b><br><a href="https://instagram.com/grandmultigymm" target="_blank" rel="noopener">@grandmultigymm</a></div></div>
+
+        <div class="contact-row">
+          <span class="ic">📞</span>
+          <div>
+            <b>Phone</b><br>
+            <a href="tel:+919778575418">9778575418</a>
+          </div>
+        </div>
+
+        <div class="contact-row">
+          <span class="ic">📍</span>
+          <div>
+            <b>Address</b><br>
+            5HG7+VJ9, Mankavil Garden,<br>
+            Bharanikkavu, Kattanam, Kerala 690503
+          </div>
+        </div>
+
+        <div class="contact-row">
+          <span class="ic">📷</span>
+          <div>
+            <b>Instagram</b><br>
+            <a href="https://instagram.com/grandmultigymm"
+               target="_blank" rel="noopener">
+              @grandmultigymm
+            </a>
+          </div>
+        </div>
+
         <div class="contact-actions">
-          <a href="tel:+919778575418" class="btn btn-gold">Call Now</a>
-          <a href="#" class="btn btn-wa" onclick="waLink('inquiry');return false;">WhatsApp</a>
-          <a href="#" class="btn btn-ghost" onclick="openBooking();return false;">Book Now</a>
-          <a href="#" class="btn btn-line" onclick="openDirections();return false;">Directions</a>
+
+          <a href="tel:+919778575418"
+             class="btn btn-gold">
+            Call Now
+          </a>
+
+          <a href="#"
+             class="btn btn-wa"
+             onclick="waLink('inquiry');return false;">
+            WhatsApp
+          </a>
+
+          <a href="#"
+             class="btn btn-ghost"
+             onclick="openBooking();return false;">
+            Book Now
+          </a>
+
+          <a href="#"
+             class="btn btn-line"
+             onclick="openDirections();return false;">
+            Directions
+          </a>
+
         </div>
       </div>
+
       <div class="map-embed">
-        <a class="overlay" href="#" onclick="openDirections();return false;">Open in Google Maps →</a>
+        <a class="overlay"
+           href="#"
+           onclick="openDirections();return false;">
+          Open in Google Maps →
+        </a>
       </div>
+
     </div>
   </div>
 </section>
@@ -545,11 +1129,20 @@ footer{background:#050403;border-top:1px solid var(--line);padding:64px 0 28px;}
 <!-- FOOTER -->
 <footer>
   <div class="wrap">
+
     <div class="foot-grid">
+
       <div class="foot-brand">
-        <div class="brand-text">GRAND <span style="color:var(--gold);">MULTI</span> GYM</div>
-        <p>Grand Multi Health Club — Discipline Today. Strength Tomorrow. Serving Kattanam since 2003.</p>
+        <div class="brand-text">
+          GRAND <span style="color:var(--gold);">MULTI</span> GYM
+        </div>
+
+        <p>
+          Grand Multi Health Club — Discipline Today.
+          Strength Tomorrow. Serving Kattanam since 2003.
+        </p>
       </div>
+
       <div class="foot-col">
         <h4>Explore</h4>
         <a href="#programs">Programs</a>
@@ -558,77 +1151,170 @@ footer{background:#050403;border-top:1px solid var(--line);padding:64px 0 28px;}
         <a href="#reviews">Reviews</a>
         <a href="#faq">FAQ</a>
       </div>
+
       <div class="foot-col">
         <h4>Contact</h4>
         <a href="tel:+919778575418">9778575418</a>
-        <a href="https://instagram.com/grandmultigymm" target="_blank" rel="noopener">Instagram</a>
-        <a href="#" onclick="openBooking();return false;">Book Now</a>
+
+        <a href="https://instagram.com/grandmultigymm"
+           target="_blank" rel="noopener">
+          Instagram
+        </a>
+
+        <a href="#"
+           onclick="openBooking();return false;">
+          Book Now
+        </a>
       </div>
+
     </div>
+
     <div class="foot-bottom">
-      <span>© <span id="year"></span> Grand Multi Gym. All rights reserved.</span>
-      <span>Mankavil Garden, Bharanikkavu, Kattanam, Kerala 690503</span>
-      <a href="admin.html" style="color:var(--smoke);">Site Admin</a>
+      <span>
+        © <span id="year"></span> Grand Multi Gym.
+        All rights reserved.
+      </span>
+
+      <span>
+        Mankavil Garden, Bharanikkavu,
+        Kattanam, Kerala 690503
+      </span>
+
+      <a href="admin.html" style="color:var(--smoke);">
+        Site Admin
+      </a>
     </div>
+
   </div>
 </footer>
 
-<!-- FLOATING BUTTONS (desktop) -->
+<!-- FLOATING BUTTONS -->
 <div class="floating">
-  <button class="fab fab-chat" onclick="openChat()" title="Ask GrandFit AI Assistant">🤖</button>
-  <a class="fab fab-call" href="tel:+919778575418" title="Call">📞</a>
+
+  <button class="fab fab-chat"
+          onclick="openChat()"
+          title="Ask GrandFit AI Assistant">
+    🤖
+  </button>
+
+  <a class="fab fab-call"
+     href="tel:+919778575418"
+     title="Call">
+    📞
+  </a>
+
 </div>
 
 <!-- MOBILE STICKY BAR -->
 <div class="mobile-stickybar">
   <div class="row" style="grid-template-columns:repeat(2,1fr);">
-    <a href="tel:+919778575418">📞 Call</a>
-    <button onclick="openBooking()">📅 Book Now</button>
+
+    <a href="tel:+919778575418">
+      📞 Call
+    </a>
+
+    <button onclick="openBooking()">
+      📅 Book Now
+    </button>
+
   </div>
 </div>
 
-
-<!-- BOOKING MODAL (quick actions — no form) -->
+<!-- BOOKING MODAL -->
 <div class="modal-overlay" id="bookingOverlay">
+
   <div class="modal" style="max-width:380px;">
-    <button class="modal-close" onclick="closeModal('bookingOverlay')">×</button>
+
+    <button class="modal-close"
+            onclick="closeModal('bookingOverlay')">
+      ×
+    </button>
+
     <h3>Book Now</h3>
-    <p class="sub">Reach us directly — pick whichever's easiest.</p>
+
+    <p class="sub">
+      Reach us directly — pick whichever's easiest.
+    </p>
+
     <div style="display:flex;flex-direction:column;gap:12px;">
-      <a href="tel:+919778575418" class="btn btn-gold" style="justify-content:center;">📞 Call Now</a>
-      <a href="#" onclick="bookingIgLink();return false;" class="btn btn-line" style="justify-content:center;">📷 DM on Instagram</a>
-      <a href="#" onclick="bookingWaLink();return false;" class="btn btn-wa" style="justify-content:center;">💬 Message on WhatsApp</a>
+
+      <a href="tel:+919778575418"
+         class="btn btn-gold"
+         style="justify-content:center;">
+        📞 Call Now
+      </a>
+
+      <a href="#"
+         onclick="bookingIgLink();return false;"
+         class="btn btn-line"
+         style="justify-content:center;">
+        📷 DM on Instagram
+      </a>
+
+      <a href="#"
+         onclick="bookingWaLink();return false;"
+         class="btn btn-wa"
+         style="justify-content:center;">
+        💬 Message on WhatsApp
+      </a>
+
     </div>
   </div>
 </div>
 
 <!-- CHATBOT WINDOW -->
 <div class="chat-window" id="chatWindow">
+
   <div class="chat-head">
+
     <div>
       <div class="t">GrandFit AI Assistant</div>
-      <div class="s">Official AI Assistant for Grand Multi Gym</div>
+
+      <div class="s">
+        Official AI Assistant for Grand Multi Gym
+      </div>
     </div>
+
     <div style="display:flex;gap:6px;">
-      <button onclick="clearChat()" title="Clear chat">🗑</button>
-      <button onclick="closeChat()">×</button>
+
+      <button onclick="clearChat()"
+              title="Clear chat">
+        🗑️
+      </button>
+
+      <button onclick="closeChat()"
+              title="Close">
+        ×
+      </button>
+
     </div>
   </div>
+
   <div class="chat-body" id="chatBody"></div>
+
   <div class="suggested" id="chatSuggest"></div>
+
   <div class="chat-input-row">
-    <input type="text" id="chatInput" placeholder="Type your message..." onkeydown="if(event.key==='Enter')sendChat()">
+
+    <input type="text"
+           id="chatInput"
+           placeholder="Type your message..."
+           onkeydown="if(event.key==='Enter')sendChat()">
+
     <button onclick="sendChat()">➤</button>
+
   </div>
+
 </div>
 
 <div class="toast" id="toast"></div>
 
-<!-- Firebase (client SDK only — no server code needed on your side) -->
+<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+
 <script>
-/* ===== PASTE YOUR FIREBASE WEB CONFIG HERE (Firebase Console → Project Settings → your web app) ===== */
+/* ===== FIREBASE CONFIG ===== */
 const firebaseConfig = {
   apiKey: "AIzaSyAX1iDS9IEI6EugPpgjXOGOOr_2t5w9mE0",
   authDomain: "grand-muilt-gym.firebaseapp.com",
@@ -637,41 +1323,135 @@ const firebaseConfig = {
   messagingSenderId: "437245103225",
   appId: "1:437245103225:web:ee1acc451091ad1ca9d8a8"
 };
+
 let db = null;
+
 try{
   firebase.initializeApp(firebaseConfig);
   db = firebase.firestore();
-}catch(err){ console.warn('Firebase not configured yet — site will run on built-in defaults.', err); }
+}catch(err){
+  console.warn(
+    'Firebase not configured yet — site will run with built-in defaults.',
+    err
+  );
+}
 </script>
 
 <script>
-/* ============ STATE (falls back to these defaults until Firestore loads) ============ */
-const state = {
-  hero: { eyebrow:'Kattanam, Kerala — Since 2003', sub:"Discipline today. Strength tomorrow. Weight training, cardio, personal coaching, and special training for Army & Kerala Police aspirants — for men and women." },
+/* ============ STATE ============ */
 
-  pricing: [
-    {name:'General Gym / Weight Training', price:500, duration:'Ask us (duration to be confirmed)', desc:'Full access to weight training equipment and floor coaching.', popular:true},
-    {name:'Cardio Training', price:700, duration:'Ask us (duration to be confirmed)', desc:'Cardio conditioning sessions with equipment access.', popular:false}
+const state = {
+
+  hero:{
+    eyebrow:'Kattanam, Kerala — Since 2003',
+    sub:"Discipline today. Strength tomorrow. Weight training, cardio, personal coaching, and special training for Army & Kerala Police aspirants — for men and women."
+  },
+
+  pricing:[
+    {
+      name:'General Gym / Weight Training',
+      price:500,
+      duration:'Ask us (duration to be confirmed)',
+      desc:'Full access to weight training equipment and floor coaching.',
+      popular:true
+    },
+    {
+      name:'Cardio Training',
+      price:700,
+      duration:'Ask us (duration to be confirmed)',
+      desc:'Cardio conditioning sessions with equipment access.',
+      popular:false
+    }
   ],
-  programs: [
-    {name:'Weight Training', items:['Strength development','Resistance training','Progressive overload','Compound movements']},
-    {name:'Cardio Training', items:['Cardio conditioning','Endurance building','Fat-loss support','HIIT / steady-state']},
-    {name:'Fat Loss', items:['Training support','Cardio guidance','Nutrition pointers','Progress tracking']},
-    {name:'Personal Training', items:['Individualized plans','Goal-based workouts','Progress monitoring']},
-    {name:'Army Special Training', items:['Special training for Indian Army aspirants'], tag:'Special'},
-    {name:'Kerala Police Special Training', items:['Special training for Kerala Police aspirants'], tag:'Special'}
+
+  programs:[
+    {
+      name:'Weight Training',
+      items:[
+        'Strength development',
+        'Resistance training',
+        'Progressive overload',
+        'Compound movements'
+      ]
+    },
+    {
+      name:'Cardio Training',
+      items:[
+        'Cardio conditioning',
+        'Endurance building',
+        'Fat-loss support',
+        'HIIT / steady-state'
+      ]
+    },
+    {
+      name:'Fat Loss',
+      items:[
+        'Training support',
+        'Cardio guidance',
+        'Nutrition pointers',
+        'Progress tracking'
+      ]
+    },
+    {
+      name:'Personal Training',
+      items:[
+        'Individualized plans',
+        'Goal-based workouts',
+        'Progress monitoring'
+      ]
+    },
+    {
+      name:'Army Special Training',
+      items:[
+        'Special training for Indian Army aspirants'
+      ],
+      tag:'Special'
+    },
+    {
+      name:'Kerala Police Special Training',
+      items:[
+        'Special training for Kerala Police aspirants'
+      ],
+      tag:'Special'
+    }
   ],
-  why: [
-    {t:'Weight Training', d:'Full equipment for strength work, all levels.'},
-    {t:'Cardio Training', d:'Dedicated cardio setup for conditioning.'},
-    {t:'Personal Support', d:'Coaching that pays attention, not just access.'},
-    {t:'Men & Women', d:'A floor that welcomes everyone.'},
-    {t:'Army Special Training', d:'For Indian Army aspirants.'},
-    {t:'Kerala Police Training', d:'For Kerala Police aspirants.'},
-    {t:'Diet & Nutrition', d:'Guidance alongside your training.'},
-    {t:'Fat Loss Support', d:'Training, cardio and nutrition together.'}
+
+  why:[
+    {
+      t:'Weight Training',
+      d:'Full equipment for strength work, all levels.'
+    },
+    {
+      t:'Cardio Training',
+      d:'Dedicated cardio setup for conditioning.'
+    },
+    {
+      t:'Personal Support',
+      d:'Coaching that pays attention, not just access.'
+    },
+    {
+      t:'Men & Women',
+      d:'A floor that welcomes everyone.'
+    },
+    {
+      t:'Army Special Training',
+      d:'For Indian Army aspirants.'
+    },
+    {
+      t:'Kerala Police Training',
+      d:'For Kerala Police aspirants.'
+    },
+    {
+      t:'Diet & Nutrition',
+      d:'Guidance alongside your training.'
+    },
+    {
+      t:'Fat Loss Support',
+      d:'Training, cardio and nutrition together.'
+    }
   ],
-  rules: [
+
+  rules:[
     'Wear proper shoes',
     'Bring your towel & water bottle',
     'Use equipment properly',
@@ -679,322 +1459,1371 @@ const state = {
     'Maintain silence & respect others',
     'Be consistent, be disciplined'
   ],
-  gallery: [
-    {src:'assets/gallery-interior.jpg', cap:'Training floor', big:true},
-    {src:'assets/logo.jpg', cap:'Grand Multi Gym'},
-    {src:'assets/gallery-hulk1.jpg', cap:'Gym mural'},
-    {src:'assets/gallery-hulk2.jpg', cap:'Gym mural'},
-    {src:'assets/gallery-equipment.jpg', cap:'Equipment'},
-    {src:'assets/gallery-brand.jpg', cap:'Grand Gym'},
-    {src:'assets/gallery-floor1.jpg', cap:'Training floor'},
-    {src:'assets/gallery-floor2.jpg', cap:'Training floor'},
-    {src:'assets/gallery-floor3.jpg', cap:'Training floor'}
+
+  gallery:[
+    {
+      src:'assets/gallery-interior.jpg',
+      cap:'Training floor',
+      big:true
+    },
+    {
+      src:'assets/logo.jpg',
+      cap:'Grand Multi Gym'
+    },
+    {
+      src:'assets/gallery-hulk1.jpg',
+      cap:'Gym mural'
+    },
+    {
+      src:'assets/gallery-hulk2.jpg',
+      cap:'Gym mural'
+    },
+    {
+      src:'assets/gallery-equipment.jpg',
+      cap:'Equipment'
+    },
+    {
+      src:'assets/gallery-brand.jpg',
+      cap:'Grand Gym'
+    },
+    {
+      src:'assets/gallery-floor1.jpg',
+      cap:'Training floor'
+    },
+    {
+      src:'assets/gallery-floor2.jpg',
+      cap:'Training floor'
+    },
+    {
+      src:'assets/gallery-floor3.jpg',
+      cap:'Training floor'
+    }
   ],
-  reviews: [
-    {name:'Godz Gym', text:'Super than fitness world.', stars:5, demo:false, src:'Google'},
-    {name:'Surya Babu', text:'💪', stars:5, demo:false, src:'Google'},
-    {name:'kailas Shankar', text:'Very good experience.', stars:5, demo:false, src:'Google'},
-    {name:'Vishal Murali', text:'Less fees compared to the nearby ones. Average equipment. Great personal support.', stars:4, demo:false, src:'Google'},
-    {name:'S.J creations', text:"It's a good place.", stars:5, demo:false, src:'Google'},
-    {name:'Arun', text:'Placeholder demo review — replace with a real one.', stars:5, demo:true, src:'Demo'}
+
+  reviews:[
+    {
+      name:'Godz Gym',
+      text:'Super than fitness world.',
+      stars:5,
+      demo:false,
+      src:'Google'
+    },
+    {
+      name:'Surya Babu',
+      text:'💪',
+      stars:5,
+      demo:false,
+      src:'Google'
+    },
+    {
+      name:'kailas Shankar',
+      text:'Very good experience.',
+      stars:5,
+      demo:false,
+      src:'Google'
+    },
+    {
+      name:'Vishal Murali',
+      text:'Less fees compared to the nearby ones. Average equipment. Great personal support.',
+      stars:4,
+      demo:false,
+      src:'Google'
+    },
+    {
+      name:'S.J creations',
+      text:"It's a good place.",
+      stars:5,
+      demo:false,
+      src:'Google'
+    },
+    {
+      name:'Arun',
+      text:'Placeholder demo review — replace with a real one.',
+      stars:5,
+      demo:true,
+      src:'Demo'
+    }
   ],
-  faq: [
-    {q:'What are the gym fees?', a:'Weight training is ₹500 and cardio training is ₹700. Contact us for the exact duration these cover.'},
-    {q:'Where is Grand Multi Gym located?', a:'Mankavil Garden, Bharanikkavu, Kattanam, Kerala 690503.'},
-    {q:'Do you provide personal training?', a:'Yes, personal training is available.'},
-    {q:'Do you provide Army or Kerala Police special training?', a:'Yes, we offer special training for Indian Army and Kerala Police aspirants.'},
-    {q:'Do you train both men and women?', a:'Yes, everyone trains here.'},
-    {q:'How can I book?', a:'Use the Book Now button, WhatsApp us, or call 9778575418.'}
+
+  faq:[
+    {
+      q:'What are the gym fees?',
+      a:'Weight training is ₹500 and cardio training is ₹700. Contact us for the exact duration these cover.'
+    },
+    {
+      q:'Where is Grand Multi Gym located?',
+      a:'Mankavil Garden, Bharanikkavu, Kattanam, Kerala 690503.'
+    },
+    {
+      q:'Do you provide personal training?',
+      a:'Yes, personal training is available.'
+    },
+    {
+      q:'Do you provide Army or Kerala Police special training?',
+      a:'Yes, we offer special training for Indian Army and Kerala Police aspirants.'
+    },
+    {
+      q:'Do you train both men and women?',
+      a:'Yes, everyone trains here.'
+    },
+    {
+      q:'How can I book?',
+      a:'Use the Book Now button, WhatsApp us, or call 9778575418.'
+    }
   ],
-  aiProvider: 'groq',
-  apiKey: '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',
-  chatHistory: []
+
+  aiProvider:'groq',
+
+  /* Groq API key */
+  apiKey:'gsk_im9V1sV86CUBlspDmWGdyb3FYgWG5OU87jM2ktXrZZpfxotwV',
+
+  chatHistory:[]
 };
 
-document.getElementById('year').textContent = new Date().getFullYear();
+document.getElementById('year').textContent =
+  new Date().getFullYear();
+
 
 /* ============ WHATSAPP / CALL / DIRECTIONS ============ */
+
 function waLink(type){
-  const msg = type==='booking'
-    ? "Hi Grand Multi Gym, I just submitted a booking request and would like to confirm it."
-    : "Hi Grand Multi Gym, I would like to know more about your membership and training programs.";
-  window.open(`https://wa.me/919778575418?text=${encodeURIComponent(msg)}`, '_blank');
-}
-function openDirections(){
-  window.open('https://www.google.com/maps/search/?api=1&query=5HG7%2BVJ9+Mankavil+Garden+Bharanikkavu+Kattanam+Kerala+690503','_blank');
+
+  const msg =
+    type==='booking'
+      ? "Hi Grand Multi Gym, I just submitted a booking request and would like to confirm it."
+      : "Hi Grand Multi Gym, I would like to know more about your membership and training programs.";
+
+  window.open(
+    `https://wa.me/919778575418?text=${encodeURIComponent(msg)}`,
+    '_blank'
+  );
 }
 
-/* ============ BOOK NOW MODAL — WhatsApp & Instagram messaging ============ */
-const BOOKING_MESSAGE = "Hello Grand Multi Gym 👋\n\nI'm interested in joining your gym. Could you please tell me how I can join and share the details about the fees, membership options, timings, and other joining details?\n\nThanks! 😊";
+function openDirections(){
+
+  window.open(
+    'https://www.google.com/maps/search/?api=1&query=5HG7%2BVJ9+Mankavil+Garden+Bharanikkavu+Kattanam+Kerala+690503',
+    '_blank'
+  );
+}
+
+
+/* ============ BOOK NOW MESSAGING ============ */
+
+/*
+  EXACT SAME MESSAGE is used for WhatsApp and Instagram.
+*/
+
+const BOOKING_MESSAGE =
+  "Hello Grand Multi Gym 👋\n\n" +
+  "I'm interested in joining your gym. Could you please tell me how I can join and share the details about the fees, membership options, timings, and other joining details?\n\n" +
+  "Thanks! 😊";
+
+
+/* WhatsApp — message is pre-filled */
 
 function bookingWaLink(){
-  window.open(`https://wa.me/919778575418?text=${encodeURIComponent(BOOKING_MESSAGE)}`, '_blank');
+
+  const whatsappUrl =
+    `https://wa.me/919778575418?text=${encodeURIComponent(BOOKING_MESSAGE)}`;
+
+  window.open(
+    whatsappUrl,
+    '_blank'
+  );
 }
+
+
+/*
+  Instagram:
+  Instagram does not provide a reliable public URL parameter
+  for forcing arbitrary pre-filled DM text from a website.
+
+  Therefore:
+  1. Copy the exact same message.
+  2. Open Instagram DM using ig.me.
+  3. Customer can paste and send.
+*/
 
 function bookingIgLink(){
-  // ig.me is Instagram's own official link format for opening a DM composer with an account
-  // (the same mechanism Instagram/Facebook use for "Message" buttons). It is handled by the
-  // OS: opens the Instagram app directly if installed, otherwise falls back to the web profile —
-  // no custom/unofficial URL scheme is used.
-  const igLink = 'https://ig.me/m/grandmultigymm';
-  // Instagram has no supported way to pre-fill DM text from a website link, so we copy the
-  // message to the clipboard (where supported) and let the customer paste it in one tap.
-  if(navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(BOOKING_MESSAGE).then(()=>{
-      toast('Message copied — just paste it into the Instagram DM');
-    }).catch(()=>{ /* clipboard blocked — still proceed to open Instagram */ });
+
+  const igLink =
+    'https://ig.me/m/grandmultigymm';
+
+  if(
+    navigator.clipboard &&
+    navigator.clipboard.writeText
+  ){
+
+    navigator.clipboard
+      .writeText(BOOKING_MESSAGE)
+      .then(()=>{
+
+        toast(
+          'Message copied — paste it into the Instagram DM'
+        );
+
+      })
+      .catch(()=>{
+
+        toast('Opening Instagram...');
+
+      });
+
+  }else{
+
+    toast('Opening Instagram...');
+
   }
-  window.open(igLink, '_blank');
+
+  setTimeout(()=>{
+
+    /*
+      Using Instagram's DM link.
+      On supported mobile devices this may open
+      the Instagram app. Otherwise it falls back to
+      the browser.
+    */
+
+    window.location.href = igLink;
+
+  },150);
 }
-function toggleMobileMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
+
+
+/* ============ MOBILE MENU ============ */
+
+function toggleMobileMenu(){
+
+  document
+    .getElementById('mobileMenu')
+    .classList.toggle('open');
+
+}
+
+
+/* ============ TOAST ============ */
+
 function toast(msg){
-  const t=document.getElementById('toast'); t.textContent=msg; t.style.display='block';
-  setTimeout(()=>t.style.display='none',2200);
+
+  const t =
+    document.getElementById('toast');
+
+  t.textContent = msg;
+  t.style.display = 'block';
+
+  setTimeout(()=>{
+
+    t.style.display = 'none';
+
+  },2200);
 }
+
 
 /* ============ HERO ROTATING WORD ============ */
-const rotWords=['Strength.','Discipline.','Consistency.','Power.'];
-let rIdx=0;
-setInterval(()=>{ rIdx=(rIdx+1)%rotWords.length; document.getElementById('rotWord').textContent=rotWords[rIdx]; },2600);
+
+const rotWords = [
+  'Strength.',
+  'Discipline.',
+  'Consistency.',
+  'Power.'
+];
+
+let rIdx = 0;
+
+setInterval(()=>{
+
+  rIdx =
+    (rIdx + 1) % rotWords.length;
+
+  document.getElementById('rotWord')
+    .textContent = rotWords[rIdx];
+
+},2600);
+
 
 /* ============ RENDER FUNCTIONS ============ */
+
 function renderHero(){
-  state.hero.eyebrow = document.getElementById('a_eyebrow')?.value || state.hero.eyebrow;
-  state.hero.sub = document.getElementById('a_sub')?.value || state.hero.sub;
-  document.querySelector('.eyebrow-tag').textContent = state.hero.eyebrow;
-  document.querySelector('.hero-sub').textContent = state.hero.sub;
+
+  state.hero.eyebrow =
+    document.getElementById('a_eyebrow')?.value ||
+    state.hero.eyebrow;
+
+  state.hero.sub =
+    document.getElementById('a_sub')?.value ||
+    state.hero.sub;
+
+  document.querySelector('.eyebrow-tag')
+    .textContent = state.hero.eyebrow;
+
+  document.querySelector('.hero-sub')
+    .textContent = state.hero.sub;
 }
+
+
 function renderWhy(){
-  document.getElementById('whyGrid').innerHTML = state.why.map((w,i)=>`
-    <div class="why-item"><div class="num">${String(i+1).padStart(2,'0')}</div><h3>${w.t}</h3><p>${w.d}</p></div>
-  `).join('');
+
+  document.getElementById('whyGrid').innerHTML =
+    state.why.map((w,i)=>`
+
+      <div class="why-item">
+
+        <div class="num">
+          ${String(i+1).padStart(2,'0')}
+        </div>
+
+        <h3>${w.t}</h3>
+
+        <p>${w.d}</p>
+
+      </div>
+
+    `).join('');
 }
+
+
 function renderPrograms(){
-  document.getElementById('progGrid').innerHTML = state.programs.map(p=>`
-    <div class="prog-card">
-      ${p.tag?`<span class="tag">${p.tag}</span>`:''}
-      <h3>${p.name}</h3>
-      <ul>${p.items.map(i=>`<li>${i}</li>`).join('')}</ul>
-    </div>
-  `).join('');
+
+  document.getElementById('progGrid').innerHTML =
+    state.programs.map(p=>`
+
+      <div class="prog-card">
+
+        ${
+          p.tag
+            ? `<span class="tag">${p.tag}</span>`
+            : ''
+        }
+
+        <h3>${p.name}</h3>
+
+        <ul>
+          ${
+            p.items.map(i=>`
+              <li>${i}</li>
+            `).join('')
+          }
+        </ul>
+
+      </div>
+
+    `).join('');
 }
+
+
 function renderPricing(){
-  document.getElementById('priceGrid').innerHTML = state.pricing.map(p=>`
-    <div class="price-card ${p.popular?'popular':''}">
-      ${p.popular?'<span class="badge">Popular</span>':''}
-      <h3>${p.name}</h3>
-      <div class="amount"><sup>₹</sup>${p.price}</div>
-      <div class="dur">${p.duration}</div>
-      <p class="desc">${p.desc}</p>
-      <a href="#" class="btn btn-gold" onclick="openBooking();return false;">Book This</a>
-    </div>
-  `).join('');
+
+  document.getElementById('priceGrid').innerHTML =
+    state.pricing.map(p=>`
+
+      <div class="price-card ${
+        p.popular ? 'popular' : ''
+      }">
+
+        ${
+          p.popular
+            ? '<span class="badge">Popular</span>'
+            : ''
+        }
+
+        <h3>${p.name}</h3>
+
+        <div class="amount">
+          <sup>₹</sup>${p.price}
+        </div>
+
+        <div class="dur">
+          ${p.duration}
+        </div>
+
+        <p class="desc">
+          ${p.desc}
+        </p>
+
+        <a href="#"
+           class="btn btn-gold"
+           onclick="openBooking();return false;">
+          Book This
+        </a>
+
+      </div>
+
+    `).join('');
 }
+
+
 function renderRules(){
-  document.getElementById('rulesList').innerHTML = state.rules.map((r,i)=>`
-    <div class="rule-row"><div class="rnum">${String(i+1).padStart(2,'0')}</div><p>${r}</p></div>
-  `).join('');
+
+  document.getElementById('rulesList').innerHTML =
+    state.rules.map((r,i)=>`
+
+      <div class="rule-row">
+
+        <div class="rnum">
+          ${String(i+1).padStart(2,'0')}
+        </div>
+
+        <p>${r}</p>
+
+      </div>
+
+    `).join('');
 }
+
+
 function renderGallery(){
-  document.getElementById('galGrid').innerHTML = state.gallery.map(g=>`
-    <div class="gal-item ${g.big?'big':''}"><img src="${g.src}" alt="${g.cap}" loading="lazy"><div class="cap">${g.cap}</div></div>
-  `).join('');
+
+  document.getElementById('galGrid').innerHTML =
+    state.gallery.map(g=>`
+
+      <div class="gal-item ${
+        g.big ? 'big' : ''
+      }">
+
+        <img
+          src="${g.src}"
+          alt="${g.cap}"
+          loading="lazy"
+        >
+
+        <div class="cap">
+          ${g.cap}
+        </div>
+
+      </div>
+
+    `).join('');
 }
+
+
 function renderReviews(){
-  document.getElementById('revGrid').innerHTML = state.reviews.map(r=>`
-    <div class="rev-card">
-      <div class="stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div>
-      <p class="body">"${r.text}"</p>
-      <div class="who"><b>${r.name}</b><span class="src">${r.src}</span></div>
-      ${r.demo?'<span class="demo-flag">Demo/Testimonial Placeholder</span>':''}
-    </div>
-  `).join('');
+
+  document.getElementById('revGrid').innerHTML =
+    state.reviews.map(r=>`
+
+      <div class="rev-card">
+
+        <div class="stars">
+          ${'★'.repeat(r.stars)}
+          ${'☆'.repeat(5-r.stars)}
+        </div>
+
+        <p class="body">
+          "${r.text}"
+        </p>
+
+        <div class="who">
+
+          <b>${r.name}</b>
+
+          <span class="src">
+            ${r.src}
+          </span>
+
+        </div>
+
+        ${
+          r.demo
+            ? '<span class="demo-flag">Demo/Testimonial Placeholder</span>'
+            : ''
+        }
+
+      </div>
+
+    `).join('');
 }
+
+
 function renderFaq(){
-  document.getElementById('faqList').innerHTML = state.faq.map((f,i)=>`
-    <div class="faq-item" id="faq-${i}">
-      <button class="faq-q" onclick="toggleFaq(${i})"><span>${f.q}</span><span class="plus">+</span></button>
-      <div class="faq-a"><p>${f.a}</p></div>
-    </div>
-  `).join('');
+
+  document.getElementById('faqList').innerHTML =
+    state.faq.map((f,i)=>`
+
+      <div class="faq-item" id="faq-${i}">
+
+        <button
+          class="faq-q"
+          onclick="toggleFaq(${i})"
+        >
+
+          <span>${f.q}</span>
+
+          <span class="plus">+</span>
+
+        </button>
+
+        <div class="faq-a">
+          <p>${f.a}</p>
+        </div>
+
+      </div>
+
+    `).join('');
 }
-function toggleFaq(i){ document.getElementById('faq-'+i).classList.toggle('open'); }
+
+
+function toggleFaq(i){
+
+  document
+    .getElementById('faq-'+i)
+    .classList.toggle('open');
+
+}
+
 
 function renderAll(){
-  renderHero(); renderWhy(); renderPrograms(); renderPricing();
-  renderRules(); renderGallery(); renderReviews(); renderFaq();
+
+  renderHero();
+  renderWhy();
+  renderPrograms();
+  renderPricing();
+  renderRules();
+  renderGallery();
+  renderReviews();
+  renderFaq();
+
 }
+
 renderAll();
 
-/* Live content sync from Firestore (written by admin.html) — updates instantly, no re-upload needed.
-   Falls back silently to the built-in defaults above if Firebase isn't configured yet. */
+
+/* ============ FIRESTORE LIVE SYNC ============ */
+
 if(db){
-  db.collection('site').doc('config').onSnapshot(docSnap => {
-    if(docSnap.exists){ Object.assign(state, docSnap.data()); renderAll(); }
-  }, err => console.warn('Firestore sync error:', err));
+
+  db.collection('site')
+    .doc('config')
+    .onSnapshot(
+
+      docSnap=>{
+
+        if(docSnap.exists){
+
+          /*
+            Keep the API key that is built into this file.
+            Firestore data cannot overwrite it.
+          */
+
+          const builtInApiKey =
+            state.apiKey;
+
+          const remoteData =
+            docSnap.data();
+
+          Object.assign(
+            state,
+            remoteData
+          );
+
+          state.apiKey =
+            builtInApiKey;
+
+          renderAll();
+        }
+
+      },
+
+      err=>{
+
+        console.warn(
+          'Firestore sync error:',
+          err
+        );
+
+      }
+
+    );
 }
+
 
 /* ============ MODALS ============ */
-function openModal(id){ document.getElementById(id).classList.add('open'); }
-function closeModal(id){ document.getElementById(id).classList.remove('open'); }
-function openBooking(){ openModal('bookingOverlay'); }
-document.getElementById('bookingOverlay').addEventListener('click',(e)=>{ if(e.target.id==='bookingOverlay') closeModal('bookingOverlay'); });
+
+function openModal(id){
+
+  document
+    .getElementById(id)
+    .classList.add('open');
+
+}
+
+function closeModal(id){
+
+  document
+    .getElementById(id)
+    .classList.remove('open');
+
+}
+
+function openBooking(){
+
+  openModal('bookingOverlay');
+
+}
+
+document
+  .getElementById('bookingOverlay')
+  .addEventListener(
+    'click',
+    e=>{
+
+      if(
+        e.target.id ===
+        'bookingOverlay'
+      ){
+
+        closeModal(
+          'bookingOverlay'
+        );
+
+      }
+
+    }
+  );
+
 
 /* ============ CHATBOT ============ */
-const suggestedQs = ['What is the gym fee?','Is cardio training available?','Is Army special training available?','What should I train today?','Diet plan for weight loss/gain?','How to use creatine?'];
+
+const suggestedQs = [
+
+  'What is the gym fee?',
+  'Is cardio training available?',
+  'Is Army special training available?',
+  'What should I train today?',
+  'Diet plan for weight loss/gain?',
+  'How to use creatine?'
+
+];
+
+
 function openChat(){
-  const win=document.getElementById('chatWindow');
+
+  const win =
+    document.getElementById(
+      'chatWindow'
+    );
+
   win.classList.add('open');
+
   if(!state.chatHistory.length){
-    pushMsg('bot', "Hi! 👋 Welcome to Grand Multi Gym. Ask me anything about our training programs, fees, location, booking, or general fitness advice.");
-    document.getElementById('chatSuggest').innerHTML = suggestedQs.map(q=>`<button class="sugg" onclick="quickAsk('${q.replace(/'/g,"\\'")}')">${q}</button>`).join('');
+
+    pushMsg(
+      'bot',
+      "Hi! 👋 Welcome to Grand Multi Gym. Ask me anything about our training programs, fees, location, booking, or general fitness advice."
+    );
+
+    document.getElementById(
+      'chatSuggest'
+    ).innerHTML =
+      suggestedQs.map(q=>`
+
+        <button
+          class="sugg"
+          onclick="quickAsk('${q.replace(/'/g,"\\'")}')"
+        >
+          ${q}
+        </button>
+
+      `).join('');
+
   }
+
 }
-function closeChat(){ document.getElementById('chatWindow').classList.remove('open'); }
-function clearChat(){ state.chatHistory=[]; document.getElementById('chatBody').innerHTML=''; openChat(); }
-function quickAsk(q){ document.getElementById('chatInput').value=q; sendChat(); }
-function clearSuggestions(){ document.getElementById('chatSuggest').innerHTML=''; }
+
+
+function closeChat(){
+
+  document
+    .getElementById('chatWindow')
+    .classList.remove('open');
+
+}
+
+
+function clearChat(){
+
+  state.chatHistory = [];
+
+  document.getElementById(
+    'chatBody'
+  ).innerHTML = '';
+
+  document.getElementById(
+    'chatSuggest'
+  ).innerHTML = '';
+
+  openChat();
+
+}
+
+
+function quickAsk(q){
+
+  document.getElementById(
+    'chatInput'
+  ).value = q;
+
+  sendChat();
+
+}
+
+
+function clearSuggestions(){
+
+  document.getElementById(
+    'chatSuggest'
+  ).innerHTML = '';
+
+}
+
+
 function pushMsg(role,text){
-  state.chatHistory.push({role,text});
-  const body=document.getElementById('chatBody');
-  const div=document.createElement('div');
-  div.className='msg '+(role==='user'?'user':'bot');
-  div.innerHTML = text.replace(/\n/g,'<br>');
+
+  state.chatHistory.push({
+    role,
+    text
+  });
+
+  const body =
+    document.getElementById(
+      'chatBody'
+    );
+
+  const div =
+    document.createElement(
+      'div'
+    );
+
+  div.className =
+    'msg ' +
+    (role === 'user'
+      ? 'user'
+      : 'bot');
+
+  div.innerHTML =
+    text.replace(
+      /\n/g,
+      '<br>'
+    );
+
   body.appendChild(div);
-  body.scrollTop = body.scrollHeight;
+
+  body.scrollTop =
+    body.scrollHeight;
+
   return div;
+
 }
+
+
+/* ============ KNOWLEDGE BASE ============ */
 
 const KB = `
+
 Business: Grand Multi Health Club / Grand Multi Gym, Kattanam, Kerala. Serving since 2003.
+
 Phone: 9778575418
-Address: 5HG7+VJ9, Mankavil Garden, Bharanikkavu, Kattanam, Kerala 690503
+
+Address: 5HG7+VJ9, Mankavil Garden, Bharanikkovu, Kattanam, Kerala 690503
+
 Instagram: @grandmultigymm
+
 Services: Weight Training, Cardio Training, Diet & Nutrition guidance, Fat Loss support, Men & Women training, Personal Training, Army Special Training, Kerala Police Special Training.
+
 Pricing: Weight/Gym training ₹500, Cardio training ₹700 (exact duration must be confirmed with the gym directly — do not guess if it's monthly/weekly).
-Gym rules: proper shoes, bring towel & water bottle, use equipment properly, wipe equipment after use, maintain silence & respect others, be consistent and disciplined.
-Winter Arc plan: strength training 4-6 days/week (8-12 reps, 3-4 sets), cardio 2-3 days/week (20-30 min), balanced high-protein nutrition, 7-8 hours sleep.
-General daily training split you can suggest (rotate through the week, not a fixed personal prescription): Day 1 Chest & Triceps, Day 2 Back & Biceps, Day 3 Legs, Day 4 Shoulders & Abs, Day 5 Cardio/HIIT, Day 6 Full body or weak-point focus, Day 7 Rest. Always add: this is a general template — a trainer at the gym can adjust it to the person.
-General diet direction for weight loss: moderate calorie deficit, high protein (lean meat/fish/eggs/paneer/dal), plenty of vegetables, complex carbs (rice/oats in controlled portion), limit fried food and sugary drinks, stay hydrated.
-General diet direction for weight/muscle gain: calorie surplus with high protein, complex carbs (rice, oats, banana), healthy fats (nuts, ghee in moderation), frequent meals, protein around workouts.
-Creatine (creatine monohydrate): a common, widely used sports supplement. Typical general usage seen on most product labels: 3–5g per day, taken any time of day (with a meal is fine), with plenty of water. Some people start with a short "loading phase" of ~20g/day split into doses for 5-7 days, then drop to 3-5g/day — this is optional, not required. Not suitable for people with kidney issues without a doctor's clearance; always suggest checking with a doctor first if they have any health condition.
-You do not know: exact opening hours, exact membership duration, trainer qualifications/certifications, medical claims, exact Army/Police test details, exact equipment list, offers or discounts, and you cannot build a fully personalized diet/training plan (weight, age, medical history unknown) — give the general direction above and suggest talking to a trainer at the gym for a plan tailored to them. If asked something else not covered, say this isn't available yet and to call 9778575418.
+
+Gym rules:
+proper shoes,
+bring towel & water bottle,
+use equipment properly,
+wipe equipment after use,
+maintain silence & respect others,
+be consistent and disciplined.
+
+Winter Arc plan:
+strength training 4-6 days/week (8-12 reps, 3-4 sets),
+cardio 2-3 days/week (20-30 min),
+balanced high-protein nutrition,
+7-8 hours sleep.
+
+General daily training split you can suggest:
+Day 1 Chest & Triceps,
+Day 2 Back & Biceps,
+Day 3 Legs,
+Day 4 Shoulders & Abs,
+Day 5 Cardio/HIIT,
+Day 6 Full body or weak-point focus,
+Day 7 Rest.
+
+Always add:
+this is a general template — a trainer at the gym can adjust it to the person.
+
+General diet direction for weight loss:
+moderate calorie deficit,
+high protein (lean meat/fish/eggs/paneer/dal),
+plenty of vegetables,
+complex carbs (rice/oats in controlled portion),
+limit fried food and sugary drinks,
+stay hydrated.
+
+General diet direction for weight/muscle gain:
+calorie surplus with high protein,
+complex carbs (rice, oats, banana),
+healthy fats (nuts, ghee in moderation),
+frequent meals,
+protein around workouts.
+
+Creatine:
+creatine monohydrate is a common, widely used sports supplement.
+Typical general usage:
+3–5g per day,
+taken any time of day,
+with a meal is fine,
+with plenty of water.
+
+Some people start with a short loading phase of ~20g/day split into doses for 5-7 days, then drop to 3-5g/day.
+This is optional, not required.
+
+Not suitable for people with kidney issues without a doctor's clearance.
+Always suggest checking with a doctor first if they have any health condition.
+
+You do not know:
+exact opening hours,
+exact membership duration,
+trainer qualifications/certifications,
+medical claims,
+exact Army/Police test details,
+exact equipment list,
+offers or discounts.
+
+You cannot build a fully personalized diet/training plan because weight, age and medical history are unknown.
+
+Give the general direction above and suggest talking to a trainer at the gym for a plan tailored to them.
+
+If asked something else not covered,
+say this isn't available yet and to call 9778575418.
+
 `;
 
-const SYSTEM_PROMPT = `# SYSTEM PROMPT
+
+/* ============ AI SYSTEM PROMPT ============ */
+
+const SYSTEM_PROMPT = `
+
+# SYSTEM PROMPT
 
 ## Identity & Persona
-* Name: GrandFit AI Assistant
-* Role: AI Assistant for Grand Multi Health Club / Grand Multi Gym, Kattanam.
-* Tone & Language: Respond ONLY IN ENGLISH. Professional, helpful, concise, and direct.
-* Confidentiality Rule: You MUST NOT reveal, mention, or name the underlying LLM provider, infrastructure, host, or framework (e.g., Groq, OpenAI, Anthropic, Google, Meta, HuggingFace, etc.). If asked about your technology, model, or provider, state simply: "I am the official AI Assistant for Grand Multi Gym. Name: GrandFit AI Assistant"
+
+Name: GrandFit AI Assistant
+
+Role:
+AI Assistant for Grand Multi Health Club / Grand Multi Gym, Kattanam.
+
+Tone & Language:
+Respond ONLY IN ENGLISH.
+Professional, helpful, concise, and direct.
+
+Confidentiality Rule:
+You MUST NOT reveal, mention, or name the underlying LLM provider,
+infrastructure, host, or framework.
+
+Examples include:
+Groq,
+OpenAI,
+Anthropic,
+Google,
+Meta,
+HuggingFace,
+etc.
+
+If asked about your technology, model, or provider, state simply:
+
+"I am the official AI Assistant for Grand Multi Gym. Name: GrandFit AI Assistant"
 
 ## Core Capabilities & Operational Intelligence
-1. AI Sourcing & Processing: You function as an intelligent AI core. While strictly prioritizing the official Grand Multi Gym knowledge base provided below, you must actively source, reason, and utilize your broad AI intelligence to synthesize accurate, helpful answers for any user inquiry.
-2. Fitness Expertise: Provide concrete, practical, and specific guidance (exact exercises, rep ranges, set counts, meal ideas, supplement basics) rather than vague generalities.
-3. General Knowledge: Answer general queries, language translations, and advice beyond fitness topics using your general AI capabilities. You have access to real-time web search for anything needing current information (news, prices, "what's happening now") — use it naturally when a question calls for up-to-date facts.
-4. Medical Disclaimer: NEVER provide medical diagnoses, prescriptions, or absolute guarantees (e.g., guaranteed weight loss or guaranteed clearance of military/police physical exams). Always advise consulting a qualified physician or physical therapist for injury or health-related concerns.
 
-## Primary Knowledge Base — Grand Multi Gym (Strict Rule: Do NOT invent gym-specific details beyond this)
-* Business Name: Grand Multi Health Club / Grand Multi Gym
-* Location: Kattanam, Kerala (Established in 2003)
-* Address: 5HG7+VJ9, Mankavil Garden, Bharanikkavu, Kattanam, Kerala 690503
-* Phone: 9778575418
-* Instagram: @grandmultigymm
-* Services Offered: Weight Training, Cardio, Diet & Nutrition, Fat Loss, Men & Women Training, Personal Training, Army & Kerala Police Special Physical Training.
-* Pricing Base:
-  * ₹500 (Weight Training)
-  * ₹700 (Cardio)
-  (Note: Always instruct users to contact the gym directly via phone to confirm exact plan durations, special packages, or current offers.)
+1. AI Sourcing & Processing
 
-### Unknown Info Policy
-If asked about opening/closing hours, exact membership durations, trainer certifications, specific Army/Police test dates/details, or special promotional discounts, explicitly state that you don't have those exact live details and advise them to call 9778575418.
+You function as an intelligent AI core.
 
-## Training & Fitness Knowledge Reference
+While strictly prioritizing the official Grand Multi Gym knowledge base
+provided below, actively source, reason, and utilize your broad AI
+intelligence to synthesize accurate and helpful answers.
 
-### General Training Split Template
-* Day 1: Chest & Triceps
-* Day 2: Back & Biceps
-* Day 3: Legs
-* Day 4: Shoulders & Abs
-* Day 5: Cardio / Functional
-* Day 6: Full Body / Weak Points
-* Day 7: Rest & Recovery
+For current factual information, current fitness science,
+nutrition, supplements, exercise recommendations,
+news, prices or information that may have changed,
+use web search when appropriate.
 
-### Winter Arc Framework
-* Strength Training: 4–6 days/week
-* Cardio: 2–3 days/week
-* Focus: Strict sleep schedule, high-protein nutrition, dynamic goal tracking.
+Do not claim that you searched the web unless a web search
+was actually performed.
+
+2. Fitness Expertise
+
+Fitness is your primary area.
+
+Provide practical and specific guidance:
+- exercises
+- sets
+- reps
+- workout structures
+- meal ideas
+- nutrition basics
+- supplement basics
+- recovery
+- training principles
+
+Avoid vague answers.
+
+However, do not present general guidance as a personalized
+medical or professional prescription.
+
+3. General Knowledge
+
+You can answer general queries beyond fitness.
+
+You can help with:
+- general facts
+- translations
+- everyday questions
+- advice
+- explanations
+- current information when web search is appropriate
+
+4. Medical Disclaimer
+
+NEVER provide medical diagnoses.
+
+NEVER prescribe medication.
+
+NEVER give absolute guarantees.
+
+Do not guarantee:
+- weight loss
+- muscle gain
+- injury recovery
+- Army selection
+- Police selection
+- medical clearance
+
+For injury or health-related concerns,
+recommend consulting a qualified physician,
+physical therapist, dietitian, or other appropriate
+health professional.
+
+## Primary Knowledge Base — Grand Multi Gym
+
+Strict Rule:
+Do NOT invent gym-specific details beyond the knowledge base.
+
+Business Name:
+Grand Multi Health Club / Grand Multi Gym
+
+Location:
+Kattanam, Kerala
+
+Established:
+2003
+
+Address:
+5HG7+VJ9, Mankavil Garden,
+Bharanikkavu,
+Kattanam,
+Kerala 690503
+
+Phone:
+9778575418
+
+Instagram:
+@grandmultigymm
+
+Services Offered:
+- Weight Training
+- Cardio
+- Diet & Nutrition
+- Fat Loss
+- Men & Women Training
+- Personal Training
+- Army Special Physical Training
+- Kerala Police Special Physical Training
+
+Pricing Base:
+₹500 — Weight Training
+₹700 — Cardio
+
+Always tell users to contact the gym directly
+to confirm exact plan durations,
+special packages,
+or current offers.
+
+## Unknown Info Policy
+
+If asked about:
+- opening/closing hours
+- exact membership duration
+- trainer certifications
+- specific Army/Police test dates/details
+- special promotional discounts
+- facilities not listed in the knowledge base
+
+explicitly state that you do not have those exact live details
+and advise them to call:
+
+9778575418
+
+## Training Reference
+
+General Training Split:
+
+Day 1:
+Chest & Triceps
+
+Day 2:
+Back & Biceps
+
+Day 3:
+Legs
+
+Day 4:
+Shoulders & Abs
+
+Day 5:
+Cardio / Functional
+
+Day 6:
+Full Body / Weak Points
+
+Day 7:
+Rest & Recovery
+
+Always explain that this is a general template
+and a trainer can adjust it to the individual.
+
+## Winter Arc Framework
+
+Strength Training:
+4–6 days/week
+
+Cardio:
+2–3 days/week
+
+Focus:
+- consistent sleep
+- high-protein nutrition
+- recovery
+- goal tracking
 
 ## Output Rules
-* Respond ONLY in English.
-* Keep answers short, crisp, and direct to the point.
 
-Full reference knowledge base:\n${KB}`;
+Respond ONLY in English.
+
+Keep answers concise and direct.
+
+Prefer 2–6 sentences unless the user asks for more detail.
+
+For fitness questions, be useful and specific.
+
+For current or changing information,
+use web search when appropriate.
+
+Full reference knowledge base:
+
+${KB}
+
+`;
+
+
+/* ============ OFFLINE FALLBACK ============ */
 
 function offlineReply(msg){
-  const m = msg.toLowerCase();
-  if(/fee|price|500|700|cost|cardio.*rupee|rupees/.test(m)) return "Weight training is ₹500 and cardio training is ₹700. Please call the gym at 9778575418 to confirm the exact plan duration.";
-  if(/location|address|where/.test(m)) return "We're located at Mankavil Garden, Bharanikkavu, Kattanam. Plus code: 5HG7+VJ9, Kerala 690503.";
-  if(/army/.test(m)) return "Yes, special training for Indian Army aspirants is available. Call 9778575418 for details.";
-  if(/police/.test(m)) return "Yes, special training for Kerala Police aspirants is also available.";
-  if(/book|appointment|session/.test(m)) return "You can book directly using the Book Now button, or WhatsApp/call us at 9778575418.";
-  if(/timing|time|open|hour/.test(m)) return "I don't have exact timing info yet — please call 9778575418 to confirm.";
-  if(/personal training/.test(m)) return "Yes, personal training is available — individualized workouts with progress tracking.";
-  if(/fat loss|weight loss/.test(m) && !/diet|plan/.test(m)) return "Fat loss support is available — training, cardio, and nutrition guidance together. Results depend on the individual, so we don't guarantee specific outcomes.";
-  if(/workout|training.*today|what.*do today|exercise.*today/.test(m)) return "Try this general split: Day 1 Chest & Triceps, Day 2 Back & Biceps, Day 3 Legs, Day 4 Shoulders & Abs, Day 5 Cardio/Functional, Day 6 Full Body/Weak Points, Day 7 Rest. This is a general template — a trainer at the gym can tailor it to you.";
-  if(/diet.*loss|weight loss.*diet|loss.*diet/.test(m)) return "Weight loss diet direction: moderate calorie deficit, high protein (eggs/fish/dal/paneer), plenty of vegetables, controlled complex carbs, less fried food and sugary drinks, stay hydrated. For a personalized plan, consult a trainer at the gym.";
-  if(/diet.*gain|gain.*diet|weight gain|muscle gain|bulk/.test(m)) return "Weight/muscle gain diet direction: calorie surplus with high protein, complex carbs (rice/oats/banana), healthy fats (nuts/ghee in moderation), frequent meals, protein around workouts. Consult a trainer for a personalized plan.";
-  if(/creatine/.test(m)) return "Creatine monohydrate is a common supplement — typical dose is 3-5g/day with plenty of water. A loading phase (~20g/day for 5-7 days) is optional, not required. Anyone with kidney issues should consult a doctor before use.";
+
+  const m =
+    msg.toLowerCase();
+
+  if(
+    /fee|price|500|700|cost|cardio.*rupee|rupees/
+      .test(m)
+  ){
+
+    return "Weight training is ₹500 and cardio training is ₹700. Please call the gym at 9778575418 to confirm the exact plan duration.";
+
+  }
+
+  if(
+    /location|address|where/
+      .test(m)
+  ){
+
+    return "We're located at Mankavil Garden, Bharanikkavu, Kattanam. Plus code: 5HG7+VJ9, Kerala 690503.";
+
+  }
+
+  if(/army/.test(m)){
+
+    return "Yes, special training for Indian Army aspirants is available. Call 9778575418 for details.";
+
+  }
+
+  if(/police/.test(m)){
+
+    return "Yes, special training for Kerala Police aspirants is also available.";
+
+  }
+
+  if(
+    /book|appointment|session/
+      .test(m)
+  ){
+
+    return "You can book directly using the Book Now button, or WhatsApp/call us at 9778575418.";
+
+  }
+
+  if(
+    /timing|time|open|hour/
+      .test(m)
+  ){
+
+    return "I don't have exact timing info yet — please call 9778575418 to confirm.";
+
+  }
+
+  if(/personal training/.test(m)){
+
+    return "Yes, personal training is available — individualized workouts with progress tracking.";
+
+  }
+
+  if(
+    /fat loss|weight loss/.test(m) &&
+    !/diet|plan/.test(m)
+  ){
+
+    return "Fat loss support is available — training, cardio, and nutrition guidance together. Results depend on the individual, so we don't guarantee specific outcomes.";
+
+  }
+
+  if(
+    /workout|training.*today|what.*do today|exercise.*today/
+      .test(m)
+  ){
+
+    return "Try this general split: Day 1 Chest & Triceps, Day 2 Back & Biceps, Day 3 Legs, Day 4 Shoulders & Abs, Day 5 Cardio/Functional, Day 6 Full Body/Weak Points, Day 7 Rest. This is a general template — a trainer at the gym can tailor it to you.";
+
+  }
+
+  if(
+    /diet.*loss|weight loss.*diet|loss.*diet/
+      .test(m)
+  ){
+
+    return "Weight loss diet direction: moderate calorie deficit, high protein (eggs/fish/dal/paneer), plenty of vegetables, controlled complex carbs, less fried food and sugary drinks, stay hydrated. For a personalized plan, consult a trainer at the gym.";
+
+  }
+
+  if(
+    /diet.*gain|gain.*diet|weight gain|muscle gain|bulk/
+      .test(m)
+  ){
+
+    return "Weight/muscle gain diet direction: calorie surplus with high protein, complex carbs (rice/oats/banana), healthy fats (nuts/ghee in moderation), frequent meals, protein around workouts. Consult a trainer for a personalized plan.";
+
+  }
+
+  if(/creatine/.test(m)){
+
+    return "Creatine monohydrate is a common supplement — typical dose is 3-5g/day with plenty of water. A loading phase (~20g/day for 5-7 days) is optional, not required. Anyone with kidney issues should consult a doctor before use.";
+
+  }
+
   return "I don't have that information yet. You can contact Grand Multi Gym directly at 9778575418.";
+
 }
 
-async function sendChat(){
-  const input=document.getElementById('chatInput');
-  const msg=input.value.trim();
-  if(!msg) return;
-  clearSuggestions();
-  pushMsg('user',msg);
-  input.value='';
-  const typingDiv=pushMsg('bot','<span class="typing"><span></span><span></span><span></span></span>');
 
-  if(state.aiProvider==='none' || !state.apiKey){
-    typingDiv.innerHTML = offlineReply(msg);
+/* ============ SEND CHAT ============ */
+
+async function sendChat(){
+
+  const input =
+    document.getElementById(
+      'chatInput'
+    );
+
+  const msg =
+    input.value.trim();
+
+  if(!msg) return;
+
+  clearSuggestions();
+
+  pushMsg(
+    'user',
+    msg
+  );
+
+  input.value = '';
+
+  const typingDiv =
+    pushMsg(
+      'bot',
+      '<span class="typing"><span></span><span></span><span></span></span>'
+    );
+
+
+  if(
+    state.aiProvider === 'none' ||
+    !state.apiKey
+  ){
+
+    typingDiv.innerHTML =
+      offlineReply(msg);
+
     return;
   }
 
+
   try{
-    const res = await fetch('https://api.groq.com/openai/v1/chat/completions',{
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json',
-        'Authorization':'Bearer '+state.apiKey
-      },
-      body:JSON.stringify({
-        model:'groq/compound',
-        messages:[
-          {role:'system',content:SYSTEM_PROMPT},
-          ...state.chatHistory.filter(h=>h.text.indexOf('typing')===-1).slice(-8).map(h=>({role:h.role==='user'?'user':'assistant',content:h.text})),
-          {role:'user',content:msg}
-        ],
-        max_tokens:500
-      })
-    });
+
+    const res =
+      await fetch(
+        'https://api.groq.com/openai/v1/chat/completions',
+        {
+          method:'POST',
+
+          headers:{
+            'Content-Type':'application/json',
+            'Authorization':
+              'Bearer ' + state.apiKey
+          },
+
+          body:JSON.stringify({
+
+            /*
+              Compound enables web search when needed.
+            */
+
+            model:'groq/compound',
+
+            messages:[
+              {
+                role:'system',
+                content:SYSTEM_PROMPT
+              },
+
+              /*
+                The current user message is already
+                present in state.chatHistory because
+                pushMsg('user', msg) was called above.
+              */
+
+              ...state.chatHistory
+                .filter(
+                  h =>
+                    h.text.indexOf('typing') === -1
+                )
+                .slice(-9)
+                .map(
+                  h => ({
+                    role:
+                      h.role === 'user'
+                        ? 'user'
+                        : 'assistant',
+                    content:h.text
+                  })
+                )
+            ],
+
+            /*
+              Compound can use web search and other
+              built-in capabilities as needed.
+            */
+
+            compound_custom:{
+              tools:{
+                enabled_tools:[
+                  'web_search',
+                  'visit_website'
+                ]
+              }
+            },
+
+            max_completion_tokens:600
+
+          })
+        }
+      );
+
+
     if(!res.ok){
-      const errBody = await res.json().catch(()=>({}));
-      const reason = errBody?.error?.message || res.statusText || 'Unknown error';
-      console.warn('Groq API error', res.status, errBody);
-      typingDiv.innerHTML = offlineReply(msg) + `<br><span style="opacity:.6;font-size:11px;">(Live AI failed — ${res.status}: ${reason.replace(/</g,'&lt;')})</span>`;
+
+      const errBody =
+        await res.json()
+          .catch(()=>({}));
+
+      const reason =
+        errBody?.error?.message ||
+        res.statusText ||
+        'Unknown error';
+
+      console.warn(
+        'AI API error',
+        res.status,
+        errBody
+      );
+
+      typingDiv.innerHTML =
+        offlineReply(msg) +
+        `<br>
+        <span style="opacity:.6;font-size:11px;">
+          (Live AI failed — ${res.status}: ${
+            String(reason)
+              .replace(/</g,'&lt;')
+          })
+        </span>`;
+
       return;
     }
-    const data = await res.json();
-    const reply = data.choices?.[0]?.message?.content || offlineReply(msg);
-    typingDiv.innerHTML = reply.replace(/\n/g,'<br>');
+
+
+    const data =
+      await res.json();
+
+
+    const reply =
+      data.choices?.[0]?.message?.content ||
+      offlineReply(msg);
+
+
+    typingDiv.innerHTML =
+      reply.replace(
+        /\n/g,
+        '<br>'
+      );
+
+
   }catch(err){
-    console.warn('Chat fetch failed:', err);
-    typingDiv.innerHTML = offlineReply(msg) + `<br><span style="opacity:.6;font-size:11px;">(Live AI failed — network error: ${String(err.message||err).replace(/</g,'&lt;')})</span>`;
+
+    console.warn(
+      'Chat fetch failed:',
+      err
+    );
+
+    typingDiv.innerHTML =
+      offlineReply(msg) +
+      `<br>
+      <span style="opacity:.6;font-size:11px;">
+        (Live AI failed — network error: ${
+          String(
+            err.message || err
+          ).replace(/</g,'&lt;')
+        })
+      </span>`;
+
   }
+
 }
 </script>
+
 </body>
 </html>
