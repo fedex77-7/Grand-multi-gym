@@ -862,7 +862,7 @@ const SYSTEM_PROMPT = `You are "Grand Multi AI", a fitness-focused assistant for
 
 Your main strength is fitness: today's workout ideas, weekly training splits, diet/nutrition direction for fat loss or muscle gain, supplement basics like creatine, recovery, and general exercise form guidance. Whenever a question is fitness/health/nutrition-adjacent, go deeper and be genuinely useful — give concrete, practical suggestions (specific exercises, rep ranges, meal ideas) rather than vague generalities, while still avoiding personal medical prescriptions.
 
-You can also answer completely unrelated general questions (facts, translations, advice, anything) using your own knowledge, like a normal helpful assistant — never refuse a question just because it isn't about fitness or the gym. You do not have live internet/web search — you answer from what you already know, so for anything that changes daily (news, scores, prices, "right now" facts) say plainly that you can't check that live.
+You can also answer completely unrelated general questions (facts, translations, advice, anything) using your own knowledge, like a normal helpful assistant — never refuse a question just because it isn't about fitness or the gym. You have access to real-time web search for anything that needs current information (news, prices, "what's happening now", recent events) — use it naturally when a question calls for up-to-date facts.
 
 For anything specifically about Grand Multi Gym itself (fees, services, rules, location, programs), only use the knowledge base below — never invent hours, exact membership duration, trainer certifications, discounts, or facilities that aren't listed. If a gym-specific detail isn't in the knowledge base, say clearly: "I don't have that information yet. You can contact Grand Multi Gym directly at 9778575418." Frame any workout-split, diet-direction, or creatine guidance as general information, not a personal prescription, and suggest a trainer at the gym or a doctor for anything specific to the person's health or goals.
 
@@ -909,19 +909,20 @@ async function sendChat(){
         'Authorization':'Bearer '+state.apiKey
       },
       body:JSON.stringify({
-        model:'llama-3.3-70b-versatile',
+        model:'groq/compound',
         messages:[
           {role:'system',content:SYSTEM_PROMPT},
           ...state.chatHistory.filter(h=>h.text.indexOf('typing')===-1).slice(-8).map(h=>({role:h.role==='user'?'user':'assistant',content:h.text})),
           {role:'user',content:msg}
         ],
-        max_tokens:400
+        max_tokens:500
       })
     });
     if(!res.ok){
       const errBody = await res.json().catch(()=>({}));
+      const reason = errBody?.error?.message || res.statusText || 'Unknown error';
       console.warn('Groq API error', res.status, errBody);
-      typingDiv.innerHTML = offlineReply(msg) + '<br><span style="opacity:.55;font-size:11px;">(Live AI reply failed — open the browser console for the exact error. Common causes: wrong/expired API key, or this page being viewed from a preview instead of its real hosted address.)</span>';
+      typingDiv.innerHTML = offlineReply(msg) + `<br><span style="opacity:.6;font-size:11px;">(Live AI failed — ${res.status}: ${reason.replace(/</g,'&lt;')})</span>`;
       return;
     }
     const data = await res.json();
@@ -929,7 +930,7 @@ async function sendChat(){
     typingDiv.innerHTML = reply.replace(/\n/g,'<br>');
   }catch(err){
     console.warn('Chat fetch failed:', err);
-    typingDiv.innerHTML = offlineReply(msg) + '<br><span style="opacity:.55;font-size:11px;">(Live AI reply failed — open the browser console for the exact error. Common causes: wrong/expired API key, or this page being viewed from a preview instead of its real hosted address.)</span>';
+    typingDiv.innerHTML = offlineReply(msg) + `<br><span style="opacity:.6;font-size:11px;">(Live AI failed — network error: ${String(err.message||err).replace(/</g,'&lt;')})</span>`;
   }
 }
 </script>
