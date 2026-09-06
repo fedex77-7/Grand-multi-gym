@@ -596,8 +596,8 @@ footer{background:#050403;border-top:1px solid var(--line);padding:64px 0 28px;}
     <p class="sub">Reach us directly — pick whichever's easiest.</p>
     <div style="display:flex;flex-direction:column;gap:12px;">
       <a href="tel:+919778575418" class="btn btn-gold" style="justify-content:center;">📞 Call Now</a>
-      <a href="https://instagram.com/grandmultigymm" target="_blank" rel="noopener" class="btn btn-line" style="justify-content:center;">📷 DM on Instagram</a>
-      <a href="#" onclick="waLink('booking');return false;" class="btn btn-wa" style="justify-content:center;">💬 Message on WhatsApp</a>
+      <a href="#" onclick="bookingIgLink();return false;" class="btn btn-line" style="justify-content:center;">📷 DM on Instagram</a>
+      <a href="#" onclick="bookingWaLink();return false;" class="btn btn-wa" style="justify-content:center;">💬 Message on WhatsApp</a>
     </div>
   </div>
 </div>
@@ -722,6 +722,29 @@ function waLink(type){
 }
 function openDirections(){
   window.open('https://www.google.com/maps/search/?api=1&query=5HG7%2BVJ9+Mankavil+Garden+Bharanikkavu+Kattanam+Kerala+690503','_blank');
+}
+
+/* ============ BOOK NOW MODAL — WhatsApp & Instagram messaging ============ */
+const BOOKING_MESSAGE = "Hello Grand Multi Gym 👋\n\nI'm interested in joining your gym. Could you please tell me how I can join and share the details about the fees, membership options, timings, and other joining details?\n\nThanks! 😊";
+
+function bookingWaLink(){
+  window.open(`https://wa.me/919778575418?text=${encodeURIComponent(BOOKING_MESSAGE)}`, '_blank');
+}
+
+function bookingIgLink(){
+  // ig.me is Instagram's own official link format for opening a DM composer with an account
+  // (the same mechanism Instagram/Facebook use for "Message" buttons). It is handled by the
+  // OS: opens the Instagram app directly if installed, otherwise falls back to the web profile —
+  // no custom/unofficial URL scheme is used.
+  const igLink = 'https://ig.me/m/grandmultigymm';
+  // Instagram has no supported way to pre-fill DM text from a website link, so we copy the
+  // message to the clipboard (where supported) and let the customer paste it in one tap.
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(BOOKING_MESSAGE).then(()=>{
+      toast('Message copied — just paste it into the Instagram DM');
+    }).catch(()=>{ /* clipboard blocked — still proceed to open Instagram */ });
+  }
+  window.open(igLink, '_blank');
 }
 function toggleMobileMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
 function toast(msg){
