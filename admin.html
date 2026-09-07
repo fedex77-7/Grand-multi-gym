@@ -3,228 +3,465 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Grand Multi GYM — Admin</title>
+<title>Grand Multi Gym — Admin Dashboard</title>
+<meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --black:#050505;
-  --panel:rgba(17,17,17,.72);
-  --gold:#f5b900;
-  --gold2:#ffd75a;
-  --muted:#9b9b9b;
-  --white:#f8f8f6;
-  --line:rgba(255,255,255,.09);
+ --bg:#050505;--panel:#11110f;--panel2:#171613;--gold:#f5b900;--gold2:#ffd75a;
+ --text:#f7f5ef;--muted:#98948b;--line:rgba(245,185,0,.15);--danger:#ff6262;--ok:#54d88a;
+ --shadow:0 22px 70px rgba(0,0,0,.42);--r:20px;--rs:13px;
 }
-*{box-sizing:border-box}
-html,body{margin:0;min-height:100%;font-family:Manrope,sans-serif}
-body{
-  min-height:100vh;
-  color:var(--white);
-  display:grid;
-  place-items:center;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at 50% 30%,rgba(245,185,0,.13),transparent 28%),
-    radial-gradient(circle at 15% 85%,rgba(245,185,0,.08),transparent 30%),
-    #050505;
-}
-body:before{
-  content:"";
-  position:fixed;inset:0;pointer-events:none;opacity:.28;
-  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
-                   linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
-  background-size:42px 42px;
-}
-.login{
-  width:min(410px,calc(100% - 32px));
-  position:relative;
-  padding:42px 34px 27px;
-  border:1px solid rgba(245,185,0,.18);
-  border-radius:25px;
-  background:linear-gradient(145deg,rgba(25,25,25,.82),rgba(8,8,8,.68));
-  box-shadow:0 30px 90px rgba(0,0,0,.65),0 0 45px rgba(245,185,0,.06);
-  backdrop-filter:blur(24px);
-  -webkit-backdrop-filter:blur(24px);
-}
-.logo-ring{
-  width:72px;height:72px;margin:0 auto 22px;
-  border-radius:50%;
-  display:grid;place-items:center;
-  border:1px solid rgba(245,185,0,.65);
-  box-shadow:0 0 0 6px rgba(245,185,0,.045),0 0 35px rgba(245,185,0,.15);
-  overflow:hidden;
-}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:
+radial-gradient(circle at 8% 0,rgba(245,185,0,.12),transparent 30%),
+radial-gradient(circle at 95% 12%,rgba(245,185,0,.07),transparent 28%),var(--bg);
+color:var(--text);font-family:Manrope,sans-serif;min-height:100vh}
+button,input,textarea,select{font:inherit}button{cursor:pointer}
+h1,h2,h3,h4{font-family:Anton,sans-serif;font-weight:400;margin:0}
+a{color:inherit;text-decoration:none}
+.glass{background:linear-gradient(145deg,rgba(25,24,21,.82),rgba(9,9,8,.68));border:1px solid var(--line);box-shadow:var(--shadow);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.login-wrap{min-height:100vh;display:grid;place-items:center;padding:18px}
+.login-box{width:min(420px,100%);padding:40px 32px 25px;border-radius:25px;text-align:center}
+.logo-ring{width:72px;height:72px;border-radius:50%;margin:0 auto 20px;overflow:hidden;border:1px solid rgba(245,185,0,.7);box-shadow:0 0 0 6px rgba(245,185,0,.04),0 0 34px rgba(245,185,0,.15)}
 .logo-ring img{width:100%;height:100%;object-fit:cover}
-.brand{
-  text-align:center;
-  font-family:Anton,sans-serif;
-  font-size:clamp(52px,15vw,76px);
-  line-height:.88;
-  letter-spacing:.5px;
-  text-transform:uppercase;
-  color:var(--gold);
-  text-shadow:0 0 24px rgba(245,185,0,.12);
-}
-.subtitle{
-  text-align:center;
-  margin:9px 0 28px;
-  font-size:13px;
-  font-weight:800;
-  letter-spacing:.24em;
-  color:#d5d5d5;
-  text-transform:uppercase;
-}
-.field{
-  position:relative;
-  margin-bottom:15px;
-}
-.field input{
-  width:100%;height:52px;
-  border:1px solid var(--line);
-  border-radius:14px;
-  outline:none;
-  color:var(--white);
-  background:rgba(0,0,0,.42);
-  padding:0 48px 0 16px;
-  font:600 14px Manrope,sans-serif;
-  transition:.2s ease;
-}
-.field input:focus{
-  border-color:rgba(245,185,0,.75);
-  box-shadow:0 0 0 4px rgba(245,185,0,.07);
-}
-.eye{
-  position:absolute;right:7px;top:50%;
-  transform:translateY(-50%);
-  width:38px;height:38px;
-  border:0;border-radius:11px;
-  background:transparent;color:#8d8d8d;
-  cursor:pointer;font-size:15px;
-  transition:.18s ease;
-}
-.eye:hover{background:rgba(245,185,0,.08);color:var(--gold)}
-.remember{
-  display:flex;align-items:center;justify-content:center;
-  gap:9px;margin:5px 0 20px;
-  color:#999;font-size:11.5px;font-weight:600;
-  cursor:pointer;user-select:none;
-}
-.switch{
-  width:30px;height:17px;position:relative;display:inline-block;flex:none;
-}
-.switch input{opacity:0;width:0;height:0}
-.slider{
-  position:absolute;inset:0;
-  border-radius:30px;
-  background:#303030;
-  border:1px solid #454545;
-  transition:.25s ease;
-}
-.slider:before{
-  content:"";position:absolute;
-  width:11px;height:11px;left:2px;top:2px;
-  border-radius:50%;background:#aaa;
-  transition:.25s cubic-bezier(.4,1.4,.6,1);
-}
-.switch input:checked + .slider{
-  background:rgba(245,185,0,.28);
-  border-color:rgba(245,185,0,.7);
-}
-.switch input:checked + .slider:before{
-  transform:translateX(13px);
-  background:var(--gold);
-  box-shadow:0 0 10px rgba(245,185,0,.55);
-}
-.login-btn{
-  width:100%;height:50px;
-  border:0;border-radius:14px;
-  cursor:pointer;
-  color:#111;
-  background:linear-gradient(135deg,var(--gold),var(--gold2));
-  font:800 13px Manrope,sans-serif;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  box-shadow:0 12px 28px rgba(245,185,0,.16);
-  transition:transform .16s ease,box-shadow .2s ease,filter .2s ease;
-}
-.login-btn:hover{
-  transform:translateY(-1px);
-  filter:brightness(1.04);
-  box-shadow:0 16px 34px rgba(245,185,0,.22);
-}
-.login-btn:active{transform:translateY(1px) scale(.99)}
-.footer{
-  margin-top:24px;text-align:center;
-  color:#555;font-size:9.5px;font-weight:600;
-  letter-spacing:.08em;
-}
-.footer span{color:#6d6d6d}
-.demo-msg{
-  display:none;text-align:center;margin:11px 0 -2px;
-  color:#ff6464;font-size:11px;font-weight:700;
-}
-@media(max-width:480px){
-  .login{padding:34px 24px 23px;border-radius:22px}
-  .brand{font-size:56px}
-  .logo-ring{width:64px;height:64px}
-}
+.brand{font:400 clamp(52px,15vw,76px)/.88 Anton,sans-serif;color:var(--gold);letter-spacing:.5px}
+.login-sub{margin:9px 0 27px;font-size:13px;font-weight:800;letter-spacing:.24em}
+.login-field{position:relative}.login-field input{width:100%;height:52px;border:1px solid var(--line);border-radius:14px;background:#0008;color:#fff;padding:0 48px 0 16px;outline:none}.login-field input:focus{border-color:#f5b900aa;box-shadow:0 0 0 4px #f5b90012}
+.eye{position:absolute;right:7px;top:7px;width:38px;height:38px;border:0;background:none;color:#888;border-radius:11px}.eye:hover{background:#f5b90012;color:var(--gold)}
+.remember{display:flex;justify-content:center;align-items:center;gap:9px;margin:14px 0 20px;color:#999;font-size:11.5px;font-weight:600}
+.switch{width:30px;height:17px;position:relative}.switch input{opacity:0;width:0;height:0}.slider{position:absolute;inset:0;background:#303030;border:1px solid #454545;border-radius:30px;transition:.25s}.slider:before{content:"";position:absolute;width:11px;height:11px;left:2px;top:2px;background:#aaa;border-radius:50%;transition:.25s cubic-bezier(.4,1.4,.6,1)}.switch input:checked+.slider{background:#f5b90038;border-color:#f5b900aa}.switch input:checked+.slider:before{transform:translateX(13px);background:var(--gold);box-shadow:0 0 10px #f5b90088}
+.btn{border:0;border-radius:12px;padding:11px 15px;font-weight:800;font-size:12px;transition:.18s}.btn:active{transform:scale(.98)}.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#111;box-shadow:0 10px 28px #f5b90020}.btn-gold:hover{transform:translateY(-1px)}.btn-line{background:#f5b9000d;border:1px solid #f5b90066;color:var(--gold)}.btn-ghost{background:#ffffff06;border:1px solid var(--line);color:#ddd}.btn-danger{background:#ff62620e;border:1px solid #ff626255;color:#ff8585}.login-btn{width:100%;height:50px;font-size:13px;letter-spacing:.07em;text-transform:uppercase}
+.footer{margin-top:23px;color:#555;font-size:9.5px;letter-spacing:.08em}.err-msg{display:none;color:#ff7474;font-size:11px;font-weight:800;margin-top:10px}
+
+.app{display:none}.shell{display:flex;min-height:100vh}
+.sidebar{width:245px;position:fixed;inset:0 auto 0 0;padding:22px 15px;background:#0b0b0ae8;border-right:1px solid var(--line);backdrop-filter:blur(18px);z-index:30}
+.side-brand{display:flex;align-items:center;gap:10px;padding:7px 9px 22px}.side-brand img{width:40px;height:40px;border-radius:50%;object-fit:cover;border:1px solid #f5b90066}.side-brand strong{font-size:12px}.side-brand small{display:block;color:var(--muted);font-size:9px;margin-top:2px}
+.nav{display:grid;gap:7px}.nav button{display:flex;align-items:center;gap:11px;width:100%;padding:12px 13px;border:1px solid transparent;background:transparent;color:#aaa;border-radius:13px;text-align:left;font-weight:800;font-size:12px}.nav button:hover,.nav button.active{color:var(--gold);background:#f5b9000d;border-color:#f5b90020}.side-bottom{position:absolute;left:15px;right:15px;bottom:18px;display:grid;gap:8px}
+.main{margin-left:245px;width:calc(100% - 245px);padding-bottom:100px}.topbar{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:16px 26px;background:#090909d9;border-bottom:1px solid var(--line);backdrop-filter:blur(18px)}.top-title{font-size:20px}.top-title span{color:var(--gold)}.top-actions{display:flex;gap:8px;align-items:center}.dirty{font-size:10px;color:var(--gold);display:none}.content{max-width:1450px;margin:auto;padding:26px}
+.section{display:none}.section.active{display:block}.hero{padding:25px;border-radius:22px;margin-bottom:17px;background:linear-gradient(135deg,#171510dd,#0a0a09cc);border:1px solid #f5b90022}.eyebrow{color:var(--gold);font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}.hero h1{font-size:42px;margin:5px 0 7px}.hero p{margin:0;color:var(--muted);font-size:12px;max-width:760px;line-height:1.7}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:17px}.stat{padding:18px;border-radius:17px}.stat b{font:400 31px Anton;color:var(--gold);display:block}.stat span{font-size:10px;color:#999;text-transform:uppercase;letter-spacing:.06em}.stat small{display:block;color:#666;margin-top:6px;font-size:9px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{padding:20px;border-radius:19px;margin-bottom:16px}.card-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.card-title h3{font-size:18px}.muted{color:var(--muted);font-size:11px}.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.quick .btn{padding:14px 9px}
+.list{display:grid;gap:8px}.mini{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 12px;background:#ffffff04;border:1px solid #ffffff08;border-radius:12px}.mini strong{font-size:11px}.mini small{display:block;color:#777;font-size:9px;margin-top:2px}.badge{display:inline-flex;align-items:center;padding:4px 8px;border-radius:99px;font-size:9px;font-weight:800;white-space:nowrap}.badge.gold{background:#f5b90016;color:var(--gold);border:1px solid #f5b90030}.badge.green{background:#54d88a12;color:#69df99;border:1px solid #54d88a30}.badge.red{background:#ff626212;color:#ff8585;border:1px solid #ff626230}.badge.gray{background:#fff1;border:1px solid #fff2;color:#aaa}
+
+.toolbar{display:grid;grid-template-columns:1.4fr repeat(3,auto);gap:8px;margin-bottom:14px}.input,.select,.textarea{width:100%;background:#0008;color:#eee;border:1px solid #ffffff10;border-radius:11px;padding:11px 12px;outline:none;font-size:11px}.input:focus,.select:focus,.textarea:focus{border-color:#f5b90077}.members-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.member{padding:16px;border-radius:17px}.member-head{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}.member-name{font-size:15px;font-weight:800}.member-phone{font-size:10px;color:#777;margin-top:3px}.member-info{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:13px 0}.info{background:#0005;border:1px solid #fff1;border-radius:10px;padding:8px}.info small{display:block;color:#666;font-size:8px;text-transform:uppercase}.info b{font-size:10px}.member-actions{display:flex;flex-wrap:wrap;gap:6px}.member-actions .btn{padding:8px 9px;font-size:9px}.empty{padding:30px;text-align:center;color:#666;font-size:11px;border:1px dashed #ffffff12;border-radius:15px}
+
+.content-card{padding:20px;border-radius:19px;margin-bottom:16px}.section-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:15px}.section-head h2{font-size:21px}.field{margin-bottom:12px}.field label{display:block;color:#89857d;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px}.row{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;margin-bottom:8px;align-items:center}.row.single{grid-template-columns:1fr auto}.content-card input,.content-card textarea,.content-card select{background:#0008;color:#eee;border:1px solid #ffffff10;border-radius:10px;padding:10px;font-size:11px;width:100%;outline:none}.content-card input:focus,.content-card textarea:focus,.content-card select:focus{border-color:#f5b90077}.delete{background:none;color:#ff7777;border:1px solid #ff555533;border-radius:9px;padding:8px 10px;font-size:10px}
+.bottom{display:none}.savebar{position:fixed;left:245px;right:0;bottom:0;z-index:25;display:flex;justify-content:center;gap:9px;padding:12px;background:#0b0b0bdd;border-top:1px solid var(--line);backdrop-filter:blur(18px)}#toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:100;color:#111;background:var(--gold);padding:10px 17px;border-radius:10px;font-size:11px;font-weight:800;display:none;box-shadow:0 10px 30px #0008}
+.modal{position:fixed;inset:0;background:#000b;z-index:80;display:none;place-items:center;padding:18px}.modal-box{width:min(620px,100%);max-height:92vh;overflow:auto;padding:22px;border-radius:20px}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:17px}.modal-head h2{font-size:22px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.full{grid-column:1/-1}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}
+.file-input{display:none}
+
+@media(max-width:1050px){.members-grid{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){
+ .sidebar{display:none}.main{margin-left:0;width:100%;padding-bottom:86px}.topbar{padding:13px 15px}.top-actions .view{display:none}.content{padding:15px}.top-title{font-size:16px}.hero{padding:20px}.hero h1{font-size:32px}.grid2{grid-template-columns:1fr}.quick{grid-template-columns:1fr 1fr}.toolbar{grid-template-columns:1fr 1fr}.toolbar .search{grid-column:1/-1}.members-grid{grid-template-columns:1fr}.savebar{left:0;bottom:58px;padding:8px}.bottom{display:grid;position:fixed;left:0;right:0;bottom:0;height:60px;z-index:50;grid-template-columns:repeat(4,1fr);background:#0b0b0bf2;border-top:1px solid var(--line);backdrop-filter:blur(18px)}.bottom button{border:0;background:none;color:#777;font-size:9px;font-weight:800}.bottom button.active{color:var(--gold)}.bottom span{display:block;font-size:17px;margin-bottom:2px}.form-grid{grid-template-columns:1fr}.full{grid-column:auto}.row{grid-template-columns:1fr}.row.single{grid-template-columns:1fr}.login-box{padding:34px 24px 23px}.brand{font-size:56px}}
 </style>
 </head>
 <body>
-<main class="login">
-  <div class="logo-ring">
-    <img src="assets/logo.jpg" alt="Grand Multi Gym" onerror="this.style.display='none'">
-  </div>
 
+<div id="loginScreen" class="login-wrap">
+ <div class="login-box glass">
+  <div class="logo-ring"><img src="assets/logo.jpg" alt="Grand Multi Gym" onerror="this.style.display='none'"></div>
   <div class="brand">GRAND MULTI GYM</div>
-  <div class="subtitle">ADMIN</div>
-
-  <div class="field">
-    <input id="pass" type="password" placeholder="Enter admin password"
-           autocomplete="current-password"
-           onkeydown="if(event.key==='Enter')login()">
-    <button class="eye" type="button" onclick="togglePass()" aria-label="Show password">◉</button>
+  <div class="login-sub">ADMIN</div>
+  <div class="login-field">
+   <input id="pass" type="password" placeholder="Enter admin password" autocomplete="current-password" onkeydown="if(event.key==='Enter')login()">
+   <button class="eye" onclick="togglePass()" type="button">◉</button>
   </div>
+  <label class="remember"><span class="switch"><input id="rememberMe" type="checkbox" checked><span class="slider"></span></span>Remember Me on this Device</label>
+  <button class="btn btn-gold login-btn" onclick="login()">Login to Dashboard</button>
+  <div id="loginError" class="err-msg">Incorrect password</div>
+  <div class="footer">© 2026 Grand Multi Gym · Admin Panel</div>
+ </div>
+</div>
 
-  <label class="remember">
-    <span class="switch">
-      <input id="rememberMe" type="checkbox" checked>
-      <span class="slider"></span>
-    </span>
-    <span>Remember Me on this Device</span>
-  </label>
+<div id="app" class="app">
+ <div class="shell">
+  <aside class="sidebar">
+   <div class="side-brand"><img src="assets/logo.jpg" alt=""><div><strong>GRAND MULTI</strong><small>ADMIN DASHBOARD</small></div></div>
+   <div class="nav">
+    <button data-nav="dashboard" class="active" onclick="showSection('dashboard')">⌂ <span>Dashboard</span></button>
+    <button data-nav="members" onclick="showSection('members')">♙ <span>Members</span></button>
+    <button data-nav="content" onclick="showSection('content')">▣ <span>Website Content</span></button>
+    <button onclick="document.getElementById('importFile').click()">⇧ <span>Import Members</span></button>
+    <button onclick="exportMembers()">⇩ <span>Export Members</span></button>
+   </div>
+   <div class="side-bottom">
+    <a class="btn btn-ghost" href="index.html" target="_blank">View Website ↗</a>
+    <button class="btn btn-ghost" onclick="logout()">Logout</button>
+   </div>
+  </aside>
 
-  <button class="login-btn" onclick="login()">Login to Dashboard</button>
-  <div id="msg" class="demo-msg">Incorrect password</div>
+  <main class="main">
+   <header class="topbar">
+    <div class="top-title">Grand Multi <span>Admin</span></div>
+    <div class="top-actions">
+     <span id="dirty" class="dirty">● Unsaved changes</span>
+     <button class="btn btn-ghost view" onclick="downloadConfig()">Backup</button>
+     <button class="btn btn-gold" onclick="saveToFirestore()">Save</button>
+    </div>
+   </header>
 
-  <div class="footer">© 2026 <span>Grand Multi Gym</span> · Admin Panel</div>
-</main>
+   <div class="content">
+    <section id="dashboardSection" class="section active">
+     <div class="hero">
+      <div class="eyebrow">Gym Management System</div>
+      <h1>CONTROL. TRACK. GROW.</h1>
+      <p>Manage members, monthly payments, attendance and website content from one clean dashboard.</p>
+     </div>
 
+     <div class="stats">
+      <div class="stat glass"><b id="sTotal">0</b><span>Total Admissions</span><small>All member records</small></div>
+      <div class="stat glass"><b id="sNew">0</b><span>New This Month</span><small>Current month admissions</small></div>
+      <div class="stat glass"><b id="sActive">0</b><span>Active Members</span><small>Currently active</small></div>
+      <div class="stat glass"><b id="sStopped">0</b><span>Stopped</span><small>Membership stopped</small></div>
+      <div class="stat glass"><b id="sPaid">0</b><span>Paid This Month</span><small>Current month payments</small></div>
+      <div class="stat glass"><b id="sDue">0</b><span>Due This Month</span><small>Payment needs attention</small></div>
+      <div class="stat glass"><b id="sAbsent">0</b><span>Absent Today</span><small>Marked absent today</small></div>
+      <div class="stat glass"><b id="sCardio">0</b><span>Cardio</span><small>Cardio plan members</small></div>
+     </div>
+
+     <div class="card glass">
+      <div class="card-title"><h3>Quick Actions</h3><span class="muted">Fast management</span></div>
+      <div class="quick">
+       <button class="btn btn-gold" onclick="openMemberModal()">＋ Add Member</button>
+       <button class="btn btn-line" onclick="showSection('members');setMemberFilter('due')">View Due</button>
+       <button class="btn btn-line" onclick="showSection('members');setMemberFilter('absent')">Absent Today</button>
+       <button class="btn btn-ghost" onclick="exportMembers()">Export CSV</button>
+      </div>
+     </div>
+
+     <div class="grid2">
+      <div class="card glass"><div class="card-title"><h3>Due This Month</h3><span class="badge red" id="dueBadge">0</span></div><div id="dueList" class="list"></div></div>
+      <div class="card glass"><div class="card-title"><h3>Absent Today</h3><span class="badge red" id="absentBadge">0</span></div><div id="absentList" class="list"></div></div>
+      <div class="card glass"><div class="card-title"><h3>Recent Admissions</h3><span class="muted">Latest first</span></div><div id="recentList" class="list"></div></div>
+      <div class="card glass"><div class="card-title"><h3>Stopped Members</h3><span class="badge gray" id="stoppedBadge">0</span></div><div id="stoppedList" class="list"></div></div>
+     </div>
+    </section>
+
+    <section id="membersSection" class="section">
+     <div class="section-head"><div><h2>Members</h2><div class="muted">Manage admissions, plans, payments and attendance.</div></div><button class="btn btn-gold" onclick="openMemberModal()">＋ Add Member</button></div>
+     <div class="card glass">
+      <div class="toolbar">
+       <input id="memberSearch" class="input search" placeholder="Search name or phone…" oninput="renderMembers()">
+       <select id="memberFilter" class="select" onchange="renderMembers()"><option value="all">All Members</option><option value="active">Active</option><option value="due">Due</option><option value="paid">Paid</option><option value="cardio">Cardio</option><option value="weight">Weight Training</option><option value="stopped">Stopped</option><option value="absent">Absent Today</option></select>
+       <select id="memberSort" class="select" onchange="renderMembers()"><option value="newest">Newest</option><option value="dueDate">Due Date</option><option value="name">Name</option></select>
+       <button class="btn btn-ghost" onclick="document.getElementById('importFile').click()">Import</button>
+      </div>
+      <div id="membersGrid" class="members-grid"></div>
+     </div>
+    </section>
+
+    <section id="contentSection" class="section">
+     <div class="section-head"><div><h2>Website Content</h2><div class="muted">Existing website management tools are preserved.</div></div></div>
+
+     <div class="content-card glass">
+      <div class="section-head"><h2>Hero Text</h2></div>
+      <div class="field"><label>Eyebrow line</label><input id="h_eyebrow"></div>
+      <div class="field"><label>Subheadline</label><textarea id="h_sub" rows="3"></textarea></div>
+     </div>
+
+     <div class="content-card glass">
+      <div class="section-head"><h2>Pricing Plans</h2><button class="btn btn-line" onclick="addPricing()">＋ Add Plan</button></div>
+      <div id="priceList"></div>
+     </div>
+
+     <div class="content-card glass">
+      <div class="section-head"><h2>Gym Rules</h2><button class="btn btn-line" onclick="addRule()">＋ Add Rule</button></div>
+      <div id="rulesList"></div>
+     </div>
+
+     <div class="content-card glass">
+      <div class="section-head"><h2>FAQs</h2><button class="btn btn-line" onclick="addFaq()">＋ Add FAQ</button></div>
+      <div id="faqList"></div>
+     </div>
+
+     <div class="content-card glass">
+      <div class="section-head"><h2>Reviews</h2><button class="btn btn-line" onclick="addReview()">＋ Add Review</button></div>
+      <div id="reviewList"></div>
+      <div class="muted">Tick Demo for placeholder reviews so the public site can label them clearly.</div>
+     </div>
+    </section>
+   </div>
+  </main>
+ </div>
+
+ <div class="savebar">
+  <button class="btn btn-gold" onclick="saveToFirestore()">💾 Save Changes</button>
+  <button class="btn btn-ghost" onclick="downloadConfig()">⬇ Backup JSON</button>
+  <span id="saveStatus" class="muted"></span>
+ </div>
+
+ <nav class="bottom">
+  <button data-bottom="dashboard" class="active" onclick="showSection('dashboard')"><span>⌂</span>Dashboard</button>
+  <button data-bottom="members" onclick="showSection('members')"><span>♙</span>Members</button>
+  <button data-bottom="content" onclick="showSection('content')"><span>▣</span>Website</button>
+  <button onclick="saveToFirestore()"><span>✓</span>Save</button>
+ </nav>
+</div>
+
+<input id="importFile" class="file-input" type="file" accept=".csv,text/csv" onchange="importMembers(event)">
+<div id="toast"></div>
+
+<div id="memberModal" class="modal">
+ <div class="modal-box glass">
+  <div class="modal-head"><h2 id="modalTitle">Add Member</h2><button class="btn btn-ghost" onclick="closeMemberModal()">✕</button></div>
+  <div class="form-grid">
+   <div class="field"><label>Full Name *</label><input id="m_name" class="input"></div>
+   <div class="field"><label>Phone</label><input id="m_phone" class="input" inputmode="tel"></div>
+   <div class="field"><label>Plan *</label><select id="m_plan" class="select"><option value="weight">Weight Training</option><option value="cardio">Cardio Training</option></select></div>
+   <div class="field"><label>Status</label><select id="m_status" class="select"><option value="active">Active</option><option value="stopped">Stopped</option></select></div>
+   <div class="field"><label>Admission Date</label><input id="m_admission" class="input" type="date"></div>
+   <div class="field"><label>Due Date</label><input id="m_due" class="input" type="date"></div>
+   <div class="field full"><label>Notes</label><textarea id="m_notes" class="textarea" rows="3"></textarea></div>
+  </div>
+  <div class="modal-actions"><button class="btn btn-ghost" onclick="closeMemberModal()">Cancel</button><button class="btn btn-gold" onclick="saveMember()">Save Member</button></div>
+ </div>
+</div>
+
+<div id="editId" style="display:none"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
 <script>
-const ADMIN_PASSWORD = 'grandmultigym@1234';
+const firebaseConfig={
+ apiKey:"AIzaSyAX1iDS9IEI6EugPpgjXOGOOr_2t5w9mE0",
+ authDomain:"grand-muilt-gym.firebaseapp.com",
+ projectId:"grand-muilt-gym",
+ storageBucket:"grand-muilt-gym.firebasestorage.app",
+ messagingSenderId:"437245103225",
+ appId:"1:437245103225:web:ee1acc451091ad1ca9d8a8"
+};
+let db=null;
+try{firebase.initializeApp(firebaseConfig);db=firebase.firestore()}catch(e){console.warn(e)}
 
-function togglePass(){
-  const input=document.getElementById('pass');
-  input.type=input.type==='password'?'text':'password';
+const ADMIN_PASSWORD='grandmultigym@1234';
+const REMEMBER_KEY='gmg_admin_logged_in';
+const PLAN_LABELS={weight:'Weight Training',cardio:'Cardio Training'};
+
+const defaultState={
+ hero:{eyebrow:'Kattanam, Kerala — Since 2003',sub:'Discipline today. Strength tomorrow. Weight training, cardio, personal coaching, and special training for Army & Kerala Police aspirants — for men and women.'},
+ pricing:[
+  {name:'General Gym / Weight Training',price:500,duration:'Ask us (duration to be confirmed)',desc:'Full access to weight training equipment and floor coaching.',popular:true},
+  {name:'Cardio Training',price:700,duration:'Ask us (duration to be confirmed)',desc:'Cardio conditioning sessions with equipment access.',popular:false}
+ ],
+ rules:['Wear proper shoes','Bring your towel & water bottle','Use equipment properly','Wipe down equipment after use','Maintain silence & respect others','Be consistent, be disciplined'],
+ faq:[
+  {q:'What are the gym fees?',a:'Weight training is ₹500 and cardio training is ₹700. Contact us for the exact duration these cover.'},
+  {q:'Where is Grand Multi Gym located?',a:'Mankavil Garden, Bharanikkavu, Kattanam, Kerala 690503.'},
+  {q:'Do you provide personal training?',a:'Yes, personal training is available.'},
+  {q:'Do you provide Army or Kerala Police special training?',a:'Yes, we offer special training for Indian Army and Kerala Police aspirants.'},
+  {q:'Do you train both men and women?',a:'Yes, everyone trains here.'},
+  {q:'How can I book?',a:'Use the Book Now button, WhatsApp us, or call 9778575418.'}
+ ],
+ reviews:[
+  {name:'Godz Gym',text:'Super than fitness world.',stars:5,demo:false,src:'Google'},
+  {name:'Surya Babu',text:'💪',stars:5,demo:false,src:'Google'},
+  {name:'kailas Shankar',text:'Very good experience.',stars:5,demo:false,src:'Google'},
+  {name:'Vishal Murali',text:'Less fees compared to the nearby ones. Average equipment. Great personal support.',stars:4,demo:false,src:'Google'},
+  {name:'S.J creations',text:"It's a good place.",stars:5,demo:false,src:'Google'},
+  {name:'Arun',text:'Placeholder demo review — replace with a real one.',stars:5,demo:true,src:'Demo'}
+ ],
+ members:[]
+};
+let state=JSON.parse(JSON.stringify(defaultState));
+let dirty=false;
+
+function uid(prefix='m'){return prefix+'_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,8)}
+function todayISO(){return new Date().toISOString().slice(0,10)}
+function monthKey(v=todayISO()){return String(v||'').slice(0,7)}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function formatDate(v){if(!v)return '—';const p=String(v).split('-');return p.length===3?`${p[2]}/${p[1]}/${p[0]}`:v}
+function normalizeMember(m={}){
+ return {
+  id:m.id||uid(),name:String(m.name||''),phone:String(m.phone||''),plan:m.plan==='cardio'?'cardio':'weight',
+  admissionDate:m.admissionDate||'',dueDate:m.dueDate||'',lastPaymentDate:m.lastPaymentDate||'',
+  paidMonth:m.paidMonth||'',paymentStatus:m.paymentStatus==='paid'?'paid':'due',
+  attendance:['present','absent','not_marked'].includes(m.attendance)?m.attendance:'not_marked',
+  attendanceDate:m.attendanceDate||'',status:m.status==='stopped'?'stopped':'active',notes:String(m.notes||'')
+ };
+}
+function mergeState(data){
+ const base=JSON.parse(JSON.stringify(defaultState));
+ if(!data)return base;
+ return {...base,...data,
+  hero:{...base.hero,...(data.hero||{})},
+  pricing:Array.isArray(data.pricing)?data.pricing:base.pricing,
+  rules:Array.isArray(data.rules)?data.rules:base.rules,
+  faq:Array.isArray(data.faq)?data.faq:base.faq,
+  reviews:Array.isArray(data.reviews)?data.reviews:base.reviews,
+  members:Array.isArray(data.members)?data.members.map(normalizeMember):[]
+ };
+}
+function togglePass(){const p=document.getElementById('pass');p.type=p.type==='password'?'text':'password'}
+function login(){
+ const ok=document.getElementById('pass').value===ADMIN_PASSWORD;
+ if(!ok){document.getElementById('loginError').style.display='block';document.getElementById('pass').animate([{transform:'translateX(0)'},{transform:'translateX(-5px)'},{transform:'translateX(5px)'},{transform:'translateX(0)'}],{duration:220});return}
+ document.getElementById('loginError').style.display='none';
+ if(document.getElementById('rememberMe').checked)localStorage.setItem(REMEMBER_KEY,'1');else localStorage.removeItem(REMEMBER_KEY);
+ enterApp();
+}
+function enterApp(){document.getElementById('loginScreen').style.display='none';document.getElementById('app').style.display='block';loadFromFirestore()}
+function logout(){localStorage.removeItem(REMEMBER_KEY);dirty=false;document.getElementById('app').style.display='none';document.getElementById('loginScreen').style.display='grid';document.getElementById('pass').value=''}
+window.addEventListener('DOMContentLoaded',()=>{if(localStorage.getItem(REMEMBER_KEY)==='1')enterApp()});
+window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue=''}});
+
+function markDirty(){dirty=true;document.getElementById('dirty').style.display='inline';}
+function clearDirty(){dirty=false;document.getElementById('dirty').style.display='none'}
+function showToast(msg,type='ok'){const t=document.getElementById('toast');t.textContent=msg;t.style.background=type==='err'?'#ff6262':'#f5b900';t.style.display='block';setTimeout(()=>t.style.display='none',2300)}
+function showSection(name){
+ document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+ document.getElementById(name+'Section').classList.add('active');
+ document.querySelectorAll('.nav button[data-nav],.bottom button[data-bottom]').forEach(b=>b.classList.toggle('active',(b.dataset.nav||b.dataset.bottom)===name));
+ window.scrollTo({top:0,behavior:'smooth'});
+ if(name==='dashboard')renderDashboard();if(name==='members')renderMembers();
+}
+function setMemberFilter(v){document.getElementById('memberFilter').value=v;renderMembers()}
+
+function loadFromFirestore(){
+ const status=document.getElementById('saveStatus');
+ if(!db){state=mergeState(null);init();status.textContent='Offline mode';return}
+ status.textContent='Loading…';
+ db.collection('site').doc('config').get().then(s=>{state=mergeState(s.exists?s.data():null);init();status.textContent='Connected';})
+ .catch(e=>{state=mergeState(null);init();status.textContent='Load failed';showToast('Firebase load failed','err')});
+}
+function init(){
+ document.getElementById('h_eyebrow').value=state.hero.eyebrow;
+ document.getElementById('h_sub').value=state.hero.sub;
+ document.getElementById('h_eyebrow').oninput=e=>{state.hero.eyebrow=e.target.value;markDirty()};
+ document.getElementById('h_sub').oninput=e=>{state.hero.sub=e.target.value;markDirty()};
+ renderPricing();renderRules();renderFaq();renderReviews();renderDashboard();renderMembers();
+}
+function isPaidThisMonth(m){return m.status!=='stopped'&&m.paidMonth===monthKey()}
+function isDueThisMonth(m){
+ if(m.status==='stopped'||isPaidThisMonth(m))return false;
+ if(!m.dueDate)return true;
+ return m.dueDate<=todayISO();
+}
+function isAbsentToday(m){return m.status!=='stopped'&&m.attendance==='absent'&&m.attendanceDate===todayISO()}
+
+function renderDashboard(){
+ const ms=state.members, active=ms.filter(m=>m.status==='active');
+ document.getElementById('sTotal').textContent=ms.length;
+ document.getElementById('sNew').textContent=ms.filter(m=>monthKey(m.admissionDate)===monthKey()).length;
+ document.getElementById('sActive').textContent=active.length;
+ document.getElementById('sStopped').textContent=ms.filter(m=>m.status==='stopped').length;
+ document.getElementById('sPaid').textContent=active.filter(isPaidThisMonth).length;
+ document.getElementById('sDue').textContent=active.filter(isDueThisMonth).length;
+ document.getElementById('sAbsent').textContent=active.filter(isAbsentToday).length;
+ document.getElementById('sCardio').textContent=active.filter(m=>m.plan==='cardio').length;
+ renderMini('dueList',active.filter(isDueThisMonth).slice(0,8),'dueBadge');
+ renderMini('absentList',active.filter(isAbsentToday).slice(0,8),'absentBadge');
+ renderMini('recentList',[...ms].sort((a,b)=>(b.admissionDate||'').localeCompare(a.admissionDate||'')).slice(0,8),null);
+ renderMini('stoppedList',ms.filter(m=>m.status==='stopped').slice(0,8),'stoppedBadge');
+}
+function renderMini(id,list,badgeId){
+ const el=document.getElementById(id);if(badgeId)document.getElementById(badgeId).textContent=list.length;
+ el.innerHTML=list.length?list.map(m=>`<div class="mini"><div><strong>${esc(m.name||'Unnamed')}</strong><small>${esc(m.phone||'No phone')} · ${PLAN_LABELS[m.plan]}</small></div><span class="badge ${m.status==='stopped'?'gray':isPaidThisMonth(m)?'green':isDueThisMonth(m)?'red':'gold'}">${m.status==='stopped'?'Stopped':isPaidThisMonth(m)?'Paid':isAbsentToday(m)?'Absent':isDueThisMonth(m)?'Due':'Active'}</span></div>`).join(''):'<div class="empty">Nothing to show</div>';
 }
 
-function login(){
-  const msg=document.getElementById('msg');
-  if(document.getElementById('pass').value===ADMIN_PASSWORD){
-    msg.style.display='none';
-    document.querySelector('.login').animate(
-      [{transform:'scale(1)'},{transform:'scale(1.015)'},{transform:'scale(1)'}],
-      {duration:260,easing:'ease-out'}
-    );
-    alert('Login successful — connect this screen to your existing dashboard.');
-  }else{
-    msg.style.display='block';
-    document.getElementById('pass').animate(
-      [{transform:'translateX(0)'},{transform:'translateX(-5px)'},{transform:'translateX(5px)'},{transform:'translateX(0)'}],
-      {duration:220}
-    );
-  }
+function renderMembers(){
+ const q=document.getElementById('memberSearch').value.toLowerCase().trim(),f=document.getElementById('memberFilter').value,s=document.getElementById('memberSort').value;
+ let list=state.members.filter(m=>(!q||(m.name+' '+m.phone).toLowerCase().includes(q)));
+ list=list.filter(m=>f==='all'||f==='active'&&m.status==='active'||f==='stopped'&&m.status==='stopped'||f==='cardio'&&m.plan==='cardio'||f==='weight'&&m.plan==='weight'||f==='paid'&&isPaidThisMonth(m)||f==='due'&&isDueThisMonth(m)||f==='absent'&&isAbsentToday(m));
+ if(s==='name')list.sort((a,b)=>a.name.localeCompare(b.name));else if(s==='dueDate')list.sort((a,b)=>(a.dueDate||'9999').localeCompare(b.dueDate||'9999'));else list.sort((a,b)=>(b.admissionDate||'').localeCompare(a.admissionDate||''));
+ const el=document.getElementById('membersGrid');
+ el.innerHTML=list.length?list.map(memberCard).join(''):'<div class="empty" style="grid-column:1/-1">No members found.</div>';
+}
+function memberCard(m){
+ const paid=isPaidThisMonth(m),due=isDueThisMonth(m),abs=isAbsentToday(m);
+ return `<article class="member glass">
+  <div class="member-head"><div><div class="member-name">${esc(m.name||'Unnamed')}</div><div class="member-phone">${m.phone?`<a href="tel:${esc(m.phone)}">${esc(m.phone)}</a>`:'No phone number'}</div></div><span class="badge ${m.status==='stopped'?'gray':m.plan==='cardio'?'gold':'green'}">${m.status==='stopped'?'STOPPED':PLAN_LABELS[m.plan]}</span></div>
+  <div class="member-info">
+   <div class="info"><small>Admission</small><b>${formatDate(m.admissionDate)}</b></div>
+   <div class="info"><small>Due Date</small><b>${formatDate(m.dueDate)}</b></div>
+   <div class="info"><small>Payment</small><b>${m.status==='stopped'?'—':paid?'Paid':'Due'}</b></div>
+   <div class="info"><small>Attendance</small><b>${abs?'Absent Today':m.attendanceDate===todayISO()&&m.attendance==='present'?'Present Today':'Not Marked'}</b></div>
+  </div>
+  <div class="member-actions">
+   ${m.status!=='stopped'?`<button class="btn ${paid?'btn-ghost':'btn-gold'}" onclick="togglePaid('${m.id}')">${paid?'Mark Due':'Mark Paid'}</button>`:''}
+   ${m.status!=='stopped'?`<button class="btn btn-line" onclick="markAttendance('${m.id}','present')">Present</button><button class="btn btn-danger" onclick="markAttendance('${m.id}','absent')">Absent</button>`:''}
+   <button class="btn btn-ghost" onclick="editMember('${m.id}')">Edit</button>
+   <button class="btn btn-ghost" onclick="toggleStopped('${m.id}')">${m.status==='stopped'?'Activate':'Stop'}</button>
+   <button class="btn btn-danger" onclick="deleteMember('${m.id}')">Delete</button>
+  </div>
+ </article>`;
+}
+function openMemberModal(id=''){
+ document.getElementById('editId').textContent=id;
+ document.getElementById('modalTitle').textContent=id?'Edit Member':'Add Member';
+ const m=id?state.members.find(x=>x.id===id):null;
+ document.getElementById('m_name').value=m?.name||'';
+ document.getElementById('m_phone').value=m?.phone||'';
+ document.getElementById('m_plan').value=m?.plan||'weight';
+ document.getElementById('m_status').value=m?.status||'active';
+ document.getElementById('m_admission').value=m?.admissionDate||todayISO();
+ document.getElementById('m_due').value=m?.dueDate||'';
+ document.getElementById('m_notes').value=m?.notes||'';
+ document.getElementById('memberModal').style.display='grid';
+ setTimeout(()=>document.getElementById('m_name').focus(),50);
+}
+function closeMemberModal(){document.getElementById('memberModal').style.display='none'}
+function saveMember(){
+ const name=document.getElementById('m_name').value.trim();if(!name){showToast('Member name is required','err');return}
+ const id=document.getElementById('editId').textContent;
+ const data=normalizeMember({id:id||uid(),name,phone:document.getElementById('m_phone').value.trim(),plan:document.getElementById('m_plan').value,status:document.getElementById('m_status').value,admissionDate:document.getElementById('m_admission').value,dueDate:document.getElementById('m_due').value,notes:document.getElementById('m_notes').value.trim(),paymentStatus:id?(state.members.find(m=>m.id===id)?.paymentStatus):'due',paidMonth:id?(state.members.find(m=>m.id===id)?.paidMonth):''});
+ if(id){const i=state.members.findIndex(m=>m.id===id);if(i>=0)state.members[i]=data}else state.members.unshift(data);
+ closeMemberModal();markDirty();renderDashboard();renderMembers();showToast(id?'Member updated':'Member added');
+}
+function editMember(id){openMemberModal(id)}
+function deleteMember(id){const m=state.members.find(x=>x.id===id);if(!m||!confirm(`Delete ${m.name}?`))return;state.members=state.members.filter(x=>x.id!==id);markDirty();renderDashboard();renderMembers();showToast('Member deleted')}
+function toggleStopped(id){const m=state.members.find(x=>x.id===id);if(!m)return;m.status=m.status==='stopped'?'active':'stopped';markDirty();renderDashboard();renderMembers();showToast(m.status==='stopped'?'Member stopped':'Member activated')}
+function togglePaid(id){const m=state.members.find(x=>x.id===id);if(!m)return;if(isPaidThisMonth(m)){m.paymentStatus='due';m.paidMonth=''}else{m.paymentStatus='paid';m.paidMonth=monthKey();m.lastPaymentDate=todayISO()}markDirty();renderDashboard();renderMembers();showToast(m.paidMonth?'Payment marked paid':'Payment marked due')}
+function markAttendance(id,status){const m=state.members.find(x=>x.id===id);if(!m)return;m.attendance=status;m.attendanceDate=todayISO();markDirty();renderDashboard();renderMembers();showToast(status==='present'?'Marked present':'Marked absent')}
+
+function renderPricing(){document.getElementById('priceList').innerHTML=state.pricing.map((p,i)=>`<div class="content-card glass" style="padding:13px"><div class="row"><input value="${esc(p.name)}" oninput="state.pricing[${i}].name=this.value;markDirty()"><input type="number" value="${p.price}" oninput="state.pricing[${i}].price=this.value;markDirty()"><button class="delete" onclick="state.pricing.splice(${i},1);renderPricing();markDirty()">Delete</button></div><div class="row single"><input value="${esc(p.duration)}" oninput="state.pricing[${i}].duration=this.value;markDirty()"><label class="muted"><input type="checkbox" ${p.popular?'checked':''} onchange="state.pricing[${i}].popular=this.checked;markDirty()"> Popular</label></div><input value="${esc(p.desc)}" oninput="state.pricing[${i}].desc=this.value;markDirty()"> </div>`).join('')}
+function addPricing(){state.pricing.push({name:'New Plan',price:0,duration:'Set duration',desc:'Describe this plan.',popular:false});renderPricing();markDirty();showToast('Plan added')}
+function renderRules(){document.getElementById('rulesList').innerHTML=state.rules.map((r,i)=>`<div class="row single"><input value="${esc(r)}" oninput="state.rules[${i}]=this.value;markDirty()"><button class="delete" onclick="state.rules.splice(${i},1);renderRules();markDirty()">Delete</button></div>`).join('')}
+function addRule(){state.rules.push('New rule');renderRules();markDirty();showToast('Rule added')}
+function renderFaq(){document.getElementById('faqList').innerHTML=state.faq.map((f,i)=>`<div class="row"><input value="${esc(f.q)}" placeholder="Question" oninput="state.faq[${i}].q=this.value;markDirty()"><input value="${esc(f.a)}" placeholder="Answer" oninput="state.faq[${i}].a=this.value;markDirty()"><button class="delete" onclick="state.faq.splice(${i},1);renderFaq();markDirty()">Delete</button></div>`).join('')}
+function addFaq(){state.faq.push({q:'New question?',a:'Answer here.'});renderFaq();markDirty();showToast('FAQ added')}
+function renderReviews(){document.getElementById('reviewList').innerHTML=state.reviews.map((r,i)=>`<div class="content-card glass" style="padding:13px"><div class="row"><input value="${esc(r.name)}" oninput="state.reviews[${i}].name=this.value;markDirty()"><input type="number" min="1" max="5" value="${r.stars}" oninput="state.reviews[${i}].stars=this.value;markDirty()"><button class="delete" onclick="state.reviews.splice(${i},1);renderReviews();markDirty()">Delete</button></div><input value="${esc(r.text)}" oninput="state.reviews[${i}].text=this.value;markDirty()" style="margin-bottom:8px"><div class="row single"><input value="${esc(r.src||'')}" oninput="state.reviews[${i}].src=this.value;markDirty()"><label class="muted"><input type="checkbox" ${r.demo?'checked':''} onchange="state.reviews[${i}].demo=this.checked;markDirty()"> Demo</label></div></div>`).join('')}
+function addReview(){state.reviews.push({name:'New',text:'Review text',stars:5,demo:true,src:'Demo'});renderReviews();markDirty();showToast('Review added')}
+
+function downloadConfig(){
+ const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='grand-multi-admin-backup.json';a.click();URL.revokeObjectURL(a.href);showToast('Backup downloaded')
+}
+function saveToFirestore(){
+ if(!db){showToast('Firebase is not connected','err');return}
+ document.getElementById('saveStatus').textContent='Saving…';
+ db.collection('site').doc('config').set(state,{merge:true}).then(()=>{clearDirty();document.getElementById('saveStatus').textContent='Saved just now';showToast('Saved to website')}).catch(e=>{document.getElementById('saveStatus').textContent='Save failed';showToast('Save failed: '+e.message,'err')})
+}
+
+/* CSV */
+function csvCell(v){return `"${String(v??'').replace(/"/g,'""')}"`}
+function exportMembers(){
+ const headers=['id','name','phone','plan','admissionDate','dueDate','lastPaymentDate','paidMonth','paymentStatus','attendance','attendanceDate','status','notes'];
+ const rows=[headers,...state.members.map(m=>headers.map(h=>m[h]??''))];
+ const csv=rows.map(r=>r.map(csvCell).join(',')).join('\r\n');
+ const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='grand-multi-members.csv';a.click();URL.revokeObjectURL(a.href);showToast('Members exported')
+}
+function parseCSV(text){
+ const rows=[];let row=[],cell='',quoted=false;
+ for(let i=0;i<text.length;i++){const c=text[i],n=text[i+1];if(c==='"'&&quoted&&n==='"'){cell+='"';i++}else if(c==='"'){quoted=!quoted}else if(c===','&&!quoted){row.push(cell);cell=''}else if((c==='\n'||c==='\r')&&!quoted){if(c==='\r'&&n==='\n')i++;row.push(cell);if(row.some(x=>x.trim()!==''))rows.push(row);row=[];cell=''}else cell+=c}
+ if(cell||row.length){row.push(cell);rows.push(row)}return rows
+}
+function importMembers(e){
+ const file=e.target.files[0];if(!file)return;
+ const reader=new FileReader();
+ reader.onload=()=>{
+  const rows=parseCSV(reader.result);if(rows.length<2){showToast('CSV is empty','err');return}
+  const headers=rows[0].map(x=>x.trim());let added=0,updated=0;
+  rows.slice(1).forEach(r=>{
+   const o={};headers.forEach((h,i)=>o[h]=r[i]??'');
+   if(!o.name?.trim())return;
+   const incoming=normalizeMember(o);
+   const existing=state.members.find(m=>incoming.id&&m.id===incoming.id || (incoming.phone&&m.phone===incoming.phone&&incoming.name.toLowerCase()===m.name.toLowerCase()));
+   if(existing){Object.assign(existing,incoming,{id:existing.id});updated++}else{state.members.unshift(incoming);added++}
+  });
+  markDirty();renderDashboard();renderMembers();showToast(`Imported ${added} new, updated ${updated}`)
+  e.target.value='';
+ };
+ reader.readAsText(file);
 }
 </script>
 </body>
